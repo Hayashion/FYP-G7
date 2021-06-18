@@ -1,0 +1,14 @@
+I've exported(dump) my tables from sql
+you can open with workbench by importing it again 
+> under Administration > Data Import/Restore select folder > Import Progress to start 
+>under Schema you can find my sptravel schema
+
+
+Logon to mysql workbench
+password : root 
+localhost : 3001
+
+Schema - sptravel
+after accessing the workbench, start running the code -> nodemon ./server.js 
+browse the specified endpoints through internet or postman (go to body can use either x-www-form-urlencoded / raw)
+
