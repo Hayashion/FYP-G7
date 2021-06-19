@@ -9,7 +9,7 @@ const app = express();
 
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
-const usersDB = require('../Model/students');
+const studentsDB = require('../Model/students');
 // const verifyFn = require('../Auth/verifyToken');
 
 var verifyToken = require('../Auth/verifyToken');
@@ -25,29 +25,10 @@ app.use(urlencodedParser);//attach body-parser middleware
 app.use(bodyParser.json());//parse json data
 
 
-//GET /users/
-// app.get('/users/', function(req,res){
-
-//     var userid = req.params.userid;
-
-//     usersDB.getUsers(userid, function (err, result) {
-
-//         res.type('json');
-//         if (err) {
-//             res.status(500);
-//             res.send(`{"message":"Internal Server Error"}`);
-
-//         } else {
-//             res.status(200);
-//             res.send(result);
-//         }
-
-//     });
-// });
-
+//GET /students/
 
 app.get("/students", function (req, res) {
-    usersDB.getUsers(function (err, result) {
+    studentsDB.getStudents(function (err, result) {
         res.type("json")
         if (!err) {
             res.status(200);
@@ -64,12 +45,12 @@ app.get("/students", function (req, res) {
 
 
 
-//GET /user/
-app.get('/user/:userid', function(req,res){
+//GET /students/:adminNo
+app.get('/students/:adminNo', function(req,res){
 
-    var userid = req.params.userid;
+    var adminNo = req.params.adminNo;
 
-    usersDB.getUser(userid, function (err, result) {
+    studentsDB.getStudent(adminNo, function (err, result) {
 
         res.type('json');
         if (err) {
@@ -84,18 +65,20 @@ app.get('/user/:userid', function(req,res){
     });
 });
 
-// POST /user/ update user
-app.post('/user/',function(req,res){
+
+
+// POST /students/:adminNo update students
+app.put('/students/:adminNo',function(req,res){
 
     var username = req.body.username;
     var password = req.body.password;
-    var userid = req.body.userid;
+    var adminNo = req.params.adminNo;
     
     console.log(username);
     console.log(password);
-    console.log(userid);
+    console.log(adminNo);
 
-    usersDB.updateUser(username, password,userid, function (err, result) {
+    studentsDB.updateStudents(username, password, adminNo, function (err, result) {
 
         res.type('json');
         if (err) {
@@ -104,12 +87,46 @@ app.post('/user/',function(req,res){
 
         } else {
             res.status(201);
-            res.send(`{"userid": ${result.affectRows}}`);
+            res.send(`{"Updated Student": ${result.affectedRows}}`);
         }
     });
 });
-// POST /user/login 
-app.post('/user/login',function(req,res){
+
+
+
+
+
+// POST /students
+app.post("/students", function (req, res) {   
+    var username = req.body.username;
+    var password = req.body.password;
+    var adminNo = req.body.adminNo;
+    var studentClass = req.body.studentClass;
+
+    studentsDB.insertStudents(adminNo, username, password, studentClass, function (err, result) {
+        if (!err) {
+            res.status(201);
+            res.send(`{"Student Created": ${result.affectedRows}}`)
+            // res.send();
+
+        }
+        else {
+            if (err.code == "ER_BAD_NULL_ERROR"){
+                res.status(422);
+                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
+            } else {
+                res.status(500);
+                res.send(`"Internal Server Error"`);
+            }
+        }
+    });
+});
+
+
+
+
+// POST /students/login 
+app.post('/students/login',function(req,res){
 
     var username = req.body.username;
     var password = req.body.password;
@@ -117,7 +134,7 @@ app.post('/user/login',function(req,res){
     console.log(username);
     console.log(password);
 
-    usersDB.loginUser(username, password, function (err, token, result) {
+    studentsDB.loginStudents(username, password, function (err, token, result) {
         if (!err) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -132,13 +149,18 @@ app.post('/user/login',function(req,res){
     });
 });
 
-//POST /user/logout
-app.post('/user/logout', function (req, res) {
+
+
+
+//POST /students/logout
+app.post('/students/logout', function (req, res) {
     console.log("..logging out.");
     //res.clearCookie('session-id'); //clears the cookie in the response
     //res.setHeader('Content-Type', 'application/json');
     res.json({ success: true, status: 'Log out successful!' });
 });
+
+
 
 //GET /products/ 
 app.get('/products/', function (req, res) {

@@ -1,7 +1,7 @@
 // HoneyHAX
 // DISM/FT/3A/02
 // FYP HoneyHAX Apparel
-// user.js
+// students.js
 
 
 
@@ -10,10 +10,10 @@ const db = require('./databaseConfig');
 // var jwt = require('jsonwebtoken');
 var config = require('../config.js');
 
-var usersDB = {
+var studentsDB = {
 
 
-    getUsers: function (callback) {    // Get all users
+    getStudents: function (callback) {    // Get all Students
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -33,7 +33,7 @@ var usersDB = {
 
 
 
-    insertUsers: function (username, password, adminNo, callback) {   // Create/Register users
+    insertStudents: function (adminNo, username, password, studentClass, callback) {   // Create/Register Students
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -41,8 +41,8 @@ var usersDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "insert into students (username, password, adminNo) Values(?,?,?)";
-                dbConn.query(sql, [username, email, password, adminNo], function (err, result) {
+                var sql = "insert into students (adminNo, username, password, studentClass) Values(?,?,?,?)";
+                dbConn.query(sql, [adminNo, username, password, studentClass], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -52,7 +52,7 @@ var usersDB = {
 
 
 
-    getUser: function (adminNo, callback) {   // Get particular user from adminNo
+    getStudent: function (adminNo, callback) {   // Get particular Student from adminNo
         var dbConn = db.getConnection()
         dbConn.connect(function (err) {
             if (err) {
@@ -72,7 +72,7 @@ var usersDB = {
 
 
 
-    updateUser: function (username, password, adminNo, callback) {     // Updating user's info
+    updateStudents: function (username, password, adminNo, callback) {     // Updating Student's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -90,7 +90,9 @@ var usersDB = {
     },
 
 
-    loginUser: function (username, password, callback) {     // Login user
+
+    
+    loginStudents: function (username, password, callback) {     // Login Student
         var conn = db.getConnection();
         conn.connect(function (err) {
             if (err) {
@@ -130,4 +132,4 @@ var usersDB = {
 
 }
 
-module.exports = usersDB;
+module.exports = studentsDB;
