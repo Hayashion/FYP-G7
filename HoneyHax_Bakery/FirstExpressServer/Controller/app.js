@@ -10,6 +10,7 @@ const app = express();
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 const studentsDB = require('../Model/students');
+const reviewsDB = require('../Model/reviews');
 // const verifyFn = require('../Auth/verifyToken');
 
 var verifyToken = require('../Auth/verifyToken');
@@ -67,7 +68,7 @@ app.get('/students/:adminNo', function(req,res){
 
 
 
-// POST /students/:adminNo update students
+// PUT /students/:adminNo update students
 app.put('/students/:adminNo',function(req,res){
 
     var username = req.body.username;
@@ -226,6 +227,66 @@ app.get('/gallery/',function (req, res) {
     });
 
 });
+
+
+
+// POST /users/:userId/:productId/review
+app.post('/users/:userId/:productId/review', function (req, res) {
+    var userId = req.params.userId;
+    var productId = req.params.productId;
+    var reviewContent = req.body.reviewContent;
+    var rating = req.body.rating;
+
+    res.type('json');
+    reviewsDB.insertReviews(reviewContent, rating, productId, userId, function (err, result) {
+        if (err) {
+            res.status(500);
+            // res.send(`"Internal Server Error"`);
+            res.send(err)
+        } else {
+            res.status(201);
+            res.send(`"reviewid":"${result.insertId}"`);
+        }
+    });
+});
+
+
+
+// GET /product/:productId/reviews/:reviewId
+app.get('/product/:productId/reviews/:reviewId', function (req, res) {
+    var productId = req.params.productId;
+    var reviewId = req.params.reviewId;
+
+    res.type('json');
+    reviewsDB.getReviewsById(productId, reviewId, function (err, result) {
+        if (err) {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+    });
+});
+
+
+
+// GET /product/:productId/reviews/
+app.get('/product/:productId/reviews/', function (req, res) {
+    var productId = req.params.productId;
+
+    res.type('json');
+    reviewsDB.getReviews(productId, function (err, result) {
+        if (err) {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+    });
+});
+
 
 
 module.exports = app;
