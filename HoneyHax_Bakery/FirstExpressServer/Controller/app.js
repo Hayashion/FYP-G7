@@ -47,7 +47,7 @@ app.use(bodyParser.json());//parse json data
 
 
 app.get("/students", function (req, res) {
-    userDB.getUsers(function (err, result) {
+    usersDB.getUsers(function (err, result) {
         res.type("json")
         if (!err) {
             res.status(200);
