@@ -33,7 +33,7 @@ var usersDB = {
 
 
 
-    insertUsers: function (username, password, userid, callback) {   // Create/Register users
+    insertUsers: function (username, password, adminNo, callback) {   // Create/Register users
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -41,8 +41,8 @@ var usersDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "insert into users (username, password, userid) Values(?,?,?)";
-                dbConn.query(sql, [username, email, password, userid], function (err, result) {
+                var sql = "insert into students (username, password, adminNo) Values(?,?,?)";
+                dbConn.query(sql, [username, email, password, adminNo], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -52,7 +52,7 @@ var usersDB = {
 
 
 
-    getUser: function (userid, callback) {   // Get particular user from adminNo
+    getUser: function (adminNo, callback) {   // Get particular user from adminNo
         var dbConn = db.getConnection()
         dbConn.connect(function (err) {
             if (err) {
@@ -60,8 +60,8 @@ var usersDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from users where userid=?"
-                dbConn.query(sql, [userid], function (err, result) {
+                var sql = "select * from students where adminNo=?"
+                dbConn.query(sql, [adminNo], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -72,7 +72,7 @@ var usersDB = {
 
 
 
-    updateUser: function (username, password, userid, callback) {     // Updating user's info
+    updateUser: function (username, password, adminNo, callback) {     // Updating user's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -80,8 +80,8 @@ var usersDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "update users set username=?, password=? where userid=?"
-                dbConn.query(sql, [username, password, userid], function (err, result) {
+                var sql = "update students set username=?, password=? where adminNo=?"
+                dbConn.query(sql, [username, password, adminNo], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -99,7 +99,7 @@ var usersDB = {
             }
             else {
                 console.log("Connected!");
-                var sql = 'select * from users where username=? and password=?';
+                var sql = 'select * from students where username=? and password=?';
                 conn.query(sql, [username,password], function (err, result) {
                     conn.end();
                     if (err) {
@@ -109,7 +109,7 @@ var usersDB = {
                         var token = "";
                         var i;
                         if (result.length == 1) {
-                            token = jwt.sign({ id: result[0].userid, role: result[0].role }, config.key, {
+                            token = jwt.sign({ id: result[0].adminNo, role: result[0].role }, config.key, {
                                 expiresIn: 86400 //expires in 24 hrs
                             });
                             console.log("@@token " + token);

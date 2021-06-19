@@ -9,7 +9,7 @@ const app = express();
 
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
-const usersDB = require('../Model/users');
+const usersDB = require('../Model/students');
 // const verifyFn = require('../Auth/verifyToken');
 
 var verifyToken = require('../Auth/verifyToken');
@@ -26,24 +26,43 @@ app.use(bodyParser.json());//parse json data
 
 
 //GET /users/
-app.get('/users/', function(req,res){
+// app.get('/users/', function(req,res){
 
-    var userid = req.params.userid;
+//     var userid = req.params.userid;
 
-    usersDB.getUsers(userid, function (err, result) {
+//     usersDB.getUsers(userid, function (err, result) {
 
-        res.type('json');
-        if (err) {
-            res.status(500);
-            res.send(`{"message":"Internal Server Error"}`);
+//         res.type('json');
+//         if (err) {
+//             res.status(500);
+//             res.send(`{"message":"Internal Server Error"}`);
 
-        } else {
+//         } else {
+//             res.status(200);
+//             res.send(result);
+//         }
+
+//     });
+// });
+
+
+app.get("/students", function (req, res) {
+    userDB.getUsers(function (err, result) {
+        res.type("json")
+        if (!err) {
             res.status(200);
             res.send(result);
         }
-
+        else {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        }
     });
 });
+
+
+
+
 
 //GET /user/
 app.get('/user/:userid', function(req,res){
