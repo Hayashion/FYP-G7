@@ -7,7 +7,7 @@
 
 const mysql = require('mysql');
 const db = require('./databaseConfig');
-// var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 var config = require('../config.js');
 
 var studentsDB = {
