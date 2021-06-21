@@ -10,6 +10,7 @@ const app = express();
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 const usersDB = require('../Model/users');
+const voucherDB = require('../Model/voucher');
 // const verifyFn = require('../Auth/verifyToken');
 
 var verifyToken = require('../Auth/verifyToken');
@@ -163,6 +164,26 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
+//Search /voucher/:voucherCode/
+app.get('/voucher/:voucherCode/', function (req, res) {
+
+    var voucherCode = req.params.voucherCode;
+
+    voucherDB.searchvoucher(voucherCode, function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
 
 //GET /gallery/ 
 app.get('/gallery/',function (req, res) {
