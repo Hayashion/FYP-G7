@@ -1,6 +1,6 @@
 // HoneyHAX
 // DISM/FT/3A/02
-// FYP HoneyHAX Bakery
+// FYP HoneyHAX Apparel
 // students.js
 
 
@@ -111,8 +111,8 @@ var studentsDB = {
                         var token = "";
                         var i;
                         if (result.length == 1) {
-                            token = jwt.sign({ id: result[0].adminNo, password: result[0].password }, config.key, {
-                                expiresIn: 3600 //expires in 1 hr
+                            token = jwt.sign({ id: result[0].adminNo, role: result[0].role }, config.key, {
+                                expiresIn: 86400 //expires in 24 hrs
                             });
                             console.log("@@token " + token);
                             return callback(null, token, result);
