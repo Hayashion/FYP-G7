@@ -21,9 +21,9 @@ getProducts: function (callback) {
             return callback(err, null);
 
         } else {
-            var sql = "select * from products";
+            var sql = "select productId,productName,price,description,productImg from products";
 
-            dbConn.query(sql, [], function (err, result) {
+            dbConn.query(sql,[],function (err, result) {
 
                 dbConn.end();
                 if (err) {
@@ -53,16 +53,21 @@ searchProducts: function (productName, callback) {
             return callback(err, null);
 
         } else {
-            var sql = "SELECT * FROM products WHERE productName=?"; //where should be the search field
-
-            dbConn.query(sql, [productName], function (err, result) {
+            var sql = `SELECT * FROM products WHERE productName LIKE '${'%' + productName + '%'}'` //where should be the search field
+            // 1' or 1=1;-- -
+            dbConn.query(sql, [], function (err, result) {
 
                 dbConn.end();
                 if (err) {
                     console.log(err);
                 } else {
+                    // console.log(result);
+                    for(i=0;i<result.length;i++){
+                        
+                        // result[i].productImg = __dirname + '\\' + result[i].productImg
+                        console.log(result[i].productImg)
+                    }
 
-                    console.log(result);
                 }
                 return callback(err, result);
             });
