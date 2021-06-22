@@ -10,6 +10,7 @@ const app = express();
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 const usersDB = require('../Model/users');
+const flagsDB = require('../Model/flags');
 // const verifyFn = require('../Auth/verifyToken');
 
 var verifyToken = require('../Auth/verifyToken');
@@ -185,6 +186,30 @@ app.get('/gallery/',function (req, res) {
     });
 
 });
+
+//GET /checkFlag
+app.get('/checkFlag/',function (req, res) {
+
+    var adminID = req.body.adminID;
+    var flagValue = req.body.flagValue;
+
+    flagsDB.checkFlag(adminID, flagValue, function (err, result) {
+        console.log(err,result)
+
+        res.type('json');
+        if (err) {
+            console.log(err)
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
+
 
 
 module.exports = app;
