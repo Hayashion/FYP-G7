@@ -471,7 +471,6 @@
         $("#discountbutton").click(function () {
                             var discountcode = $("#discountinput").val();
                             
-                           
                             $.ajax({
                                 type : 'GET',
                                 url  : `http://localhost:8081/voucher/${discountcode}/`,
@@ -479,8 +478,8 @@
                                 dataType: 'json',  
                                 success: function (result, textStatus, xhr) {
                                     console.log(result);
-                                    if (result != null){  
-
+                                    if (result.length!=0){  
+                                        
                                             var divOutput="";
                                             
                                             divOutput+=`
@@ -492,6 +491,16 @@
                
                                             $("#discountresult").html(divOutput);
                                     } else {
+                                        var divOutput="";
+                                            
+                                            divOutput+=`
+                                                <div>
+                                                    <label>Not a valid code</label>
+                                                </div>
+                                                `;
+                                            
+               
+                                            $("#discountresult").html(divOutput);
                                         console.log("Error");
                                     }                           
                                 },  
@@ -500,7 +509,7 @@
                                 }  
                             });  
 
-                            return false;  //otherwise will keep reloading
+                            return true;  //otherwise will keep reloading
                         });
 
                     });

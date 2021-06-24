@@ -168,6 +168,7 @@ app.get('/products/:productName/', function (req, res) {
 app.get('/voucher/:voucherCode/', function (req, res) {
 
     var voucherCode = req.params.voucherCode;
+    
 
     voucherDB.searchvoucher(voucherCode, function (err, result) {
 
