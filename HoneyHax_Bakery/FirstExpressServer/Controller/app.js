@@ -125,9 +125,7 @@ app.post('/user/logout', function (req, res) {
 //GET /products/ 
 app.get('/products/', function (req, res) {
 
-    var productId = req.params.productId;
-
-    productsDB.getProducts(productId, function (err, result) {
+    productsDB.getProducts(function (err, result) {
 
         res.type('json');
         if (err) {
@@ -147,8 +145,10 @@ app.get('/products/', function (req, res) {
 app.get('/products/:productName/', function (req, res) {
 
     var productName = req.params.productName;
+    console.log(productName)
 
     productsDB.searchProducts(productName, function (err, result) {
+        
 
         res.type('json');
         if (err) {
