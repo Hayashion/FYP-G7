@@ -3,6 +3,11 @@
 // FYP HoneyHAX Apparel
 // voucher.js
 
+const mysql = require('mysql');
+const db = require('./databaseConfig');
+// var jwt = require('jsonwebtoken');
+var config = require('../config.js');
+
 var voucherDB = {
 
     //GET/voucher
@@ -53,13 +58,21 @@ var voucherDB = {
                 var sql = "SELECT * FROM voucher WHERE voucherCode=?"; //where should be the input field
     
                 dbConn.query(sql, [voucherCode], function (err, result) {
-    
+                    
                     dbConn.end();
                     if (err) {
                         console.log(err);
-                    } else {
-    
+                    } else if (result.length==0){
                         console.log(result);
+                    } else {
+                        if(result[0].voucherCode==voucherCode) {
+                            console.log("Success!");
+                            console.log(result);
+                        } else{
+                            console.log("Not a valid code.");
+                            console.log(result);
+                        }
+                        return callback(err, result);
                     }
                     return callback(err, result);
                 });

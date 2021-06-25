@@ -97,8 +97,7 @@
             margin-right: 60px;
         }
 
-        .delete-btn,
-        .like-btn {
+        .delete-btn {
             display: inline-block;
             Cursor: pointer;
         }
@@ -109,16 +108,7 @@
             background: url(&amp;quot;delete-icn.svg&amp;quot;) no-repeat center;
         }
 
-        .like-btn {
-            position: absolute;
-            top: 9px;
-            left: 15px;
-            background: url('twitter-heart.png');
-            width: 60px;
-            height: 60px;
-            background-size: 2900%;
-            background-repeat: no-repeat;
-        }
+       
 
         .is-active {
             animation-name: animate;
@@ -237,6 +227,10 @@
         .buttons {
             margin-right: 20px;
         }
+
+        .discountsection {
+            margin: 6% 45%;
+        }
     </style>
 
 </head>
@@ -277,21 +271,21 @@
             </div>
           <!-- end header inner -->
 
-        </header>
+    </header>
 
     
             <!--shopping cart-->
             <div class="shopping-cart">
                 <!-- Title -->
                 <div class="title">
-                    Shopping Bag
+                    Pastry Cart
                 </div>
 
                 <!-- Product #1 -->
                 <div class="item">
                     <div class="buttons">
                         <span class="delete-btn"></span>
-                        <span class="like-btn"></span>
+                        
                     </div>
 
                     <div class="image">
@@ -299,9 +293,9 @@
                     </div>
 
                     <div class="description">
-                        <span>Common Projects</span>
-                        <span>Bball High</span>
-                        <span>White</span>
+                        
+                        <span>Bread1</span>
+                        
                     </div>
 
                     <div class="quantity">
@@ -321,7 +315,7 @@
                 <div class="item">
                     <div class="buttons">
                         <span class="delete-btn"></span>
-                        <span class="like-btn"></span>
+                        
                     </div>
 
                     <div class="image">
@@ -329,9 +323,9 @@
                     </div>
 
                     <div class="description">
-                        <span>Maison Margiela</span>
-                        <span>Future Sneakers</span>
-                        <span>White</span>
+                        
+                        <span>Bread2</span>
+                        
                     </div>
 
                     <div class="quantity">
@@ -351,7 +345,7 @@
                 <div class="item">
                     <div class="buttons">
                         <span class="delete-btn"></span>
-                        <span class="like-btn"></span>
+                        
                     </div>
 
                     <div class="image">
@@ -359,9 +353,9 @@
                     </div>
 
                     <div class="description">
-                        <span>Our Legacy</span>
-                        <span>Brushed Scarf</span>
-                        <span>Brown</span>
+                        
+                        <span>Bread3</span>
+                        
                     </div>
 
                     <div class="quantity">
@@ -377,160 +371,192 @@
                     <div class="total-price">$3</div>
                 </div>
             </div>
+            <div class="discountsection">
+                <label class="discountlabel">Got a discount code?</label>
+                <input id="discountinput" /><button id="discountbutton" type="button">Enter</button>
+                <div id="discountresult"></div>
+            </div>
             <!--end of shopping cart-->
-            	<!-- contact start-->
-            <div id="contact" class="contact_section">
-                <div class="container">
-                    <div class="contact-taital">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h1 class="contact_text"><strong>Contact Us</strong></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-        
-                        <div class="row">
-                            <div class="col-4 box">
-                                <label class="adderess_text">Address</label>
-        
-                                <div class="row image-icon">
-        
-                                    <div>
-                                        <img class="img-fluid" src="images/map-icon.png">
-                                    </div>
-                                    <div class="email_text">500 Dover Rd, Singapore 139651</div>
-        
-        
-                                </div>
-        
-                            </div>
-        
-                            <div class="col-4 box">
-                                <label class="adderess_text">Phone Number</label>
-                                <div class="row image-icon">
-                                    <div>
-                                        <img class="img-fluid" src="images/phone-icon.png">
-                                    </div>
-                                    
-                                    <div class="email_text">(+65) 67751133</div>
-                                </div>
-                            </div>
-        
-                            <div class="col-4 box">
-                                <label class="adderess_text">Email</label>
-                                <div class="row image-icon">
-                                    <div>
-                                        <img class="img-fluid" src="images/email-icon.png">
-                                    </div>
-                                    
-                                    <div class="email_text">honeyhax@gmail.com</div>
-                                </div>
-                            </div>
-                        </div>
-        
-        
-                    </div>
-                </div>
-            </div>
-
-            <!-- contact end-->
-            <!-- copyright start-->
-            <div class="copyright_section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p class="copyright_taital">2021 All Rights Reserved. HoneyHax</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-	        <!-- copyright end-->
 
             
-                
-
-
-            
-
-            <!-- Javascript files-->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/popper.min.js"></script>
-            <script src="js/bootstrap.bundle.min.js"></script>
-            <script src="js/jquery-3.0.0.min.js"></script>
-            <script src="js/plugin.js"></script>
-            <!-- sidebar -->
-            <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-            <script src="js/custom.js"></script>
-            <!-- javascript -->
-            <script src="js/owl.carousel.js"></script>
-            <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-            <script>
-
-                $(document).ready(function () {
-                    $(".fancybox").fancybox({
-                        openEffect: "none",
-                        closeEffect: "none"
-                    });
-
-                    $(".zoom").hover(function () {
-
-                        $(this).addClass('transition');
-                    }, function () {
-
-                        $(this).removeClass('transition');
-                    });
-                });
-                jQuery(document).ready(function ($) {
-                    tab = $('.tabs h3 a');
-
-                    tab.on('click', function (event) {
-                        event.preventDefault();
-                        tab.removeClass('active');
-                        $(this).addClass('active');
-
-                        tab_content = $(this).attr('href');
-                        $('div[id$="tab-content"]').removeClass('active');
-                        $(tab_content).addClass('active');
-                    });
-                });
-
-                $('.like-btn').on('click', function () {
-                    $(this).toggleClass('is-active');
-                });
-                $('.minus-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var $this = $(this);
-                    var $input = $this.closest('div').find('input');
-                    var value = parseInt($input.val());
-
-                    if (value &amp, amp, gt == 1) {
-                    value = value - 1;
-                } else {
-                    value = 0;
-                }
-
-                $input.val(value);
- 
-                });
-
-                $('.plus-btn').on('click', function (e) {
-                    e.preventDefault();
-                    var $this = $(this);
-                    var $input = $this.closest('div').find('input');
-                    var value = parseInt($input.val());
-
-                    if (value & amp, amp, lt == 100) {
-                    value = value + 1;
-                } else {
-                    value = 100;
-                }
-
-                $input.val(value);
-                });
-            </script>
 
 
 </body>
+<footer>
+                <!-- contact start-->
+                <div id="contact" class="contact_section">
+                    <div class="container">
+                        <div class="contact-taital">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1 class="contact_text"><strong>Contact Us</strong></h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+            
+                            <div class="row">
+                                <div class="col-4 box">
+                                    <label class="adderess_text">Address</label>
+            
+                                    <div class="row image-icon">
+            
+                                        <div>
+                                            <img class="img-fluid" src="images/map-icon.png">
+                                        </div>
+                                        <div class="email_text">500 Dover Rd, Singapore 139651</div>
+            
+            
+                                    </div>
+            
+                                </div>
+            
+                                <div class="col-4 box">
+                                    <label class="adderess_text">Phone Number</label>
+                                    <div class="row image-icon">
+                                        <div>
+                                            <img class="img-fluid" src="images/phone-icon.png">
+                                        </div>
+                                        
+                                        <div class="email_text">(+65) 67751133</div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-4 box">
+                                    <label class="adderess_text">Email</label>
+                                    <div class="row image-icon">
+                                        <div>
+                                            <img class="img-fluid" src="images/email-icon.png">
+                                        </div>
+                                        
+                                        <div class="email_text">honeyhax@gmail.com</div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+                <!-- contact end-->
+                <!-- copyright start-->
+                <div class="copyright_section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="copyright_taital">2021 All Rights Reserved. HoneyHax</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- copyright end-->
+    
+</footer>
 
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- javascript -->
+<script src="js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#discountbutton").click(function () {
+                            var discountcode = $("#discountinput").val();
+                            
+                            $.ajax({
+                                type : 'GET',
+                                url  : `http://localhost:8081/voucher/${discountcode}/`,
+                                contentType: "application/json; charset=utf-8",
+                                dataType: 'json',  
+                                success: function (result, textStatus, xhr) {
+                                    console.log(result);
+                                    if (result.length!=0){  
+                                        
+                                            var divOutput="";
+                                            
+                                            divOutput+=`
+                                                <div>
+                                                    <label>Discount applied successfully!</label>
+                                                </div>
+                                                `;
+                                            
+               
+                                            $("#discountresult").html(divOutput);
+                                    } else {
+                                        var divOutput="";
+                                            
+                                            divOutput+=`
+                                                <div>
+                                                    <label>Not a valid code</label>
+                                                </div>
+                                                `;
+                                            
+               
+                                            $("#discountresult").html(divOutput);
+                                        console.log("Error");
+                                    }                           
+                                },  
+                                error: function (xhr, textStatus, errorThrown) {  
+                                    console.log('Error in Operation');  
+                                }  
+                            });  
+
+                            return true;  //otherwise will keep reloading
+                        });
+
+                    });
+    jQuery(document).ready(function ($) {
+        tab = $('.tabs h3 a');
+
+        tab.on('click', function (event) {
+            event.preventDefault();
+            tab.removeClass('active');
+            $(this).addClass('active');
+
+            tab_content = $(this).attr('href');
+            $('div[id$="tab-content"]').removeClass('active');
+            $(tab_content).addClass('active');
+        });
+    });
+
+   
+    $('.minus-btn').on('click', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $input = $this.closest('div').find('input');
+        var value = parseInt($input.val());
+
+        if (value &amp, amp, gt == 1) {
+        value = value - 1;
+    } else {
+        value = 0;
+    }
+
+    $input.val(value);
+
+    });
+
+    $('.plus-btn').on('click', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $input = $this.closest('div').find('input');
+        var value = parseInt($input.val());
+
+        if (value & amp, amp, lt == 100) {
+        value = value + 1;
+    } else {
+        value = 100;
+    }
+
+    $input.val(value);
+    });
+</script>
 </html>

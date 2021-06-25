@@ -11,6 +11,7 @@ const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 <<<<<<< HEAD
 const usersDB = require('../Model/users');
+<<<<<<< HEAD
 const flagsDB = require('../Model/flags');
 =======
 const studentsDB = require('../Model/students');
@@ -19,6 +20,9 @@ const reviewsDB = require('../Model/reviews');
 const adminDB = require('../Model/admin');
 
 >>>>>>> origin/login
+=======
+const voucherDB = require('../Model/voucher');
+>>>>>>> origin/frontend
 // const verifyFn = require('../Auth/verifyToken');
 
 const verifyFn = require('../Auth/verifyToken');
@@ -253,9 +257,7 @@ app.delete('/students/:adminNo/',verifyToken.verifyToken, function (req, res) {
 //GET /products/ 
 app.get('/products/', function (req, res) {
 
-    var productId = req.params.productId;
-
-    productsDB.getProducts(productId, function (err, result) {
+    productsDB.getProducts(function (err, result) {
 
         res.type('json');
         if (err) {
@@ -275,8 +277,10 @@ app.get('/products/', function (req, res) {
 app.get('/products/:productName/', function (req, res) {
 
     var productName = req.params.productName;
+    console.log(productName)
 
     productsDB.searchProducts(productName, function (err, result) {
+        
 
         res.type('json');
         if (err) {
@@ -292,6 +296,27 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
+//Search /voucher/:voucherCode/
+app.get('/voucher/:voucherCode/', function (req, res) {
+
+    var voucherCode = req.params.voucherCode;
+    
+
+    voucherDB.searchvoucher(voucherCode, function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
 
 //GET /gallery/ 
 app.get('/gallery/',function (req, res) {
