@@ -130,6 +130,72 @@ var studentsDB = {
 
 
 
+    deleteStudent: function (adminNo, callback) {
+
+        var dbConn = db.getConnection();
+
+        dbConn.connect(function (err) {
+
+            if (err) {
+
+                console.log(err);
+                return callback(err, null);
+
+            } else {
+                var sql = "delete from login.students where adminNo=?";
+
+                dbConn.query(sql, [adminNo], function (err, result) {
+
+                    dbConn.end();
+                    if (err) {
+                        console.log(err);
+                    } else {
+
+                        console.log(result);
+                    }
+                    return callback(err, result);
+                });
+
+            }
+
+        });
+
+    },
+
+
+    deleteStudents: function (studentClass, callback) {
+
+        var dbConn = db.getConnection();
+
+        dbConn.connect(function (err) {
+
+            if (err) {
+
+                console.log(err);
+                return callback(err, null);
+
+            } else {
+                var sql = "delete from login.students where studentClass=?";
+
+                dbConn.query(sql, [studentClass], function (err, result) {
+
+                    dbConn.end();
+                    if (err) {
+                        console.log(err);
+                    } else {
+
+                        console.log(result);
+                    }
+                    return callback(err, result);
+                });
+
+            }
+
+        });
+
+    },
+
+
 }
 
 module.exports = studentsDB;

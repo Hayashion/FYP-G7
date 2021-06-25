@@ -1,6 +1,6 @@
 // HoneyHAX
 // DISM/FT/3A/02
-// FYP HoneyHAX Apparel
+// FYP HoneyHAX Bakery
 // app.js
 
 const express = require('express');
@@ -10,8 +10,14 @@ const app = express();
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 const studentsDB = require('../Model/students');
+
 const reviewsDB = require('../Model/reviews');
+const adminDB = require('../Model/admin');
+
 // const verifyFn = require('../Auth/verifyToken');
+
+const verifyFn = require('../Auth/verifyToken');
+
 
 var verifyToken = require('../Auth/verifyToken');
 
@@ -27,7 +33,6 @@ app.use(bodyParser.json());//parse json data
 
 
 //GET /students/
-
 app.get("/students", function (req, res) {
     studentsDB.getStudents(function (err, result) {
         res.type("json")
@@ -95,8 +100,6 @@ app.put('/students/:adminNo',function(req,res){
 
 
 
-
-
 // POST /students
 app.post("/students", function (req, res) {   
     var username = req.body.username;
@@ -123,9 +126,6 @@ app.post("/students", function (req, res) {
     });
 });
 
-
-
-
 // POST /students/login 
 app.post('/students/login',function(req,res){
 
@@ -151,8 +151,6 @@ app.post('/students/login',function(req,res){
 });
 
 
-
-
 //POST /students/logout
 app.post('/students/logout', function (req, res) {
     console.log("..logging out.");
@@ -160,6 +158,90 @@ app.post('/students/logout', function (req, res) {
     //res.setHeader('Content-Type', 'application/json');
     res.json({ success: true, status: 'Log out successful!' });
 });
+
+
+// PUT /admin/:adminid 
+app.put('/admin/:adminid',verifyToken.verifyToken, function(req,res){
+
+    var username = req.body.username;
+    var password = req.body.password;
+    var adminid = req.params.adminid;
+    
+    // console.log(username);
+    // console.log(password);
+    // console.log(adminid);
+
+    adminDB.updateAdmin(username, password, adminid, function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(201);
+            res.send(`{"Updated Admin": ${result.affectedRows}}`);
+        }
+    });
+});
+
+
+// POST /admin/login 
+app.post('/admin/login',function(req,res){
+
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    console.log(username);
+    console.log(password);
+
+    adminDB.loginAdmin(username, password, function (err, token, result) {
+        if (!err) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            delete result[0]['password'];//clear the password in json data, do not send back to client
+            console.log(result);
+            res.json({ success: true, UserData: JSON.stringify(result), token: token, status: 'You are successfully logged in!' }); // token = jwt
+            res.send();
+        } else {
+            res.status(500);
+            res.sendStatus(err.statusCode);
+        }
+    });
+});
+
+
+//POST /admin/logout
+app.post('/admin/logout', function (req, res) {
+    console.log("..logging out.");
+    //res.clearCookie('session-id'); //clears the cookie in the response
+    //res.setHeader('Content-Type', 'application/json');
+    res.json({ success: true, status: 'Log out successful!' });
+});
+
+
+// DELETE /students/:adminNo/ 
+app.delete('/students/:adminNo/',verifyToken.verifyToken, function (req, res) {
+
+    var adminNo = req.params.adminNo;
+
+    studentsDB.deleteStudent(adminNo, function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(204);
+            res.send('');
+        }
+
+    });
+
+});
+
+
 
 
 
