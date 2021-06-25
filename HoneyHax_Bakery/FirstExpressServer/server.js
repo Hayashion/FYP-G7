@@ -1,6 +1,7 @@
-// Class: DISM/FT/3A/02
-// Admission No: P1950023
-// Name: Ang Yuran
+// HoneyHAX
+// DISM/FT/3A/02
+// FYP HoneyHAX Bakery
+// server.js
 
 
 var express = require('express');
