@@ -9,20 +9,16 @@ const app = express();
 
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
-<<<<<<< HEAD
-const usersDB = require('../Model/users');
-<<<<<<< HEAD
+
 const flagsDB = require('../Model/flags');
-=======
 const studentsDB = require('../Model/students');
 
 const reviewsDB = require('../Model/reviews');
 const adminDB = require('../Model/admin');
 
->>>>>>> origin/login
-=======
+
 const voucherDB = require('../Model/voucher');
->>>>>>> origin/frontend
+
 // const verifyFn = require('../Auth/verifyToken');
 
 const verifyFn = require('../Auth/verifyToken');
