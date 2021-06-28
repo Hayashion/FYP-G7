@@ -21,7 +21,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select adminNo,username,studentName,studentClass from login.students"
+                var sql = "select adminNo,username,studentName,studentClass,points from login.students"
                 dbConn.query(sql, function (err, result) {
                     dbConn.end();
                     return callback(err, result);
