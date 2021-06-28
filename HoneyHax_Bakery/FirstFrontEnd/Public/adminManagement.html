@@ -1,0 +1,204 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HoneyHAX Admin</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var tmpToken = localStorage.getItem("token");
+        var deleteFun = function (id) {
+            $.ajax({
+                headers: { 'authorization': 'Bearer ' + tmpToken },
+                url: `http://localhost:8081/travel/${id}/`,
+                type: 'DELETE',
+                //data: data,
+                // contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (result, textStatus, xhr) {
+                    if (result != null) {
+                        alert("Delete Successful!");
+                        window.location.reload();
+                    } else {
+                        console.log("Error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                    if (errorThrown == "Forbidden") {
+                        alert("Unauthorised!")
+                    } else {
+                        alert("Internal Server error")
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            // Display all Travels
+            $.ajax({
+                //headers: {'authorization': 'Bearer '+tmpToken},     
+                url: `http://localhost:8081/students`,
+                type: 'GET',
+                //data: data,  
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (result, textStatus, xhr) {
+                    if (result != null) {
+                        var divOutput = "";
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i]);
+                            divOutput += `<tr>
+												<th scope="row">${i + 1}</th>
+												<td>${result[i].studentName}</td>
+												<td>${result[i].studentClass}</td>
+												<td>${result[i].adminNo}</td>
+												<td>${result[i].points}</td>
+												<td><a class="btn btn-primary Delete" onclick="deleteFun(${result[i].adminNo})" id="Delete${result[i].adminNo}">Delete</a></td>
+											</tr>`
+                        }
+
+                        $('#studentTable').html(divOutput);
+
+                    } else {
+                        console.log("Error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+
+
+
+
+
+
+            // var a = JSON.parse(localStorage.getItem("userInfo"))
+            // if (a[0].role != "admin") {
+            // 	window.location.assign("http://localhost:3001/index1.html");
+            // }
+
+
+
+            $("#logout").click(function () {
+                window.localStorage.clear();
+                window.location.assign("http://localhost:3001/index.html");
+            });
+        })
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="logo">
+                <h1><a href="#"><strong>HoneyHAX Admin</strong></a></h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li class="home"><a href="admin.html" accesskey="1" title="">Home</a></li>
+                    <li class="current_page_item itinerary"><a href="adminManagement.html" accesskey="3"
+                            title="">Management</a></li>
+                    <li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="page" class="container">
+        <div id="content">
+            <div id="infomation">
+                <div class="title">
+                    <h2>Management</h2>
+                    <span class="byline">Welcome! Please select either to Add or to Remove Students</span>
+                </div>
+                <a href="adminAddStudent.html" class="btn btn-primary btn-block" id="addItinerary">Add Student</a>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Student</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Admin Number</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTable">
+                            <!-- <tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>Jacob</td>
+								<td>Thornton</td>
+								<td>@fat</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>Larry</td>
+								<td>the Bird</td>
+								<td>@twitter</td>
+							</tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div id="copyright">
+        <p>| &copy; HoneyHAX. All rights reserved. |</p>
+    </div>
+</body>
+
+</html>
