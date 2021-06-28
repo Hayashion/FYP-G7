@@ -21,7 +21,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from login.students"
+                var sql = "select adminNo,username,studentName,studentClass from login.students"
                 dbConn.query(sql, function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -41,7 +41,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "insert into students (adminNo, username, password, studentClass) Values(?,?,?,?)";
+                var sql = "insert into login.students (adminNo, username, password, studentClass) Values(?,?,?,?)";
                 dbConn.query(sql, [adminNo, username, password, studentClass], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -60,7 +60,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from students where adminNo=?"
+                var sql = "select adminNo,username,studentName,studentClass from login.students where adminNo=?"
                 dbConn.query(sql, [adminNo], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -80,7 +80,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "update students set username=?, password=? where adminNo=?"
+                var sql = "update login.students set username=?, password=? where adminNo=?"
                 dbConn.query(sql, [username, password, adminNo], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -101,7 +101,7 @@ var studentsDB = {
             }
             else {
                 console.log("Connected!");
-                var sql = 'select * from students where username=? and password=?';
+                var sql = 'select * from login.students where username=? and password=?';
                 conn.query(sql, [username,password], function (err, result) {
                     conn.end();
                     if (err) {
