@@ -77,6 +77,21 @@ app.get('/students/:adminNo', function(req,res){
 });
 
 
+app.get("/studentsflag", function (req, res) {
+    studentsDB.getStudentsFlags(function (err, result) {
+        res.type("json")
+        if (!err) {
+            res.status(200);
+            res.send(result);
+        }
+        else {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        }
+    });
+});
+
+
 
 // PUT /students/:adminNo update students
 app.put('/students/:adminNo',function(req,res){

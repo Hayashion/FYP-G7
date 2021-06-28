@@ -21,7 +21,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from students"
+                var sql = "select * from login.students"
                 dbConn.query(sql, function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -193,6 +193,24 @@ var studentsDB = {
 
         });
 
+    },
+
+
+    getStudentsFlags: function (callback) {    // Get all Students Flags
+        var dbConn = db.getConnection();
+        dbConn.connect(function (err) {
+            if (err) {
+                console.log(err);
+                return callback(err, null);
+            }
+            else {
+                var sql = "select studentName, studentClass, points from login.students"
+                dbConn.query(sql, function (err, result) {
+                    dbConn.end();
+                    return callback(err, result);
+                });
+            }
+        });
     },
 
 
