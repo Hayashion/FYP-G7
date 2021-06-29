@@ -26,7 +26,7 @@ app.use(function(req,res,next){
 });
 
 
-app.use(serveStatic(__dirname+"/Public")); 
+app.use(serveStatic(__dirname+"/Public",{index:'home.html'})); 
 
 
 app.listen(port,hostname,function(){
