@@ -21,7 +21,7 @@ var adminDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "insert into students (adminid, username, password) Values(?,?,?)";
+                var sql = "insert into login.admin (adminid, username, password) Values(?,?,?)";
                 dbConn.query(sql, [adminid, username, password], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -38,7 +38,7 @@ var adminDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "update admin set username=?, password=? where adminid=?"
+                var sql = "update login.admin set username=?, password=? where adminid=?"
                 dbConn.query(sql, [username, password, adminid], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
