@@ -373,42 +373,22 @@
       <script src="js/owl.carousel.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
       <script>
-      $(document).ready(function(){
-      $(".fancybox").fancybox({
-         openEffect: "none",
-         closeEffect: "none"
-         });
-         
-         $(".zoom").hover(function(){
-         
-         $(this).addClass('transition');
-         }, function(){
-         
-         $(this).removeClass('transition');
-         });
-         });
-         </script> 
+		$(document).ready(function(){
+			$(".fancybox").fancybox({
+				openEffect: "none",
+				closeEffect: "none"
+				});
+				
+				$(".zoom").hover(function(){
+				
+				$(this).addClass('transition');
+				}, function(){
+				
+				$(this).removeClass('transition');
+				});
+			});
+        </script> 
 
-         <script>
-      // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-      // Australia.
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 11,
-          center: {lat: 40.645037, lng: -73.880224},
-          });
-
-        var image = 'images/location_point.png';
-          var beachMarker = new google.maps.Marker({
-             position: {lat: 40.645037, lng: -73.880224},
-             map: map,
-             icon: image
-          });
-        }
-        </script>
-        <!-- google map js -->
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
-        <!-- end google map js -->
 
 
 
