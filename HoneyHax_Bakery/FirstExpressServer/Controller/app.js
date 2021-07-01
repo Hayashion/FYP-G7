@@ -419,6 +419,24 @@ app.get('/product/:productId/reviews/', function (req, res) {
     });
 });
 
+// GET /reviews
+app.get('/review', function (req, res) {
+    var name = req.query.name;
+    var review = req.query.review;
+    console.log(name,review)
+
+    res.type('json');
+    reviewsDB.processReview(name,review, function (err, result) {
+        console.log(err);
+        if (err) {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        } else {
+            res.status(200);
+            res.send(result); //
+        }
+    });
+});
 
 
 module.exports = app;

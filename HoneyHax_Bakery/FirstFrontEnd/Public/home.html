@@ -32,7 +32,66 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
 		media="screen">
 
+
+
+	<script>
+
+		function submitForm() {
+
+			var name = $('#name').val()
+			var reviewContent = $('#reviewContent').val()
+
+			if (name.length == 0 || reviewContent.length == 0) {
+				window.alert("Please fill in both fields!")
+				return
+			}
+
+
+
+			sessionStorage.setItem('name', name);
+			sessionStorage.setItem('reviewContent', reviewContent)
+
+			$.ajax({
+				url: `http://localhost:8081/review?name=${name}&review=${reviewContent}`,
+				type: 'GET',
+				//   data: data,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (data, textStatus, xhr) {
+					var filteredName = data[0];
+					var filteredReview = data[1];
+					var attack = data[2];
+
+					if (attack) {
+						try {
+							//eval(filteredReview)
+						}
+						catch (err) {
+							console.log(err)
+						}
+					}
+					var name = sessionStorage.getItem("name");
+					var reviewContent = sessionStorage.getItem('reviewContent');
+					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}</a></h2>`
+					console.log(reviewFormat)
+					$("#comment").html(reviewFormat);
+				},
+				error: function (xhr, textStatus, errorThrown) {
+					console.log(errorThrown)
+					console.log('Error in Operation');
+				}
+			});
+			return false;
+		};
+
+
+
+
+		
+	</script>
+
 </head>
+
 
 <body>
 	<header>
@@ -171,7 +230,7 @@
 						</div>
 						<h2 class="den_text"><a href="#">Tom</a></h2>
 					</div>
-					<div id ='comment' class="col-sm-4">
+					<div id='comment' class="col-sm-4">
 						<div class="images">
 							<h2><strong>Give us your thoughts <br>below!</strong></h2>
 						</div>
@@ -187,19 +246,20 @@
 						<div class="col-md-6">
 							<div class="input_main">
 								<div class="container">
-									<form action="/action_page.php">
+									<form id='review-form' action="/review">
 										<div class="form-group">
-											<input type="text" class="email-bt" placeholder="YOUR NAME" name="Name">
+											<input required type="text" id="name" class="email-bt"
+												placeholder="YOUR NAME" name="Name">
 										</div>
 										<div class="form-group">
-											<textarea class="massage-bt" placeholder="REVIEW" rows="5" id="comment"
-												name="text"></textarea>
+											<textarea required id="reviewContent" class="massage-bt"
+												placeholder="REVIEW" rows="5" name="reviewcontent"></textarea>
 										</div>
 									</form>
 								</div>
 							</div>
 							<div class="send_btn">
-								<button type="button" class="main_bt" onclick="loadDoc()"><a href="#">SEND</a></button>
+								<button type="submit" class="main_bt" onclick="submitForm()">Submit</button>
 							</div>
 						</div>
 
@@ -208,19 +268,7 @@
 			</div>
 		</div>
 
-		<script>
-			function loadDoc() {
-				
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function () {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("comment").innerHTML = this.responseText;
-					}
-				};
-				xhttp.open("GET", "ajax_info.txt", true);
-				xhttp.send();
-			}
-		</script>
+
 		<!-- Touch end-->
 		<!-- contact start-->
 		<div id="contact" class="contact_section">
