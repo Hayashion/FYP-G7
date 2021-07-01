@@ -629,3 +629,18 @@ button.main_bt a:hover { color: #fa3e19; }
 .product_section_2 .images:hover {
     border-color: #fa3e19;
 }
+
+
+.review_section{
+	width: 100%;
+	float: right;
+    padding-top: 40px;
+}
+
+.review_section .images {
+    border: solid #fa3e19 5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
