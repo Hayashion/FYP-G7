@@ -31,13 +31,15 @@
    <link rel="stylesheet" href="css/owl.theme.default.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
       media="screen">
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
    <style>
       :root {
          --rad: .7rem;
          --dur: .3s;
-         --color-dark: #2f2f2f;
+         /* --color-dark: #2f2f2f; */
          --color-light: #fff;
-         --color-brand: #57bd84;
+         /* --color-brand: #57bd84; */
          --font-fam: 'Lato', sans-serif;
          --height: 5rem;
          --btn-width: 6rem;
@@ -45,13 +47,6 @@
       }
 
       /* // Setup */
-      body {
-         /* background: var(--color-dark); */
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         min-height: 100vh
-      }
 
       html {
          box-sizing: border-box;
@@ -65,47 +60,6 @@
          box-sizing: inherit;
       }
 
-      /* // Main styles */
-
-      /* Slideshow container */
-      .slideshow-container {
-         max-width: 1000px;
-         position: relative;
-         margin: auto;
-
-      }
-      
-      /* Hide the images by default */
-      .mySlides {
-         display: none;
-      }
-
-      .mySlides img {
-         width: 100%;
-      }
-
-      /* Next & previous buttons */
-      .prev,
-      .next {
-         cursor: pointer;
-         position: absolute;
-         top: 50%;
-         width: auto;
-         margin-top: -22px;
-         padding: 16px;
-         color: white;
-         font-weight: bold;
-         font-size: 18px;
-         border-radius: 0 3px 3px 0;
-         user-select: none;
-      }
-
-      /* Position the "next button" to the right */
-      .next {
-         right: 0;
-         border-radius: 3px 0 0 3px;
-      }
-
       /* Caption text */
       .text {
          color: #f2f2f2;
@@ -116,44 +70,63 @@
          width: 100%;
          text-align: center;
       }
-      .displayblockcupcroissants{
-         display:block;
+
+      #products-body {
+         padding-top: 200px;
       }
 
-      
+      .product-body {
+         border: 1px solid black;
+      }
+
+      .product-img {
+         width: 200px;
+         height: 200px;
+      }
+
+      .center-block {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 5%;
+      }
    </style>
    <script>
-      var slideIndex = 0;
-      showSlides(slideIndex);
-
-      // Next/previous controls
-      function plusSlides(n) {
-         showSlides(slideIndex += n);
-      }
-
-      // Thumbnail image controls
-      function currentSlide(n) {
-         showSlides(slideIndex = n);
-      }
-
-      function showSlides(n) {
-         var i;
-         var slides = document.getElementsByClassName("mySlides");
-
-         if (n > slides.length) {
-            slideIndex = 1
-         }
-         if (n < 1) {
-            slideIndex = slides.length
-         }
-         for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-         }
-         
-         slides[slideIndex - 1].style.display = "block";
-
-      }
+      $(document).ready(function () {
+         $.ajax({
+            url: 'http://localhost:8081/products/',
+            type: 'GET',
+            // data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+               if (data != null) {
+                  var divOutput = "";
+                  console.log(data)
+                  for (var i = 0; i < data.length - 1; i++) {
+                     divOutput += `
+                                          <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
+                                          <img class="product-img center-block img-thumbnail" src="${data[i].productImg}">
+                                          <p class="product-name text-center">${data[i].productName}
+                                          <p class="product-price text-center">$${data[i].price}
+                                          <p class="product-description text-center">${data[i].description}
+                                       </div>
+                                    `
+                     // divOutput+=data[0].price
+                  }
+                  $('#products-body').html(divOutput)
+               } else {
+                  console.log("Error");
+               }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+               console.log('Error in Operation');
+            }
+         });
+         return false;
+      });
    </script>
+
 </head>
 
 <body>
@@ -189,36 +162,21 @@
                </div>
             </div>
          </div>
+         <!-- end header inner -->
       </div>
+   </header>
+
+   <main>
       <!-- Slideshow container -->
-      <div class="slideshow-container">
+      <div class="container-fluid">
 
-         <!-- Full-width images with number and caption text -->
-         <div class="mySlides displayblockcupcroissants">
+         <div id='products-body' class="row justify-content-center">
 
-            <img src="images/gallery-img1.png">
-            <div class="text">Croissants</div>
          </div>
-
-
-         <div class="mySlides">
-
-            <img src="images/gallery-img2.png">
-            <div class="text">Bread</div>
-         </div>
-
-         <div class="mySlides">
-
-            <img src="images/gallery-img3.png">
-            <div class="text">Cupcake</div>
-         </div>
-
-         <!-- Next and previous buttons -->
-         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-         <a class="next" onclick="plusSlides(1)">&#10095;</a>
       </div>
-      <br>
+   </main>
 
+   <footer>
       <!-- contact start-->
       <div id="contact" class="contact_section">
          <div class="container">
@@ -302,52 +260,24 @@
             </div>
          </div>
       </div>
+   </footer>
 
 
-      <!-- copyright end-->
+   <!-- copyright end-->
 
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <!-- javascript -->
-      <script src="js/owl.carousel.js"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-      <script>
-         $(document).ready(function () {
-            
-            $(".fancybox").fancybox({
-               openEffect: "none",
-               closeEffect: "none"
-            });
+   <!-- Javascript files-->
+   <script src="js/jquery.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+   <script src="js/jquery-3.0.0.min.js"></script>
+   <script src="js/plugin.js"></script>
+   <!-- sidebar -->
+   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="js/custom.js"></script>
+   <!-- javascript -->
+   <script src="js/owl.carousel.js"></script>
+   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
-            $(".zoom").hover(function () {
-
-               $(this).addClass('transition');
-            }, function () {
-
-               $(this).removeClass('transition');
-            });
-         });
-         jQuery(document).ready(function ($) {
-            tab = $('.tabs h3 a');
-
-            tab.on('click', function (event) {
-               event.preventDefault();
-               tab.removeClass('active');
-               $(this).addClass('active');
-
-               tab_content = $(this).attr('href');
-               $('div[id$="tab-content"]').removeClass('active');
-               $(tab_content).addClass('active');
-            });
-         });
-      </script>
 
 
 </body>

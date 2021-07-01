@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>Flag</title>
+  <title>HoneyHAX Flag</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -255,7 +255,6 @@
         text-transform: uppercase;
       }
 
-
       table td:last-child {
         border-bottom: 0;
       }
@@ -263,6 +262,98 @@
   </style>
 
 </head>
+<script>
+  var userData = undefined;
+  var studentClass = undefined;
+  var adminNo = undefined;
+  var userJsonData = undefined;
+  var userData = localStorage.getItem("userInfo");
+  var userJsonData = JSON.parse(userData);
+
+  if (userJsonData === null) {
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
+
+
+
+  if (userJsonData != null) {
+    // var userRole = userJsonData[0].role;
+    var userName = userJsonData[0].username
+  }
+
+  // if(userRole!="student"){
+  //     window.alert('Unauthorized. You will be redirected to home page.')
+  //     window.location.assign("/index.html");
+  // }
+
+  // <form id="flagMainForm">
+  //   <div class="name-wrapper">
+  //     <input type="text" required="">
+  //     <span class="highlight"></span>
+  //     <span class="bar"></span>
+  //     <label class="inputFlag">Input Flag</label>
+  //   </div>
+  //   <!-- <button type="submit" id="flagEnter" value="submit">Submit</button> -->
+  // </form>
+
+
+  //         <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();" role="search">
+  //     <!-- <label for="search">Search for stuff</label> -->
+  //     <input id="search" class="mt-4 border col-6" type="search" placeholder="Search..." autofocus required />
+  //     <button type="submit">Go<img src="images/searchicon.png"></button>
+  //  </form>
+
+
+  $("#flagMainForm").submit(function (e) {
+    e.preventDefault();
+    var flagValue = $('#inputText').val();
+    console.log(flagValue)
+  })
+
+  var adminID = userJsonData[0].adminNo;
+
+  $(document).ready(function () { // Login
+
+    $("#flagMainForm").submit(function () { // # = id
+      $.ajax({
+        url: `http://localhost:8081/checkFlag/`,
+        type: 'GET',
+        data: data, // contain username and password
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({ "adminID": adminNo, 'flagValue' : flagValue }),
+        success: function (result, textStatus, xhr) {
+          if (result != null) {                     // managed to retrieve some data
+            alert("Well Done! Points have been awarded :)")
+          } else {
+            alert("Invalid flag input, please try again.")
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Invalid flag input, please try again.")
+        }
+      });
+
+      return false;
+
+    });
+
+  });
+
+
+
+
+
+
+
+  // function flagSubmit() {
+  //   var flagValue = $('#inputText').val();
+  //   console.log(flagValue);
+  // }
+
+</script>
 
 <body>
   <header>
@@ -284,8 +375,9 @@
                 <div class="limit-box">
                   <nav class="main-menu">
                     <ul class="menu-area-main">
-                      <li class="active"><a href="#studentprofile" id="studentNameOfUsername">Name</a></li>
-                      <li><a href="#logout">Logout</a></li>
+                      <li><a href="home.html" target="_blank">HoneyHAX Page</a></li>
+                      <li class="active"><a href="" id="studentNameOfUsername">Name</a></li>
+                      <li><a href="#logout" id="logout">Logout</a></li>
                     </ul>
                   </nav>
                 </div>
@@ -295,28 +387,25 @@
         </div>
       </div>
       <!-- end header inner -->
-
+      <br>
       <!-- Flag and Scoreboard start-->
       <div id="page" class="container">
         <div id="content">
           <div class="row">
-
-
             <div class="col-sm-9">
               <div class="formandbutton">
-                <form>
+                <form id="flagMainForm">
                   <div class="name-wrapper">
-                    <input type="text" required="">
+                    <input id='inputText' type="text" required="">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label class="inputFlag">Input Flag</label>
                   </div>
+                  <!-- <button type="submit" onclick='flagSubmit()'>Submit</button> -->
                 </form>
-                <!-- <button type="submit" form="flagform" value="submit">Submit</button> -->
               </div>
+
             </div>
-
-
 
             <div class="col-sm-3">
               <div id="score">
@@ -429,6 +518,7 @@
       <!-- javascript -->
       <script src="js/owl.carousel.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       <script>
 
 
@@ -439,19 +529,6 @@
         $(document).ready(function () {
 
 
-
-          $(".fancybox").fancybox({
-            openEffect: "none",
-            closeEffect: "none"
-          });
-
-          $(".zoom").hover(function () {
-
-            $(this).addClass('transition');
-          }, function () {
-
-            $(this).removeClass('transition');
-          });
 
 
 
@@ -477,7 +554,7 @@
                             </tr>`
 
                 for (var i = 0; i < result.length; i++) {
-                  console.log(result[i]);
+                  // console.log(result[i]);
                   divOutput2 += `<tr>
                                 <td class="studentClass">${result[i].studentClass}</td>
                                 <td class="student">${result[i].studentName}</td>
@@ -487,7 +564,7 @@
 
 
                 }
-                console.log(divOutput)
+
 
                 $('#head').html(divOutput);
                 $('#myStudentNames').html(divOutput2);
@@ -502,27 +579,8 @@
 
             }
           });
-
-
-          var a = localStorage.getItem("userInfo")
-          if (a == null) {
-            // window.location.assign("http://localhost:3001/login.html");
-          }
-          else {
-            var studentName = JSON.parse(a)
-            var username = studentName[0].username
-            console.log(username)
-            console.log(`${username}`)
-            document.getElementById('studentNameOfUsername').innerHTML = `${username}`
-          }
-
-
-
-
-
+          document.getElementById('studentNameOfUsername').innerHTML = `${userName}`
         });
-
-
 
         jQuery(document).ready(function ($) {
           tab = $('.tabs h3 a');
@@ -539,14 +597,12 @@
         });
 
 
-
-
-
-
-
-
+        $('#logout').click(function () {
+          window.localStorage.clear();
+          console.log('Cleared the localStorage!')
+          window.location.assign("/login.html");
+        })
       </script>
-
 
 </body>
 

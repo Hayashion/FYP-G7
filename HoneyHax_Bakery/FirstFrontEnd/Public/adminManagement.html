@@ -36,37 +36,46 @@
 
 
     <script>
-        var tmpToken = localStorage.getItem("token");
+        // var tmpToken = localStorage.getItem("token");
         var deleteFun = function (id) {
-            $.ajax({
-                headers: { 'authorization': 'Bearer ' + tmpToken },
-                url: `http://localhost:8081/travel/${id}/`,
-                type: 'DELETE',
-                //data: data,
-                // contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                success: function (result, textStatus, xhr) {
-                    if (result != null) {
-                        alert("Delete Successful!");
-                        window.location.reload();
-                    } else {
-                        console.log("Error");
+            var confirmText = "Are you sure you want to delete user?";
+            if (confirm(confirmText)) {
+                $.ajax({
+                    // headers: { 'authorization': 'Bearer ' + tmpToken },
+                    url: `http://localhost:8081/students/${id}/`,
+                    type: 'DELETE',
+                    //data: data,
+                    // contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    success: function (result, textStatus, xhr) {
+                        if (result === undefined) {
+                            alert("Delete Successful!");
+                            location.reload();
+                        } else {
+                            console.log("Error");
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                        console.log(xhr)
+                        if (errorThrown == "Forbidden") {
+                            alert("Unauthorised!")
+                        } else {
+                            alert("Internal Server error")
+                        }
+
                     }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
-                    if (errorThrown == "Forbidden") {
-                        alert("Unauthorised!")
-                    } else {
-                        alert("Internal Server error")
-                    }
-                }
-            });
+                });
+            } else {
+                return
+            }
         }
+
+
 
         $(document).ready(function () {
 
-            // Display all Travels
+            // Display all Students
             $.ajax({
                 //headers: {'authorization': 'Bearer '+tmpToken},     
                 url: `http://localhost:8081/students`,
@@ -84,9 +93,12 @@
 												<td>${result[i].studentName}</td>
 												<td>${result[i].studentClass}</td>
 												<td>${result[i].adminNo}</td>
-												<td>${result[i].points}</td>
-												<td><a class="btn btn-primary Delete" onclick="deleteFun(${result[i].adminNo})" id="Delete${result[i].adminNo}">Delete</a></td>
+												<td>${result[i].points}</td> 
+												<td><a class="btn btn-primary" onclick="deleteFun(${result[i].adminNo})" id="Delete">Delete</a></td>
 											</tr>`
+                            // deleteFun(${result[i].adminNo})
+                            // deleteFun(${result[i].adminNo})
+                            // Delete${result[i].adminNo} 
                         }
 
                         $('#studentTable').html(divOutput);
@@ -99,6 +111,24 @@
                     console.log('Error in Operation');
                 }
             });
+
+            var a = JSON.parse(localStorage.getItem("userInfo"))
+				
+            if (a==null || a[0].role != "admin") {
+                window.location.assign("http://localhost:3001/home.html");
+            }
+
+            var a = localStorage.getItem("userInfo")
+            if (a == null) {
+                // window.location.assign("http://localhost:3001/login.html");
+            }
+            else {
+                var teacherName = JSON.parse(a)
+                var username = teacherName[0].username
+                console.log(username)
+                console.log(`${username}`)
+                document.getElementById('teacherName').innerHTML = `${username}`
+            }
 
 
 
@@ -114,7 +144,7 @@
 
             $("#logout").click(function () {
                 window.localStorage.clear();
-                window.location.assign("http://localhost:3001/index.html");
+                window.location.assign("http://localhost:3001/home.html");
             });
         })
 
@@ -142,8 +172,9 @@
             <div id="menu">
                 <ul>
                     <li class="home"><a href="admin.html" accesskey="1" title="">Home</a></li>
-                    <li class="current_page_item itinerary"><a href="adminManagement.html" accesskey="3"
+                    <li class="current_page_item itinerary"><a href="adminManagement.html" accesskey="2"
                             title="">Management</a></li>
+                    <li class="itinerary"><a href="#" accesskey="3" title="" id="teacherName">Name</a></li>
                     <li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
                 </ul>
             </div>
@@ -192,7 +223,7 @@
                         </tbody>
                     </table>
                 </div>
-            
+
             </div>
         </div>
     </div>

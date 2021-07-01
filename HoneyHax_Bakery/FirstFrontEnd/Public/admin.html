@@ -31,14 +31,27 @@
 			$(document).ready(function(){
 				$("#logout").click(function () {
 					window.localStorage.clear();
-					window.location.assign("http://localhost:3001/index.html");
+					window.location.assign("http://localhost:3001/home.html");
 				});
 				
-				// var a = JSON.parse(localStorage.getItem("userInfo"))
+				var a = JSON.parse(localStorage.getItem("userInfo"))
 				
-				// if (a==null || a[0].role != "admin") {
-				// 	window.location.assign("http://localhost:3001/index1.html");
-				// }
+				if (a==null || a[0].role != "admin") {
+					window.location.assign("http://localhost:3001/home.html");
+				}
+
+
+				var a = localStorage.getItem("userInfo")
+				if (a == null) {
+					// window.location.assign("http://localhost:3001/adminLogin.html");
+				}
+				else {
+					var teacherName = JSON.parse(a)
+					var username = teacherName[0].username
+					console.log(username)
+					console.log(`${username}`)
+					document.getElementById('teacherName').innerHTML = `${username}`
+				}
 
 
 			})
@@ -64,7 +77,8 @@
 				<div id="menu">
 					<ul>
 						<li class="current_page_item home"><a href="admin.html" accesskey="1" title="">Home</a></li>
-						<li class="itinerary"><a href="adminManagement.html" accesskey="3" title="">Management</a></li>
+						<li class="itinerary"><a href="adminManagement.html" accesskey="2" title="">Management</a></li>
+						<li class="itinerary"><a href="#" accesskey="3" title="" id="teacherName">Name</a></li>
 						<li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
 					</ul>
 				</div>
@@ -74,10 +88,10 @@
             <div id="content">
 				<div class="title">
 					<h2>Welcome to HoneyHAX Admin Dashboard</h2>
-					<span class="byline">You can manage students here on the "Management" tab ":)</span> 
+					<span class="byline">You can manage students here on the "Management" tab :)</span> 
 				</div>
 				<div class="card-footer text-muted">
-					<a href="index.html" class="btn btn-primary">HoneyHAX Page</a>			
+					<a href="home.html" target="_blank" class="btn btn-primary">HoneyHAX Page</a>			
 				</div>
 			</div>
 		</div>

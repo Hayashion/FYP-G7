@@ -21,7 +21,8 @@
             <div id="menu">
                 <ul>
                     <li class="home"><a href="admin.html" accesskey="1" title="">Home</a></li>
-                    <li class="current_page_item itinerary"><a href="adminManagement.html" accesskey="3" title="">Management</a></li>
+                    <li class="current_page_item itinerary"><a href="adminManagement.html" accesskey="2" title="">Management</a></li>
+                    <li class="itinerary"><a href="#" accesskey="3" title="" id="teacherName">Name</a></li>
                     <li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
                 </ul>
             </div>
@@ -34,8 +35,9 @@
                     <h2>Manage Student</h2>
                     <span class="byline">Welcome! Please fill up the details to add a new Student</span>
                 </div>
+                
                 <div id="addform">
-                    <form id="add-tour">
+                    <form id="add-student">
                         <div class="form-group">
                             <input type="text" class="form-control" id="studentName" placeholder="Student Name (Full Name)" required="required">
                         </div>
@@ -56,12 +58,8 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block" id="add">Add</button>
                         </div>
-
                     </form>
                 </div>
-
-
-
             </div>
         </div>
 
@@ -111,32 +109,32 @@
 
 <script>
 
-
     $(document).ready(function () {
         var tmpToken = localStorage.getItem("token");
         const baseUrl = "http://localhost:8081"
-        $("#add-tour").submit((event) => {
+        $("#add-student").submit((event) => {
             event.preventDefault(); //this prevents the webpage from reloading
-            const title = $("#title").val();
-            const country = $("#country").val();
-            const price = $("#price").val()
-            const description = $("#description").val()
-            const travelPeriod = $("#travelPeriod").val()
-            const featured = $("#featured").val()
-            const pic = "http://localhost:8081/images/default.jpg"
-            var data = `{"title":"${title}","country":"${country}","price":"${price}","description":"${description}","travelPeriod":"${travelPeriod}","featured":"${featured}","pic":"${pic}"}`;
+
+            const studentName = $("#studentName").val();
+            const username = $("#username").val();
+            const studentClass = $("#studentClass").val()
+            const adminNo = $("#adminNo").val()
+            const password = $("#password").val()
+
+            var data = `{"studentName":"${studentName}","username":"${username}","studentClass":"${studentClass}","adminNo":"${adminNo}","password":"${password}"}`;
 
             $.ajax({
                 headers: { 'authorization': 'Bearer ' + tmpToken },
-                url: `http://localhost:8081/travel`,
+                url: `http://localhost:8081/students`,
                 type: 'POST',
                 data: data,
                 contentType: "application/json; charset=utf-8",
                 // dataType: "json",
                 success: function (data, textStatus, xhr) {
                     if (data != null) {
-                        window.alert("Successfully added a new travel listing!")
-                        window.location.assign(`http://localhost:3001/adminItinerary.html`);
+                        window.alert("Successfully added a new student!")
+                        // window.location.assign(`http://localhost:3001/adminManagement.html`);
+                        location.reload();
                     } else {
                         console.log("Error");
                     }
@@ -160,8 +158,26 @@
 
         $("#logout").click(function () {
             window.localStorage.clear();
-            window.location.assign("http://localhost:3001/index.html");
+            window.location.assign("http://localhost:3001/home.html");
         });
+
+        var a = JSON.parse(localStorage.getItem("userInfo"))
+        
+        if (a==null || a[0].role != "admin") {
+            window.location.assign("http://localhost:3001/home.html");
+        }
+
+        var a = localStorage.getItem("userInfo")
+        if (a == null) {
+            // window.location.assign("http://localhost:3001/login.html");
+        }
+        else {
+            var teacherName = JSON.parse(a)
+            var username = teacherName[0].username
+            console.log(username)
+            console.log(`${username}`)
+            document.getElementById('teacherName').innerHTML = `${username}`
+        }   
     })
 
 </script>
