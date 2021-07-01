@@ -28,7 +28,7 @@ var flagsDB = {
     //GET /products/:productsName/
     checkFlag: async function (adminID, flagValue, callback) {
 
-        var adminID = adminID.toString();
+        var adminID = adminID;
         var vulnID = "";
         var vulnString = "";
         var pointValue = 0;
