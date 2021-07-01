@@ -559,11 +559,18 @@ button.main_bt a:hover { color: #fa3e19; }
 	margin-top: 15px;
 }
 
-.copyright_section{
-	width: 100%;
-	float: left;
-	background-color: #fefefe;
-	height: auto;
+.copyright_section {
+    width: 100%;
+    float: left;
+    height: auto;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: #393838;
+}
+.copyright_text {
+    color:white;
 }
 
 .copyright_taital{
