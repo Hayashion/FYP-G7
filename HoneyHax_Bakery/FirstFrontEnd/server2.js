@@ -28,6 +28,9 @@ app.use(function(req,res,next){
 
 app.use(serveStatic(__dirname+"/Public",{index:'home.html'})); 
 
+app.get('*', function(req, res) {
+    res.redirect('/');
+});
 
 app.listen(port,hostname,function(){
 
