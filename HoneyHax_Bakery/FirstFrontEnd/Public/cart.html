@@ -474,12 +474,12 @@
                                 success: function (result, textStatus, xhr) {
                                     console.log(result);
                                     if (result.length!=0){  
-                                            
+                                        
                                             var divOutput="";
                                             
                                             divOutput+=`
                                                 <div>
-                                                    <label>Discount applied successfully! ${result[0].voucherDiscount}% off</label>
+                                                    <label>Discount applied successfully!</label>
                                                 </div>
                                                 `;
                                             
@@ -504,7 +504,7 @@
                                 }  
                             });  
 
-                            return true;
+                            return true;  //otherwise will keep reloading
                         });
 
                     });
