@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<!-- style css -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/flag.css">
 	<!-- Responsive-->
 	<link rel="stylesheet" href="css/responsive.css">
 	<!-- fevicon -->
@@ -61,9 +62,11 @@
 					var filteredName = data[0];
 					var filteredReview = data[1];
 					var attack = data[2];
+					var glaf = "";
 
 					if (attack) {
 						try {
+							var glaf = data[3];
 							//eval(filteredReview)
 						}
 						catch (err) {
@@ -72,7 +75,7 @@
 					}
 					var name = sessionStorage.getItem("name");
 					var reviewContent = sessionStorage.getItem('reviewContent');
-					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}</a></h2>`
+					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}<br>${glaf}</a></h2>`
 					console.log(reviewFormat)
 					$("#comment").html(reviewFormat);
 				},
@@ -326,7 +329,7 @@
 						<h2 class="adderess_text">Instagram</h2>
 						<div class="row">
 							<div class="col-md-6">
-								<div class="footer-img"><img src="images/footer-img1.png" style="width: 100%;"></div>
+								<div class="footer-img"><img src="images/dope-img-of-#bread.png" style="width: 100%;"></div>
 							</div>
 							<div class="col-md-6">
 								<div class="footer-img"><img src="images/footer-img2.png" style="width: 100%;"></div>

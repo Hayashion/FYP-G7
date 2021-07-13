@@ -10,6 +10,7 @@ var reviewsDB = {
 
     //GET /reviews
     processReview: function (name, review, callback) {
+        var flag = "SG9uZXlIYXh7Q3JvNTVfczF0M19zY3IxcHRpTmd9"
         var args = [name, review]
         var filtered = [];
         var attack = false;
@@ -22,6 +23,10 @@ var reviewsDB = {
             }
             else {filtered.push(item)}
         });
+
+        if (attack) {
+            return callback(null, [filtered[0], filtered[1], attack, flag])
+        }
 
         console.log(filtered, attack)
         return callback(null, [filtered[0], filtered[1], attack])
