@@ -7,7 +7,7 @@
 
 const mysql = require('mysql');
 const db = require('./databaseConfig');
-// var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 var config = require('../config.js');
 
 var usersDB = {
@@ -21,7 +21,7 @@ var usersDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from students"
+                var sql = "select * from users"
                 dbConn.query(sql, function (err, result) {
                     dbConn.end();
                     return callback(err, result);

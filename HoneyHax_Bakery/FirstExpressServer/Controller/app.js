@@ -622,7 +622,7 @@ app.post('/users/login',function(req,res){
     console.log(username);
     console.log(password);
 
-    usersdb.loginStudents(username, password, function (err, token, result) {
+    usersDB.loginUser(username, password, function (err, token, result) {
         if (!err) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
