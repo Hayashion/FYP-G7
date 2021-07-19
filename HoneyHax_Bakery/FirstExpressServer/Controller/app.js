@@ -11,7 +11,7 @@ const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 
 
-
+const aboutDB = require('../Model/about');
 const flagsDB = require('../Model/flags');
 
 const studentsDB = require('../Model/students');
