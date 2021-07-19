@@ -25,7 +25,7 @@ function makeDb(db) { //sql promise wrapper
 
 var flagsDB = {
 
-    //GET /products/:productsName/
+    //POST 
     checkFlag: async function (adminID, flagValue, callback) {
 
         var adminID = adminID;
@@ -33,10 +33,17 @@ var flagsDB = {
         var vulnString = "";
         var pointValue = 0;
         var points = 0;
-
+        
         var dbConn = makeDb(db)
 
         // Check if Flag is valid in DB
+
+        try{
+            flagValue = flagValue.split('{')[1].split('}')[0];
+        }
+        catch (err) {
+            return callback (null,"Flag Invalid")
+        }
 
 
         try {

@@ -336,8 +336,8 @@ app.get('/gallery/',function (req, res) {
 
 });
 
-//GET /checkFlag
-app.get('/checkFlag/',function (req, res) {
+//POST /checkFlag
+app.post('/checkFlag/',function (req, res) {
 
     var adminID = req.body.adminID;
     var flagValue = req.body.flagValue;
