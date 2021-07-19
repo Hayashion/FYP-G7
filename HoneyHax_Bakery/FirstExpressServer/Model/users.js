@@ -30,10 +30,25 @@ var usersDB = {
         });
     },
 
+    getUser: function (username, callback) {   // Get particular user from adminNo
+        var dbConn = db.getConnection()
+        dbConn.connect(function (err) {
+            if (err) {
+                console.log(err);
+                return callback(err, null);
+            }
+            else {
+                var sql = "select * from users where username=?"
+                dbConn.query(sql, [username], function (err, result) {
+                    dbConn.end();
+                    return callback(err, result);
+                });
+            }
+        });
+    },
 
 
-
-    insertUsers: function (username, password, userid, callback) {   // Create/Register users
+    insertUsers: function (username, password, callback) {   // Create/Register users
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -42,7 +57,7 @@ var usersDB = {
             }
             else {
                 var sql = "insert into users (username, password, userid) Values(?,?,?)";
-                dbConn.query(sql, [username, email, password, userid], function (err, result) {
+                dbConn.query(sql, [username, password], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -50,29 +65,7 @@ var usersDB = {
         });
     },
 
-
-
-    getUser: function (userid, callback) {   // Get particular user from adminNo
-        var dbConn = db.getConnection()
-        dbConn.connect(function (err) {
-            if (err) {
-                console.log(err);
-                return callback(err, null);
-            }
-            else {
-                var sql = "select * from users where userid=?"
-                dbConn.query(sql, [userid], function (err, result) {
-                    dbConn.end();
-                    return callback(err, result);
-                });
-            }
-        });
-    },
-
-
-
-
-    updateUser: function (username, password, userid, callback) {     // Updating user's info
+    updateUser: function (username, password, callback) {     // Updating user's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -115,7 +108,7 @@ var usersDB = {
                             console.log("@@token " + token);
                             return callback(null, token, result);
                         } else {
-                            var err2 = new Error("AdminNo/Password does not match.");
+                            var err2 = new Error("Username/Password does not match.");
                             err2.statusCode = 500;
                             return callback(err2, null, null);
                         }

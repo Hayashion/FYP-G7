@@ -19,7 +19,7 @@ const studentsDB = require('../Model/students');
 const reviewsDB = require('../Model/reviews');
 const adminDB = require('../Model/admin');
 
-
+const usersDB = require('../Model/users');
 
 const voucherDB = require('../Model/voucher');
 
@@ -528,6 +528,111 @@ app.get('/about', function (req, res) {
         } else {
             res.status(200);
             res.send(result); //
+        }
+    });
+});
+
+//get users 
+app.get("/users", function (req, res) {
+    usersDB.getUsers(function (err, result) {
+        res.type("json")
+        if (!err) {
+            res.status(200);
+            res.send(result);
+        }
+        else {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        }
+    });
+});
+
+// get user
+app.get('/users/:username', function(req,res){
+
+    var username = req.params.username;
+
+    usersDB.getUser(username, function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+});
+
+// post new user
+app.post("/users", function (req, res) {   
+    var username = req.body.username;
+    var password = req.body.password;
+
+
+    studentsDB.insertStudents(username, password, function (err, result) {
+        if (!err) {
+            res.status(201);
+            res.send(`{"User Created": ${result.affectedRows}}`)
+            // res.send();
+
+        }
+        else {
+            if (err.code == "ER_BAD_NULL_ERROR"){
+                res.status(422);
+                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
+            } else {
+                res.status(500);
+                console.log(err)
+                res.send(`"Internal Server Error"`);
+            }
+        }
+    });
+});
+
+// update /users/:username 
+app.put('/users/:username',function(req,res){
+    
+    var username = req.body.username;
+   
+    var password = req.body.password;
+
+
+    studentsDB.updateStudents(username, password, function (err, result) {
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+        } else {
+            res.status(201);
+            res.send(`{"affectedRows": "${result.affectedRows}"}`);
+        }
+    });
+});
+
+
+app.post('/users/login',function(req,res){
+
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    console.log(username);
+    console.log(password);
+
+    usersdb.loginStudents(username, password, function (err, token, result) {
+        if (!err) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            delete result[0]['password'];//clear the password in json data, do not send back to client
+            console.log(result);
+            res.json({ success: true, UserData: JSON.stringify(result), token: token, status: 'You are successfully logged in!' }); // token = jwt
+            res.send();
+        } else {
+            res.status(500);
+            res.sendStatus(err.statusCode);
         }
     });
 });
