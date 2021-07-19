@@ -10,23 +10,15 @@ const app = express();
 const productsDB = require('../Model/products');
 const galleryDB = require('../Model/gallery');
 
-<<<<<<< HEAD
 
 
 const flagsDB = require('../Model/flags');
 
-=======
-const flagsDB = require('../Model/flags');
->>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 const studentsDB = require('../Model/students');
 
 const reviewsDB = require('../Model/reviews');
 const adminDB = require('../Model/admin');
 
-<<<<<<< HEAD
-=======
-const aboutDB = require('../Model/about');
->>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 
 
 const voucherDB = require('../Model/voucher');
