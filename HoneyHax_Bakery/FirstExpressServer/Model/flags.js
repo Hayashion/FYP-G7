@@ -28,7 +28,7 @@ var flagsDB = {
     //GET /products/:productsName/
     checkFlag: async function (adminID, flagValue, callback) {
 
-        var adminID = adminID.toString();
+        var adminID = adminID;
         var vulnID = "";
         var vulnString = "";
         var pointValue = 0;
@@ -40,12 +40,12 @@ var flagsDB = {
 
 
         try {
-            var sql = "SELECT * FROM vulntable WHERE flagValue=?";
+            var sql = "SELECT * FROM login.vulntable WHERE flagValue=?";
             flagInfo = await dbConn.query(sql, [flagValue]); //pointValue + vulnID
             console.log(flagInfo)
             if (flagInfo.length == 0){ return callback (null,"Flag Invalid") }
 
-            var sql = "SELECT vulnStr,points FROM students WHERE adminNo=?";
+            var sql = "SELECT vulnStr,points FROM login.students WHERE adminNo=?";
             studentInfo = await dbConn.query(sql, [adminID]); //vulnStr + points
             console.log(studentInfo)
 
@@ -62,7 +62,7 @@ var flagsDB = {
             vulnString += "," + vulnID;
             points = points + pointValue;
 
-            var sql = "update students set vulnStr=?, points=? where adminNo=?"
+            var sql = "update login.students set vulnStr=?, points=? where adminNo=?"
             await dbConn.query(sql, [vulnString, points, adminID])
             return callback(null,"Valid, Points Scored: " + points);
 

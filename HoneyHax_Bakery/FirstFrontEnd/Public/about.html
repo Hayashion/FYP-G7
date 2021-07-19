@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>HoneyHAX</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- fevicon -->
+   <link rel="icon" href="images/fevicon.png" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- owl stylesheets -->
+   <link rel="stylesheet" href="css/owl.carousel.min.css">
+   <link rel="stylesheet" href="css/owl.theme.default.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+   <style>
+      :root {
+         --rad: .7rem;
+         --dur: .3s;
+         /* --color-dark: #2f2f2f; */
+         --color-light: #fff;
+         /* --color-brand: #57bd84; */
+         --font-fam: 'Lato', sans-serif;
+         --height: 5rem;
+         --btn-width: 6rem;
+         --bez: cubic-bezier(0, 0, 0.43, 1.49);
+      }
+
+      /* // Setup */
+
+      html {
+         box-sizing: border-box;
+         height: 100%;
+         font-size: 10px;
+      }
+
+      *,
+      *::before,
+      *::after {
+         box-sizing: inherit;
+      }
+
+      /* Caption text */
+      .text {
+         color: #f2f2f2;
+         font-size: 15px;
+         padding: 8px 12px;
+         position: absolute;
+         bottom: 8px;
+         width: 100%;
+         text-align: center;
+      }
+
+      #pcap{
+         color: #110f0a;
+      }
+
+      #products-body {
+         padding-top: 100px;
+         padding-bottom: 70px;
+      }
+
+      .product-body {
+         border: 1px solid black;
+      }
+
+      .product-img {
+         width: 200px;
+         height: 200px;
+      }
+
+      .center-block {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 5%;
+      }
+
+      .pictures {
+         border-radius: 30%;
+      }
+
+
+      /* // Main styles */
+      form {
+         position: relative;
+         margin: 2% 30%;
+         background: var(--color-brand);
+         border-radius: var(--rad);
+
+      }
+
+      input,
+      button {
+         height: var(--height);
+         font-family: var(--font-fam);
+         border: 0;
+         color: var(--color-dark);
+         font-size: 1.8rem;
+      }
+
+      input[type="search"] {
+         outline: 0;
+         width: 100%;
+         background: var(--color-light);
+         padding: 0 1.6rem;
+         border-radius: var(--rad);
+         appearance: none;
+         transition: all var(--dur) var(--bez);
+         transition-property: width, border-radius;
+         z-index: 1;
+         position: relative;
+      }
+
+      button {
+         display: none;
+         position: absolute;
+         top: 0;
+         right: 0;
+         width: var(--btn-width);
+         font-weight: bold;
+         background: var(--color-brand);
+         border-radius: 0 var(--rad) var(--rad) 0;
+         padding-left: 500px;
+      }
+   </style>
+
+
+   <script>
+      $(document).ready(function () {
+         $("#product-form").submit(function (e) {
+            var searchValue = $('#search').val()
+            var url = `about.html?location=${searchValue}`
+            // console.log(searchValue)
+            if (searchValue != '') {
+               window.location.replace(url)
+            }
+         })
+
+         var searchParams = new URLSearchParams(window.location.search)
+         if (searchParams.has("location")) {
+            var location = searchParams.get("location");
+         }
+         $.ajax({
+            url: `http://localhost:8081/location/${location}`,
+            type: 'GET',
+            //   data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+               console.log(data)
+               if (data != null) {
+                  var divOutput = "";
+                  for (var i = 0; i < data.length; i++) {
+                     divOutput += `
+                                    <div>${data[i].location}
+                                    </div>
+
+                                 `
+                     // divOutput+=data[0].price
+                  }
+                  $('#products-section').html(divOutput)
+               } else {
+                  console.log("Error");
+               }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+               console.log('Error in Operation');
+            }
+         });
+         return false;
+      });
+   </script>
+
+
+
+</head>
+
+<body>
+   <header>
+      <div class="layout_padding banner_section_start">
+         <!-- header inner -->
+         <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo"><a href="#home"><img src="images/logo.png" style="max-width: 100%;"></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <div class="menu-area">
+                        <div class="limit-box">
+                           <nav class="main-menu">
+                              <ul class="menu-area-main">
+                                 <li><a href="home.html">Home</a></li>
+                                 <li class="active"><a href="about.html">About</a></li>
+                                 <li><a href="products.html">products</a></li>
+                                 <li><a href="search.html">search</a></li>
+                                 <li><a href="login.html">Login</a></li>
+                              </ul>
+                           </nav>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- end header inner -->
+      </div>
+   </header>
+
+   <main>
+      <!-- Slideshow container -->
+      <div class="container-fluid">
+         <div id='products-body' class="row justify-content-center">
+            <div class="content">
+               <h2 style="text-align: center;">Our Team:</h2>
+               <br>
+               <div class='main-body row'>
+
+
+                  <div class="col-sm-4">
+                     <!-- <br> -->
+                     <a href="/benjamintan.html?img=benjamintan.jpg"><img class="pictures center" src="images/benjamintan.jpg" height=200 width=200 alt="ccs_logo"></img></a>
+                     <div id="posts">
+                        <div class="card" style="margin-top: 2rem;">
+                           <div class="card-body">
+                              <p class="card-text">Benjamin Tan</p>
+                           </div>
+                           <div class="card-footer text-muted">
+                              <a href="pcap_files/wireshark.pcap" download id='pcap'>
+                                 HoneyHAX Bakery Owner
+                              </a>
+                           </div>
+                           <br>
+                           <div class="card-footer text-muted">
+                              Established in 2021, we aim to provide the <br>best bakery in the world. With my team of 3
+                              <br>people, we aim to strive to succeed in the <br>next 5 years! 
+                           </div>
+                           <br>
+   
+                        </div>
+                     </div>
+                  </div>
+   
+   
+                  <div class="col-sm-4">
+                     <!-- <br> -->
+                     <img class="pictures center" src="images/guy2.jpg" height=200 width=200 alt="ccs_logo">
+                     <div id="posts">
+                        <div class="card" style="margin-top: 2rem;">
+                           <div class="card-body">
+                              <p class="card-text">Jerry Toh</p>
+                           </div>
+                           <div class="card-footer text-muted">
+                              HoneyHAX Bakery Co-Owner
+                           </div>
+                           <br>
+                           <div class="card-footer text-muted">
+                              IWVyb3BhZ25pUyBuaSB9c29kbmFueyB0c<br>2ViIGVodCBmbyBlbm8gZXZlaWhjYSBvdC<br>B0c2ViIHJ1byBtaWEgZXcgLHJhZXkgc2loVA==
+                           </div>
+                           <br>
+   
+                        </div>
+                     </div>
+                  </div>
+   
+   
+                  <div class="col-sm-4">
+                     <!-- <br> -->
+                     <img class="pictures center" src="images/guy3.jpg" height=200 width=200 alt="ccs_logo">
+                     <div id="posts">
+                        <div class="card" style="margin-top: 2rem;">
+                           <div class="card-body">
+                              <p class="card-text">Justin Koh</p>
+                           </div>
+                           <div class="card-footer text-muted">
+                              HoneyHAX Bakery Manager
+                           </div>
+                           <br>
+                           <div class="card-footer text-muted">
+                              Created in 2021, we started off as a small <br>home enterprise into now, a small local
+                              <br>chain in Singapore. Determined to bring<br>HoneyHAX in a global market!
+   
+                           </div>
+                           <br>
+   
+                        </div>
+                     </div>
+                  </div>
+   
+   
+   
+   
+               </div>
+            </div>
+
+
+            <br>
+
+         </div>
+
+         <div class='search'>
+            
+            <h2 style="text-align: center;">Our <a href="pcap_files/flag.pcap" download id='pcap'>Locations</a>:</h2>
+            
+            <!-- Search bar -->
+            <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();"
+               role="search">
+               <!-- <label for="search">Search for stuff</label> -->
+               <input id="search" class="mt-4 border col-6" type="search" placeholder="Search... (Example: Orchard, Clementi, etc...)" autofocus
+                  required />
+               <button type="submit">Go<img src="images/searchicon.png"></button>
+            </form>
+
+            <!-- To display Items -->
+            <div id='products-section' class="row justify-content-center">
+               <!-- Ajax command will input HTML here -->
+            </div>
+         </div>
+
+         <br>
+
+
+
+      </div>
+   </main>
+
+
+
+   <!-- Javascript files-->
+   <script src="js/jquery.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+   <script src="js/jquery-3.0.0.min.js"></script>
+   <script src="js/plugin.js"></script>
+   <!-- sidebar -->
+   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="js/custom.js"></script>
+   <!-- javascript -->
+   <script src="js/owl.carousel.js"></script>
+   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+</body>
+<footer>
+   <!-- contact start-->
+   <div id="contact" class="contact_section">
+      <div class="container">
+         <div class="contact-taital">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="contact_text"><strong>Contact Us</strong></div>
+               </div>
+            </div>
+         </div>
+         <div class="container">
+
+            <div class="row">
+               <div class="col-4 box">
+                  <label class="adderess_text">Address</label>
+
+                  <div class="row">
+                     <div class="image_icon">
+                        <img class="img-fluid" src="images/map-icon.png">
+                     </div>
+                     <div class="email_text">500 Dover Rd, Singapore 139651</div>
+
+
+                  </div>
+
+               </div>
+
+               <div class="col-4 box">
+                  <label class="adderess_text">Phone Number</label>
+                  <div class="row">
+                     <div class="image_icon">
+                        <img class="img-fluid" src="images/phone-icon.png">
+                     </div>
+
+                     <div class="email_text">(+65) 67751133</div>
+                  </div>
+               </div>
+
+               <div class="col-4 box">
+                  <label class="adderess_text">Email</label>
+                  <div class="row">
+                     <div class="image_icon">
+                        <img class="img-fluid" src="images/email-icon.png">
+                     </div>
+
+                     <div class="email_text">honeyhax@gmail.com</div>
+                  </div>
+               </div>
+            </div>
+
+
+         </div>
+      </div>
+   </div>
+   <!-- contact end-->
+   <!-- copyright start-->
+   <div class="copyright_section">
+
+      <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
+
+   </div>
+   <!-- copyright end-->
+
+</footer>
+
+</html>

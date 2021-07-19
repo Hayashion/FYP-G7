@@ -497,6 +497,7 @@ button.main_bt a:hover {
     height: auto;
 }
 
+<<<<<<< HEAD
 .contact_text {
     width: 12%;
     float: left;
@@ -511,11 +512,29 @@ button.main_bt a:hover {
     float: left;
     margin-top: 20px;
     margin-bottom: 20px;
+=======
+.contact_section{
+	width: 100%;
+	float: left;
+	background-color: #393838;
+	height: auto;
+
+}
+
+.contact_text {
+    width: 12%;
+    float: left;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding-top: 2%;
+    font-size: 24px;
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 }
 .image_icon {
     padding-left: 4%;
     margin-right: 3%;
 }
+<<<<<<< HEAD
 .adderess_text {
     color: #ffffff;
     font-size: 14pt;
@@ -530,6 +549,29 @@ button.main_bt a:hover {
 .email_text {
     color: #ffffff;
     font-size: 12pt;
+=======
+
+.image_icon {
+    padding-left: 4%;
+    margin-right: 3%;
+}
+
+.adderess_text{
+	color: #ffffff;
+    font-size: 14pt;
+    margin-top: 10px;
+    
+}
+
+.phonenumber_text{
+	color: #ffffff;
+	font-size: 10pt;
+}
+
+.email_text{
+	color: #ffffff;
+	font-size: 12pt;
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 }
 
 .footer-parent {
@@ -579,8 +621,17 @@ button.main_bt a:hover {
     text-align: center;
 }
 
+<<<<<<< HEAD
 .copyright_taital a {
     color: #010000;
+=======
+.copyright_text {
+    color:white;
+}
+
+.copyright_taital a{
+	color: #010000;
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 }
 
 .copyright_taital a:hover {
@@ -637,4 +688,23 @@ button.main_bt a:hover {
 
 .product_section_2 .images:hover {
     border-color: #fa3e19;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+.review_section{
+	width: 100%;
+	float: right;
+    padding-top: 40px;
+}
+
+.review_section .images {
+    border: solid #fa3e19 5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080

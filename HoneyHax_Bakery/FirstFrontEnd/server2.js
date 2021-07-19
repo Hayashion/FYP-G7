@@ -1,6 +1,6 @@
 // Class: DISM/FT/3A/02
-// Admission No: P1950023
-// Name: Ang Yuran
+// FYP Group 7
+// HoneyHAX Bakery
 
 const express= require('express');
 const serveStatic =require('serve-static');
@@ -34,5 +34,5 @@ app.get('*', function(req, res) {
 
 app.listen(port,hostname,function(){
 
-    console.log(`Server hosted at http://${hostname}:${port}`);
+    console.log(`HoneyHAX Frontend hosted at http://${hostname}:${port}`);
 });

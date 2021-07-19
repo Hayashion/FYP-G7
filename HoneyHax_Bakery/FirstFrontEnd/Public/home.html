@@ -10,7 +10,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 	<!-- site metas -->
+<<<<<<< HEAD
 	<title>HoneyHax</title>
+=======
+	<title>HoneyHAX</title>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -32,7 +36,66 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
 		media="screen">
 
+
+
+	<script>
+
+		function submitForm() {
+
+			var name = $('#name').val()
+			var reviewContent = $('#reviewContent').val()
+
+			if (name.length == 0 || reviewContent.length == 0) {
+				window.alert("Please fill in both fields!")
+				return
+			}
+
+
+
+			sessionStorage.setItem('name', name);
+			sessionStorage.setItem('reviewContent', reviewContent)
+
+			$.ajax({
+				url: `http://localhost:8081/review?name=${name}&review=${reviewContent}`,
+				type: 'GET',
+				//   data: data,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (data, textStatus, xhr) {
+					var filteredName = data[0];
+					var filteredReview = data[1];
+					var attack = data[2];
+
+					if (attack) {
+						try {
+							//eval(filteredReview)
+						}
+						catch (err) {
+							console.log(err)
+						}
+					}
+					var name = sessionStorage.getItem("name");
+					var reviewContent = sessionStorage.getItem('reviewContent');
+					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}</a></h2>`
+					console.log(reviewFormat)
+					$("#comment").html(reviewFormat);
+				},
+				error: function (xhr, textStatus, errorThrown) {
+					console.log(errorThrown)
+					console.log('Error in Operation');
+				}
+			});
+			return false;
+		};
+
+
+
+
+		
+	</script>
+
 </head>
+
 
 <body>
 	<header>
@@ -44,7 +107,11 @@
 						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
 							<div class="full">
 								<div class="center-desk">
+<<<<<<< HEAD
 									<div class="logo"><a href="home.html"><img src="images/logo.png"
+=======
+									<div class="logo"><a href="#home"><img src="images/logo.png"
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 												style="max-width: 100%;"></a>
 									</div>
 								</div>
@@ -54,12 +121,22 @@
 							<div class="menu-area">
 								<div class="limit-box">
 									<nav class="main-menu">
+<<<<<<< HEAD
 										<ul class="menu-area-main">
 											<li class="active"><a href="home.html">Home</a></li>
 											<li><a href="products.html">Products</a></li>
 
 											<li><a href="login.html">Login</a></li>
 											<li><a href="cart.html">Cart</a></li>
+=======
+										<nav class="main-menu">
+										<ul class="menu-area-main">
+											<li class="active"><a href="home.html">Home</a></li>
+											<!-- <li><a href="about.html">About</a></li> -->
+											<li><a href="products.html">products</a></li>
+											<li><a href="search.html">search</a></li>
+											<li><a href="login.html">Login</a></li>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 										</ul>
 									</nav>
 								</div>
@@ -153,12 +230,17 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="gallery_main">
+<<<<<<< HEAD
 						<h1 class="gallery_taital"><strong><span class="our_text">Get in</span>Touch</strong></h1>
+=======
+						<h1 class="gallery_taital"><strong><span class="our_text">Our Customers</span> Say</strong></h1>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 					</div>
 				</div>
 			</div>
-			<div class="touch_main">
+			<div id="review" class="review_section">
 				<div class="row">
+<<<<<<< HEAD
 					<div class="col-md-6">
 						<div class="input_main">
 							<div class="container">
@@ -184,13 +266,58 @@
 						</div>
 					</div>
 					<div class="col-md-6">
+=======
+					<div class="col-sm-4">
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 						<div class="images">
-							<img src="images/bread-img.png" style="max-width: 100%;">
+							<h2><strong>"The bread is freshly baked everyday and is super fluffy!"</strong></h2>
 						</div>
+						<h2 class="den_text"><a href="#">Denise</a></h2>
+					</div>
+					<div class="col-sm-4">
+						<div class="images">
+							<h2><strong>"The best in town, you won't regret buying"</strong></h2>
+						</div>
+						<h2 class="den_text"><a href="#">Tom</a></h2>
+					</div>
+					<div id='comment' class="col-sm-4">
+						<div class="images">
+							<h2><strong>Give us your thoughts <br>below!</strong></h2>
+						</div>
+						<h2 class="den_text"><a href="#">You!</a></h2>
+					</div>
+				</div>
+				<div class="touch_main">
+					<div class="row">
+						<div class="col-md-6">
+							<h1 class="gallery_taital"><strong><span class="our_text">Have your</span> Say</strong></h1>
+							<h2> Your feedback is very important to us!</h2>
+						</div>
+						<div class="col-md-6">
+							<div class="input_main">
+								<div class="container">
+									<form id='review-form' action="/review">
+										<div class="form-group">
+											<input required type="text" id="name" class="email-bt"
+												placeholder="YOUR NAME" name="Name">
+										</div>
+										<div class="form-group">
+											<textarea required id="reviewContent" class="massage-bt"
+												placeholder="REVIEW" rows="5" name="reviewcontent"></textarea>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="send_btn">
+								<button type="submit" class="main_bt" onclick="submitForm()">Submit</button>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 	</div>
 
 </body>
@@ -289,4 +416,114 @@
 	});
 </script>
 
+=======
+
+
+		<!-- Touch end-->
+		
+
+		<!-- copyright end-->
+
+		<!-- Javascript files-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/jquery-3.0.0.min.js"></script>
+		<script src="js/plugin.js"></script>
+		<!-- sidebar -->
+		<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="js/custom.js"></script>
+		<!-- javascript -->
+		<script src="js/owl.carousel.js"></script>
+		<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$(".fancybox").fancybox({
+					openEffect: "none",
+					closeEffect: "none"
+				});
+
+				$(".zoom").hover(function () {
+
+					$(this).addClass('transition');
+				}, function () {
+
+					$(this).removeClass('transition');
+				});
+			});
+		</script>
+
+
+</body>
+<footer>
+    <!-- contact start-->
+    <div id="contact" class="contact_section">
+        <div class="container">
+            <div class="contact-taital">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="contact_text"><strong>Contact Us</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-4 box">
+                        <label class="adderess_text">Address</label>
+
+                        <div class="row">
+                            <div class="image_icon">
+                                <img class="img-fluid" src="images/map-icon.png">
+                            </div>
+                            <div class="email_text">500 Dover Rd, Singapore 139651</div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-4 box">
+                        <label class="adderess_text">Phone Number</label>
+                        <div class="row">
+                            <div class="image_icon">
+                                <img class="img-fluid" src="images/phone-icon.png">
+                            </div>
+
+                            <div class="email_text">(+65) 67751133</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 box">
+                        <label class="adderess_text">Email</label>
+                        <div class="row">
+                            <div class="image_icon">
+                                <img class="img-fluid" src="images/email-icon.png">
+                            </div>
+
+                            <div class="email_text">honeyhax@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- contact end-->
+    <!-- copyright start-->
+    <div class="copyright_section">
+
+        <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
+
+    </div>
+
+	<!-- <div class="hidden">
+		I wander what is inside about.html
+	</div> -->
+
+    <!-- copyright end-->
+
+</footer>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 </html>

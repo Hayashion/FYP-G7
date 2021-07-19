@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>HoneyHax</title>
+  <title>HoneyHAX</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -44,6 +44,7 @@
   <!-- javascript -->
   <script src="js/owl.carousel.js"></script>
   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  <script src="js/secret.js"></script>
   <script>
     $(document).ready(function () {
       $(".fancybox").fancybox({
@@ -103,6 +104,7 @@
 
     @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
 
+<<<<<<< HEAD
     .banner_section_start {
       width: 100%;
       float: left;
@@ -125,6 +127,8 @@
       border: 0px;
     }
 
+=======
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
     /* * {
       margin: 0;
       padding: 0;
@@ -278,6 +282,12 @@
       font-size: 14px;
     }
 
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
     /*     
     .email_text{
       font-size:15px;
@@ -286,8 +296,55 @@
 
 </head>
 
-<script>
+<script> // sign up
   $(document).ready(function () {
+
+    $("#Signup").click(function () { // # = id
+
+      var data = {};
+
+      data.adminNo = $("#adminNo").val();
+      data.studentName = $("#studentName").val();
+      data.username = $("#new_username").val();
+      data.password = $("#new_pwd").val();
+      data.studentClass = $("#new_studentClass").val();
+
+      // data collection and creation of json data that we're sending back  
+      console.log(data);
+
+      $.ajax({
+        url: 'http://localhost:8081/students/',
+        type: 'POST', // insertStudents
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result, textStatus, xhr) {
+          if (result != null) {                     // managed to retrieve some data
+            // localStorage.setItem('token', result.token);
+            // localStorage.setItem('userInfo', result.UserData);
+            alert("Registered Successfully! Please login now.");
+            window.location.assign("http://localhost:3001/login.html"); // successful redirected to this page
+          } else {
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Error Signing up. Please contact your teacher")
+          console.log('Error in Operation');
+        }
+      });
+
+      return false;
+
+    });
+
+  });
+
+</script>
+
+<script>
+
+  $(document).ready(function () { // Login
 
     $("#Login").click(function () { // # = id
 
@@ -308,15 +365,19 @@
         dataType: "json",
         success: function (result, textStatus, xhr) {
           if (result != null) {                     // managed to retrieve some data
+            console.log(result)
             localStorage.setItem('token', result.token);
             localStorage.setItem('userInfo', result.UserData);
             window.location.assign("http://localhost:3001/flag.html"); // successful redirected to this page
           } else {
+            alert("Invalid Username/Password")
             console.log("Error");
           }
         },
         error: function (xhr, textStatus, errorThrown) {
+          alert("Invalid Username/Password")
           console.log('Error in Operation');
+          console.log("Error");
         }
       });
 
@@ -350,6 +411,7 @@
                   <nav class="main-menu">
                     <ul class="menu-area-main">
                       <li><a href="login.html">Do not believe whatever you see :o</a></li>
+                      <!-- <div hidden>{hideandseek}</div> -->
                     </ul>
                   </nav>
                 </div>
@@ -374,7 +436,19 @@
               <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username">
               <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
               <input type="submit" class="button" value="Sign Up"> -->
+
             <form class="signup-form" action="" method="POST">
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="number" class="form-control form-control-lg" id="adminNo" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;" 
+                  placeholder="Admin No (22xxxxx)." autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="studentName" placeholder="Student Name"
+                  autocomplete="off">
+              </div>
               <div class="form-group">
                 <!-- <label>Username</label> -->
                 <input type="text" class="form-control form-control-lg" id="new_username" placeholder="Username"
@@ -385,8 +459,15 @@
                 <input type="password" class="form-control form-control-lg" id="new_pwd" placeholder="Password"
                   autocomplete="off">
               </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="text" class="form-control form-control-lg" id="new_studentClass"
+                  placeholder="Student Class" autocomplete="off">
+              </div>
 
-              <button type="submit" id="Signup" class="btn btn-danger btn-lg btn-block">SIGN UP</button>
+              <button type="submit" id="Signup" class="btn btn-danger btn-lg btn-block">
+                SIGN UP
+              </button>
 
             </form>
             <!--.login-form-->
@@ -420,6 +501,7 @@
                   autocomplete="off">
               </div>
 
+<<<<<<< HEAD
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="remember_me">
                 <label class="form-check-label" for="remember_me">
@@ -427,11 +509,14 @@
                 </label>
               </div>
 
+=======
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
               <button type="submit" id="Login" class="btn btn-danger btn-lg btn-block">LOGIN</button>
             </form>
             <!--.login-form-->
             <div class="help-text">
-              <p><a href="#">Forget your password?</a></p>
+              <p><a href="#" title="Please contact your teacher :)">Forget your password?</a>
+              </p>
             </div>
           </div>
 
@@ -443,6 +528,7 @@
   </header>
 
 
+<<<<<<< HEAD
 </body>
 <footer>
   <div class="copyright_section">
@@ -452,4 +538,19 @@
   </div>
 </footer>
 
+=======
+
+</body>
+<footer>
+  
+  <!-- copyright start-->
+  <div class="copyright_section">
+
+      <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
+
+  </div>
+  <!-- copyright end-->
+
+</footer>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 </html>
