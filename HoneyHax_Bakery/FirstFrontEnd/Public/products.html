@@ -10,7 +10,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
    <!-- site metas -->
-   <title>Den</title>
+   <title>HoneyHAX</title>
    <meta name="keywords" content="">
    <meta name="description" content="">
    <meta name="author" content="">
@@ -31,6 +31,8 @@
    <link rel="stylesheet" href="css/owl.theme.default.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
       media="screen">
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
    <style>
       :root {
          --rad: .7rem;
@@ -45,7 +47,7 @@
       }
 
       /* // Setup */
-      /* body {background: var(--color-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh } */
+
       html {
          box-sizing: border-box;
          height: 100%;
@@ -58,71 +60,28 @@
          box-sizing: inherit;
       }
 
-      /* // Main styles */
-      form {
-         position: relative;
-         margin: 2% 30%;
-         background: var(--color-brand);
-         border-radius: var(--rad);
-
-      }
-
-      input,
-      button {
-         height: var(--height);
-         font-family: var(--font-fam);
-         border: 0;
-         color: var(--color-dark);
-         font-size: 1.8rem;
-      }
-
-      input[type="search"] {
-         outline: 0;
+      /* Caption text */
+      .text {
+         color: #f2f2f2;
+         font-size: 15px;
+         padding: 8px 12px;
+         position: absolute;
+         bottom: 8px;
          width: 100%;
-         background: var(--color-light);
-         padding: 0 1.6rem;
-         border-radius: var(--rad);
-         appearance: none;
-         transition: all var(--dur) var(--bez);
-         transition-property: width, border-radius;
-         z-index: 1;
-         position: relative;
+         text-align: center;
       }
 
-      button {
-         display: none;
-         position: absolute;
-         top: 0;
-         right: 0;
-         width: var(--btn-width);
-         font-weight: bold;
-         background: var(--color-brand);
-         border-radius: 0 var(--rad) var(--rad) 0;
-         padding-left: 500px;
-      }
-
-      /* input:not(:placeholder-shown) {
-      border-radius: var(--rad) 0 0 var(--rad);
-      width: calc(100% - var(--btn-width));
-      /* + button {
-        display: block;
-      } */
-      /* } */
-      label {
-         position: absolute;
-         clip: rect(1px, 1px, 1px, 1px);
-         padding: 0;
-         border: 0;
-         height: 1px;
-         width: 1px;
-         overflow: hidden;
+      #products-body {
+         padding-top: 100px;
+         padding-bottom: 70px;
       }
 
       .product-body {
          border: 1px solid black;
       }
+
       .product-img {
-         width: 200px; 
+         width: 200px;
          height: 200px;
       }
 
@@ -130,14 +89,48 @@
          display: block;
          margin-left: auto;
          margin-right: auto;
-         margin-top:5%;
+         margin-top: 5%;
       }
    </style>
+   <script>
+      $(document).ready(function () {
+         $.ajax({
+            url: 'http://localhost:8081/products/',
+            type: 'GET',
+            // data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+               if (data != null) {
+                  var divOutput = "";
+                  console.log(data)
+                  for (var i = 0; i < data.length - 1; i++) {
+                     divOutput += `
+                                          <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
+                                          <img class="product-img center-block img-thumbnail" src="${data[i].productImg}">
+                                          <p class="product-name text-center">${data[i].productName}
+                                          <p class="product-price text-center">$${data[i].price}
+                                          <p class="product-description text-center">${data[i].description}
+                                       </div>
+                                    `
+                     // divOutput+=data[0].price
+                  }
+                  $('#products-body').html(divOutput)
+               } else {
+                  console.log("Error");
+               }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+               console.log('Error in Operation');
+            }
+         });
+         return false;
+      });
+   </script>
 
 </head>
 
 <body>
-   <!-- Header sectionr -->
    <header>
       <div class="layout_padding banner_section_start">
          <!-- header inner -->
@@ -157,10 +150,10 @@
                         <div class="limit-box">
                            <nav class="main-menu">
                               <ul class="menu-area-main">
-                                 <li class="active"><a href="home.html">Home</a></li>
-                                 <li><a href="about.html">About</a></li>
-                                 <li><a href="products.html">products</a></li>
-                                 <li><a href="gallery.html">gallery</a></li>
+                                 <li><a href="home.html">Home</a></li>
+                                 <!-- <li><a href="about.html">About</a></li> -->
+                                 <li class="active"><a href="products.html">products</a></li>
+                                 <li><a href="search.html">search</a></li>
                                  <li><a href="login.html">Login</a></li>
                               </ul>
                            </nav>
@@ -175,113 +168,16 @@
    </header>
 
    <main>
+      <!-- Slideshow container -->
       <div class="container-fluid">
+         
+         <div id='products-body' class="row justify-content-center">
 
-         <!-- Search bar -->
-         <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();" role="search">
-            <!-- <label for="search">Search for stuff</label> -->
-            <input id="search" class="mt-4 border col-6" type="search" placeholder="Search..." autofocus required />
-            <button type="submit">Go<img src="images/searchicon.png"></button>
-         </form>
-
-         <!-- To display Items -->
-         <div id='products-section' class="row justify-content-center">
-            <!-- Ajax command will input HTML here -->
          </div>
-
-
       </div>
    </main>
 
-   <foooter>
-      <!-- contact start-->
-      <div id="contact" class="contact_section">
-         <div class="container">
-            <div class="contact-taital">
-               <div class="row">
-                  <div class="col-sm-12">
-                     <h1 class="contact_text"><strong>Contact Us</strong></h1>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-sm-6 col-md-6 col-lg-3">
-                  <h2 class="adderess_text">Address</h2>
-                  <div class="image-icon"><img src="images/map-icon.png"><span class="email_text">500 Dover Rd,
-                        Singapore 139651 </span></div>
-                  <div class="image-icon"><img src="images/phone-icon.png"><span class="email_text">(+65)
-                        67751133</span></div>
-                  <div class="image-icon"><img src="images/email-icon.png"><span
-                        class="email_text">honeyhax@gmail.com</span></div>
-               </div>
-               <div class="col-sm-6 col-md-6 col-lg-3">
-                  <h2 class="adderess_text">Useful Links</h2>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Bacerim
-                        Dictionary</span></div>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Help Links</span>
-                  </div>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">bacerim
-                        Attitudes</span></div>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Call a
-                        Cutumer</span></div>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Help a
-                        Bacerim</span></div>
-               </div>
-               <div class="col-sm-6 col-md-6 col-lg-3">
-                  <h2 class="adderess_text">Overview</h2>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Bacerim
-                        Dictionary</span></div>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Help Links</span>
-                  </div>
-                  <div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">bacerim
-                        Attitudes</span></div>
-                  <div class="social_icon">
-                     <ul>
-                        <li><a href="#"><img src="images/fb-icon.png"></a></li>
-                        <li><a href="#"><img src="images/twitter-icon.png"></a></li>
-                        <li><a href="#"><img src="images/google-icon.png"></a></li>
-                        <li><a href="#"><img src="images/linkedin-icon.png"></a></li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-md-6 col-lg-3">
-                  <h2 class="adderess_text">Instagram</h2>
-                  <div class="row">
-                     <div class="col-md-6">
-                        <div class="footer-img"><img src="images/footer-img1.png" style="width: 100%;"></div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="footer-img"><img src="images/footer-img2.png" style="width: 100%;"></div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-6">
-                        <div class="footer-img"><img src="images/footer-img2.png" style="width: 100%;"></div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="footer-img"><img src="images/footer-img3.png" style="width: 100%;"></div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- contact end-->
-      <!-- copyright start-->
-      <div class="copyright_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <p class="copyright_taital">2021 All Rights Reserved. HoneyHax</p>
-               </div>
-            </div>
-         </div>
-      </div>
-
-   </foooter>
-
-
-   <!-- copyright end-->
+   
 
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
@@ -295,126 +191,73 @@
    <!-- javascript -->
    <script src="js/owl.carousel.js"></script>
    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-   <script>
-      $(document).ready(function () {
-         $("#product-form").submit(function (e) {
-            var searchValue = $('#search').val()
-            var url = `products.html?product=${searchValue}`
-            // console.log(searchValue)
-            if (searchValue != '') {
-               window.location.replace(url)
-            }
-         })
-         // $("#Login").click(function () {  
-         //     var id=$('#email').val();
-         //     var pwd=$('#pwd').val();
-         //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
-         //     console.log(data)
-         // searchParam = new URLSearchParams(windows.location.search)
-         // var wsUrl = 'http://localhost:8081/products'
-         // if(searchParams.has("productSearch")){
-         //    searchParams.get("productSearch")
-         // }
-         // if (searchParams.has('query')){
-         //       var product =searchParams.get("query");
-         //       console.log(product)
-         // }
-         var searchParams = new URLSearchParams(window.location.search)
-         if (searchParams.has("product")) {
-            var product = searchParams.get("product");
-         }
-         $.ajax({
-            url: `http://localhost:8081/products/${product}`,
-            type: 'GET',
-            //   data: data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, textStatus, xhr) {
-               if (data != null) {
-                  var divOutput = "";
-                  for (var i = 0; i < data.length; i++) {
-                     divOutput += `
-                                    <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
-                                       <img class="product-img center-block img-thumbnail" src="${data[i].productImg}">
-                                       <p class="product-name text-center">${data[i].productName}
-                                       <p class="product-price text-center">$${data[i].price}
-                                       <p class="product-description text-center">${data[i].description}
-                                    </div>
-                                 `
-                     console.log(divOutput)
-                     // divOutput+=data[0].price
-                  }
-                  $('#products-section').html(divOutput)
-               } else {
-                  console.log("Error");
-               }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-               console.log('Error in Operation');
-            }
-         });
-         return false;
-      });
-   //    $(document).ready(function(){
-   //       $.ajax({                                                               
-   //       url: 'http://localhost:8081/products',  
-   //       type: 'GET', 
-   //       data: data,
-   //       contentType: "application/json; charset=utf-8",
-   //       dataType: "json",  
-   //       success: function (result, textStatus, xhr) {  
-   //           if (result != null){     
-   //                for(var i=0;i<result.length;i++){
-   //                   console.log(result[i]);
-   //                }               
-   //             //   localStorage.setItem('token',data.token);
-   //             //   console.log(data)
-   //             //   localStorage.setItem('userInfo',data.UserData);
 
-   //               location.reload
-   //           } else {
-   //               console.log("Error");
-   //           }                                                                 
-   //       },  
-   //       error: function (xhr, textStatus, errorThrown) {  
-   //           console.log('Error in Operation');  
-   //       }  
-   //    });  
-   //    return false;
-
-   // });
-      // $(".fancybox").fancybox({
-      //    openEffect: "none",
-      //    closeEffect: "none"
-      //    });
-
-      //    $(".zoom").hover(function(){
-
-      //    $(this).addClass('transition');
-      //    }, function(){
-
-      //    $(this).removeClass('transition');
-      //    }),
-
-      //   jQuery(document).ready(function($) {
-      //       tab = $('.tabs h3 a');
-
-      //       tab.on('click', function(event) {
-      //           event.preventDefault();
-      //           tab.removeClass('active');
-      //           $(this).addClass('active');
-
-      //           tab_content = $(this).attr('href');
-      //           $('div[id$="tab-content"]').removeClass('active');
-      //           $(tab_content).addClass('active');
-      //       });
-      //   });
-      //   $(document).ready(function()){
-      //      console.log()
-      //   }
-   </script>
 
 
 </body>
+<footer>
+   <!-- contact start-->
+   <div id="contact" class="contact_section">
+       <div class="container">
+           <div class="contact-taital">
+               <div class="row">
+                   <div class="col-sm-12">
+                       <div class="contact_text"><strong>Contact Us</strong></div>
+                   </div>
+               </div>
+           </div>
+           <div class="container">
 
+               <div class="row">
+                   <div class="col-4 box">
+                       <label class="adderess_text">Address</label>
+
+                       <div class="row">
+                           <div class="image_icon">
+                               <img class="img-fluid" src="images/map-icon.png">
+                           </div>
+                           <div class="email_text">500 Dover Rd, Singapore 139651</div>
+
+
+                       </div>
+
+                   </div>
+
+                   <div class="col-4 box">
+                       <label class="adderess_text">Phone Number</label>
+                       <div class="row">
+                           <div class="image_icon">
+                               <img class="img-fluid" src="images/phone-icon.png">
+                           </div>
+
+                           <div class="email_text">(+65) 67751133</div>
+                       </div>
+                   </div>
+
+                   <div class="col-4 box">
+                       <label class="adderess_text">Email</label>
+                       <div class="row">
+                           <div class="image_icon">
+                               <img class="img-fluid" src="images/email-icon.png">
+                           </div>
+
+                           <div class="email_text">honeyhax@gmail.com</div>
+                       </div>
+                   </div>
+               </div>
+
+
+           </div>
+       </div>
+   </div>
+   <!-- contact end-->
+   <!-- copyright start-->
+   <div class="copyright_section">
+
+       <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
+
+   </div>
+   <!-- copyright end-->
+
+</footer>
 </html>

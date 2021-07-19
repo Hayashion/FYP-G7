@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- basic -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- mobile metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <!-- site metas -->
+  <title>HoneyHAX Flag</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <!-- style css -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- Responsive-->
+  <link rel="stylesheet" href="css/responsive.css">
+  <!-- fevicon -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <!-- Scrollbar Custom CSS -->
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <!-- Tweaks for older IEs-->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <!-- owl stylesheets -->
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+    media="screen">
+
+  <style>
+    :root {
+      --rad: .7rem;
+      --dur: .3s;
+      --color-dark: #2f2f2f;
+      --color-light: #fff;
+      --color-brand: #57bd84;
+      --font-fam: 'Lato', sans-serif;
+      --height: 5rem;
+      --btn-width: 6rem;
+      --bez: cubic-bezier(0, 0, 0.43, 1.49);
+    }
+
+    /* // Setup */
+    /* body {display: flex; align-items: center; justify-content: center; min-height: 100vh }
+    html { box-sizing: border-box; height: 100%; font-size: 10px; } *, *::before, *::after { box-sizing: inherit; } */
+
+    /* // Main styles */
+
+    /* button{
+        float: right;
+    } */
+    /* .scoreboard {
+      margin-left: 66%;
+    } */
+
+    input {
+      font-size: 18px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      border: none;
+      border : 1px solid #c41010;
+      border-radius:5px ;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    /* LABEL ======================================= */
+    .inputFlag {
+      color: #999;
+      font-size: 18px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+
+    /* active state */
+    input:focus~.inputFlag,
+    input:valid~.inputFlag {
+      top: -20px;
+      font-size: 14px;
+      color: #c41010;
+    }
+
+    /* BOTTOM BARS ================================= */
+    .bar {
+      position: relative;
+      display: block;
+      width: 300px;
+    }
+
+    .bar:before,
+    .bar:after {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 1px;
+      position: absolute;
+      background: #c41010;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+
+    .bar:before {
+      left: 50%;
+    }
+
+    .bar:after {
+      right: 50%;
+    }
+
+    /* active state */
+    input:focus~.bar:before,
+    input:focus~.bar:after {
+      width: 50%;
+    }
+
+    /* HIGHLIGHTER ================================== */
+    .highlight {
+      position: absolute;
+      height: 60%;
+      width: 100px;
+      top: 25%;
+      left: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    /* active state */
+    input:focus~.highlight {
+      -webkit-animation: inputHighlighter 0.3s ease;
+      -moz-animation: inputHighlighter 0.3s ease;
+      animation: inputHighlighter 0.3s ease;
+    }
+
+    /* ANIMATIONS ================ */
+    @-webkit-keyframes inputHighlighter {
+      from {
+        background: #c41010;
+      }
+
+      to {
+        width: 0;
+        background: transparent;
+      }
+    }
+
+    @-moz-keyframes inputHighlighter {
+      from {
+        background: #c41010;
+      }
+
+      to {
+        width: 0;
+        background: transparent;
+      }
+    }
+
+    @keyframes inputHighlighter {
+      from {
+        background: #c41010;
+      }
+
+      to {
+        width: 0;
+        background: transparent;
+      }
+    }
+
+    table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin-right: 0;
+      padding: 0;
+      table-layout: fixed;
+    }
+
+    table caption {
+      font-size: 1.5em;
+      margin: .5em 0 .75em;
+    }
+
+    table tr {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: .35em;
+    }
+
+    table th,
+    table td {
+      padding: .625em;
+      text-align: center;
+    }
+
+    table th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 600px) {
+      table {
+        border: 0;
+      }
+
+      table caption {
+        font-size: 1.3em;
+      }
+
+      table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+
+      table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+
+      table td::before {
+        /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      table td:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+
+</head>
+<script>
+  var userData = undefined;
+  var studentClass = undefined;
+  var adminNo = undefined;
+  var userJsonData = undefined;
+  var userData = localStorage.getItem("userInfo");
+  var token = localStorage.getItem("token");
+  var userJsonData = JSON.parse(userData);
+
+  if (userJsonData === null) {
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
+
+  if (userJsonData === undefined) {
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
+
+  if (token === null){
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
+
+  if (userJsonData != null && token != null) {
+    // var userRole = userJsonData[0].role;
+    var userName = userJsonData[0].username
+  }
+
+  // if(userRole!="student"){
+  //     window.alert('Unauthorized. You will be redirected to home page.')
+  //     window.location.assign("/index.html");
+  // }
+
+  // <form id="flagMainForm">
+  //   <div class="name-wrapper">
+  //     <input type="text" required="">
+  //     <span class="highlight"></span>
+  //     <span class="bar"></span>
+  //     <label class="inputFlag">Input Flag</label>
+  //   </div>
+  //   <!-- <button type="submit" id="flagEnter" value="submit">Submit</button> -->
+  // </form>
+
+
+  //         <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();" role="search">
+  //     <!-- <label for="search">Search for stuff</label> -->
+  //     <input id="search" class="mt-4 border col-6" type="search" placeholder="Search..." autofocus required />
+  //     <button type="submit">Go<img src="images/searchicon.png"></button>
+  //  </form>
+
+
+  $("#flagMainForm").submit(function (e) {
+    e.preventDefault();
+    var flagValue = $('#inputText').val();
+    console.log(flagValue)
+  })
+
+  var adminID = userJsonData[0].adminNo;
+
+  $(document).ready(function () { // Login
+
+    $("#flagMainForm").submit(function () { // # = id
+      $.ajax({
+        url: `http://localhost:8081/checkFlag/`,
+        type: 'GET',
+        data: data, // contain username and password
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({ "adminID": adminNo, 'flagValue': flagValue }),
+        success: function (result, textStatus, xhr) {
+          if (result != null) {                     // managed to retrieve some data
+            alert("Well Done! Points have been awarded :)")
+          } else {
+            alert("Invalid flag input, please try again.")
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Invalid flag input, please try again.")
+        }
+      });
+
+      return false;
+
+    });
+
+  });
+
+  // function flagSubmit() {
+  //   var flagValue = $('#inputText').val();
+  //   console.log(flagValue);
+  // }
+
+</script>
+
+<body>
+  <div class="containter-fluid">
+    <header class="row mb-4">
+      <div class="layout_padding banner_section_start">
+
+        <!-- header inner -->
+        <div class="header">
+          <div class="container">
+            <div class="row">
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                <div class="full">
+                  <div class="center-desk">
+                    <div class="logo"><a href="#home"><img src="images/logo.png" style="max-width: 100%;"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                <div class="menu-area">
+                  <div class="limit-box">
+                    <nav class="main-menu">
+                      <ul class="menu-area-main">
+                        <li><a href="home.html" target="_blank">HoneyHAX Page</a></li>
+                        <li class="active"><a href="" id="studentNameOfUsername">Name</a></li>
+                        <li><a href="#logout" id="logout">Logout</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end header inner -->
+
+    </header>
+
+    <!-- Flag and Scoreboard start-->
+    <section id="content">
+
+      <!-- Instuctions -->
+      <div class="row justify-content-center">
+        <div class=" m-4 col-6 shadow border">
+          <h2 class="mt-3 mb-2">Welcome to the flag page</h2>
+          <p class="m-2">Put in your flag to earn score to be on the leaderboards!</p>
+          <p class="m-2">Easy - 5 Points</p> 
+          <p class="m-2">Medium - 10 Points</p> 
+          <p class="m-2">Hard - 15 Points</p> 
+        </div>
+
+      </div>
+
+
+      <!-- Enter flag input -->
+      <form id="flagMainForm"  class="m-4 row justify-content-center">
+        <div class="col-8">
+          <input class="w-100" id='inputText' type="text" required="">  
+          <span class="highlight w-100"></span>
+          <span class="bar w-100"></span>
+          <label class="inputFlag w-100 pl-3">Input Flag  Example: {Flag}</label>
+        </div>
+        <!-- <button type="submit" onclick='flagSubmit()'>Submit</button> -->
+      </form>
+
+      
+
+      <!-- Student leaderboards -->
+      <div class="row justify-content-center mb-3">
+        <div class="col-sm-3">
+          <div id="score">
+            <table class="scoreboard">
+              <thead id="head">
+                <!-- <tr class="header">
+                      <th>Class</th>
+                      <th>Student Name</th>
+                      <th>Score</th>
+                    </tr> -->
+              </thead>
+              <tbody id="myStudentNames">
+                <!-- <tr>
+                      <td class="studentClass">2A02</td>
+                      <td class="student">Bob</td>
+                      <td class="score">2800</td>
+                    </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testing Student leaderboards -->
+      <div class="row justify-content-center">
+        <!-- Left big scoreboard -->
+        <div class="col-5">
+           <div class="m-5 border">Hello</div>
+        </div>
+
+        <!-- Right small scoreboard -->
+        <div class="col-7">
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello </div>
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <footer>
+      <div class="copyright_section">
+
+        <p class="copyright_text">| &copy; HoneyHAX. All rights reserved. |</p>
+
+      </div>
+    </footer>
+  </div>
+
+</body>
+
+
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- javascript -->
+<script src="js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+
+
+
+
+
+  $(document).ready(function () {
+
+
+
+
+
+
+    var wsURL = 'http://localhost:8081/studentsflag'
+
+
+    $.ajax({
+      //headers: {'authorization': 'Bearer '+tmpToken},     
+      url: `${wsURL}`,
+      type: 'GET',
+      //data: data,  
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+      success: function (result, textStatus, xhr) {
+        if (result != null) {
+          var divOutput = "";
+          var divOutput2 = "";
+          divOutput += `<tr>
+                              <th>Class</th>
+                              <th>Student Name</th>
+                              <th>Score</th>
+                            </tr>`
+
+          for (var i = 0; i < result.length; i++) {
+            // console.log(result[i]);
+            divOutput2 += `<tr>
+                                <td class="studentClass">${result[i].studentClass}</td>
+                                <td class="student">${result[i].studentName}</td>
+                                <td class="score">${result[i].points}</td>
+                              </tr>
+                              `
+          }
+
+
+          $('#head').html(divOutput);
+          $('#myStudentNames').html(divOutput2);
+
+        } else {
+          console.log("Error");
+        }
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log(errorThrown);
+        console.log('Error in Operation');
+
+      }
+    });
+    document.getElementById('studentNameOfUsername').innerHTML = `${userName}`
+    
+  });
+
+  jQuery(document).ready(function ($) {
+    tab = $('.tabs h3 a');
+
+    tab.on('click', function (event) {
+      event.preventDefault();
+      tab.removeClass('active');
+      $(this).addClass('active');
+
+      tab_content = $(this).attr('href');
+      $('div[id$="tab-content"]').removeClass('active');
+      $(tab_content).addClass('active');
+    });
+  });
+
+
+  $('#logout').click(function () {
+    window.localStorage.clear();
+    console.log('Cleared the localStorage!')
+    window.location.assign("/login.html");
+  })
+</script>
+
+
+
+</html>

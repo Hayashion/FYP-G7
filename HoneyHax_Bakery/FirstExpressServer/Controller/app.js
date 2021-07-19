@@ -16,6 +16,8 @@ const studentsDB = require('../Model/students');
 const reviewsDB = require('../Model/reviews');
 const adminDB = require('../Model/admin');
 
+const aboutDB = require('../Model/about');
+
 
 const voucherDB = require('../Model/voucher');
 
@@ -77,28 +79,42 @@ app.get('/students/:adminNo', function(req,res){
 });
 
 
+app.get("/studentsflag", function (req, res) {
+    studentsDB.getStudentsFlags(function (err, result) {
+        res.type("json")
+        if (!err) {
+            res.status(200);
+            res.send(result);
+        }
+        else {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        }
+    });
+});
+
+
 
 // PUT /students/:adminNo update students
 app.put('/students/:adminNo',function(req,res){
-
+    var studentName = req.body.studentName;
     var username = req.body.username;
+    var studentClass = req.body.studentClass;
     var password = req.body.password;
-    var adminNo = req.params.adminNo;
-    
-    console.log(username);
-    console.log(password);
-    console.log(adminNo);
+    var newAdminNo = req.body.adminNo;
+    var oldAdminNo = req.params.adminNo;
+    if(password == "" || password == null || typeof(password) == "undefined"){
+        password = null;
+    }
 
-    studentsDB.updateStudents(username, password, adminNo, function (err, result) {
-
+    studentsDB.updateStudents(studentName, username, studentClass, password, newAdminNo, oldAdminNo, function (err, result) {
         res.type('json');
         if (err) {
             res.status(500);
             res.send(`{"message":"Internal Server Error"}`);
-
         } else {
             res.status(201);
-            res.send(`{"Updated Student": ${result.affectedRows}}`);
+            res.send(`{"affectedRows": "${result.affectedRows}"}`);
         }
     });
 });
@@ -111,8 +127,10 @@ app.post("/students", function (req, res) {
     var password = req.body.password;
     var adminNo = req.body.adminNo;
     var studentClass = req.body.studentClass;
+    var studentName = req.body.studentName;
 
-    studentsDB.insertStudents(adminNo, username, password, studentClass, function (err, result) {
+
+    studentsDB.insertStudents(adminNo,studentName, username, password, studentClass, function (err, result) {
         if (!err) {
             res.status(201);
             res.send(`{"Student Created": ${result.affectedRows}}`)
@@ -125,6 +143,7 @@ app.post("/students", function (req, res) {
                 res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
             } else {
                 res.status(500);
+                console.log(err)
                 res.send(`"Internal Server Error"`);
             }
         }
@@ -165,33 +184,61 @@ app.post('/students/logout', function (req, res) {
 });
 
 
-// PUT /admin/:adminid 
-app.put('/admin/:adminid',verifyToken.verifyToken, function(req,res){
+// POST /admin/login 
+// app.post('/admin/login',function(req,res){
 
+//     var username = req.body.username;
+//     var password = req.body.password;
+    
+//     console.log(username);
+//     console.log(password);
+
+//     adminDB.loginAdmin(username, password, function (err, token, result) {
+//         if (!err) {
+//             res.statusCode = 200;
+//             res.setHeader('Content-Type', 'application/json');
+//             delete result[0]['password'];//clear the password in json data, do not send back to client
+//             console.log(result);
+//             res.json({ success: true, UserData: JSON.stringify(result), token: token, status: 'You are successfully logged in!' }); // token = jwt
+//             res.send();
+//         } else {
+//             res.status(500);
+//             res.sendStatus(err.statusCode);
+//         }
+//     });
+// });
+
+
+// POST /admin
+app.post("/admin", function (req, res) {   
     var username = req.body.username;
     var password = req.body.password;
-    var adminid = req.params.adminid;
+    var adminid = req.body.adminid;
     
-    // console.log(username);
-    // console.log(password);
-    // console.log(adminid);
 
-    adminDB.updateAdmin(username, password, adminid, function (err, result) {
 
-        res.type('json');
-        if (err) {
-            res.status(500);
-            res.send(`{"message":"Internal Server Error"}`);
-
-        } else {
+    adminDB.insertAdmin(adminid, username, password, function (err, result) {
+        if (!err) {
             res.status(201);
-            res.send(`{"Updated Admin": ${result.affectedRows}}`);
+            res.send(`{"Teacher Created": ${result.affectedRows}}`)
+            // res.send();
+
+        }
+        else {
+            if (err.code == "ER_BAD_NULL_ERROR"){
+                res.status(422);
+                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
+            } else {
+                res.status(500);
+                console.log(err)
+                res.send(`"Internal Server Error"`);
+            }
         }
     });
 });
 
 
-// POST /admin/login 
+// POST /students/login 
 app.post('/admin/login',function(req,res){
 
     var username = req.body.username;
@@ -226,7 +273,10 @@ app.post('/admin/logout', function (req, res) {
 
 
 // DELETE /students/:adminNo/ 
-app.delete('/students/:adminNo/',verifyToken.verifyToken, function (req, res) {
+
+// app.delete('/students/:adminNo/',verifyToken.verifyToken, function (req, res) {
+
+app.delete('/students/:adminNo/', function (req, res) {
 
     var adminNo = req.params.adminNo;
 
@@ -292,6 +342,29 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
+//Search /location/:locationName/
+app.get('/location/:locationName/', function (req, res) {
+
+    var locationName = req.params.locationName;
+    console.log(locationName)
+
+    productsDB.searchLocation(locationName, function (err, result) {
+        
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
+
 //Search /voucher/:voucherCode/
 app.get('/voucher/:voucherCode/', function (req, res) {
 
@@ -341,6 +414,7 @@ app.post('/checkFlag/',function (req, res) {
 
     var adminID = req.body.adminID;
     var flagValue = req.body.flagValue;
+
 
     flagsDB.checkFlag(adminID, flagValue, function (err, result) {
         console.log(err,result)
@@ -437,6 +511,25 @@ app.get('/review', function (req, res) {
         }
     });
 });
+
+// GET /about
+app.get('/about', function (req, res) {
+    var url = req.query.url;
+    console.log(url)
+
+    res.type('json');
+    aboutDB.processAbout(url, function (err, result) {
+        console.log(err);
+        if (err) {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        } else {
+            res.status(200);
+            res.send(result); //
+        }
+    });
+});
+
 
 
 module.exports = app;

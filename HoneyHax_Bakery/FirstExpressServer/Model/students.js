@@ -9,6 +9,9 @@ const mysql = require('mysql');
 const db = require('./databaseConfig');
 var jwt = require('jsonwebtoken');
 var config = require('../config.js');
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+// var hash = bcrypt.hashSync("asdf", salt);
 
 var studentsDB = {
 
@@ -21,7 +24,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from students"
+                var sql = "select adminNo,username,studentName,studentClass,points from login.students"
                 dbConn.query(sql, function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -33,7 +36,8 @@ var studentsDB = {
 
 
 
-    insertStudents: function (adminNo, username, password, studentClass, callback) {   // Create/Register Students
+
+    insertStudents: function (adminNo, studentName,username, password, studentClass, callback) {   // Create/Register Students
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -41,8 +45,9 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "insert into students (adminNo, username, password, studentClass) Values(?,?,?,?)";
-                dbConn.query(sql, [adminNo, username, password, studentClass], function (err, result) {
+                var hashedPassword = bcrypt.hashSync(`${password}`, salt);
+                var sql = "insert into login.students (adminNo, studentName, username, password, studentClass) Values(?,?,?,?,?)";
+                dbConn.query(sql, [adminNo, studentName, username, hashedPassword, studentClass], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -60,7 +65,7 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "select * from students where adminNo=?"
+                var sql = "select adminNo,username,studentName,studentClass from login.students where adminNo=?"
                 dbConn.query(sql, [adminNo], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
@@ -72,7 +77,7 @@ var studentsDB = {
 
 
 
-    updateStudents: function (username, password, adminNo, callback) {     // Updating Student's info
+    updateStudents: function (studentName, username, studentClass, password, newAdminNo, oldAdminNo, callback) {     // Updating Student's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -80,8 +85,16 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "update students set username=?, password=? where adminNo=?"
-                dbConn.query(sql, [username, password, adminNo], function (err, result) {
+                var data = [studentName, username, studentClass, newAdminNo, oldAdminNo];
+                if (password == null){
+                    var sql = "update login.students set studentName=?, username=?, studentClass=?, adminNo=? where adminNo=?";
+                }else{
+                    var hashedPassword = bcrypt.hashSync(`${password}`, salt);
+                    data.splice(3, 0, hashedPassword);
+                    var sql = "update login.students set studentName=?, username=?, studentClass=?, password=?, adminNo=? where adminNo=?";
+                }
+                
+                dbConn.query(sql, data, function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });
@@ -101,28 +114,55 @@ var studentsDB = {
             }
             else {
                 console.log("Connected!");
-                var sql = 'select * from students where username=? and password=?';
-                conn.query(sql, [username,password], function (err, result) {
-                    conn.end();
-                    if (err) {
-                        console.log("Error: " + err);
-                        return callback(err, null, null);
-                    } else {
-                        var token = "";
-                        var i;
-                        if (result.length == 1) {
-                            token = jwt.sign({ id: result[0].adminNo, password: result[0].password }, config.key, {
-                                expiresIn: 3600 //expires in 1 hr
-                            });
-                            console.log("@@token " + token);
-                            return callback(null, token, result);
-                        } else {
+                var sql2 = 'select password from login.students where username = ?';
+
+                conn.query(sql2,[username],function(err,result){
+                    if(err){
+                        console.log(err)
+                    }else{
+                        
+                        result=JSON.parse(JSON.stringify(result))
+                        try{
+                            console.log(result)
+                            var hashedPassword = result[0]['password']
+                            console.log(hashedPassword)
+                            if (bcrypt.compareSync(password,hashedPassword)==true){
+                                console.log("Connected!");
+                                var sql = 'select * from login.students where username=? and password=?';
+                                conn.query(sql, [username,hashedPassword], function (err, result) {
+                                    conn.end();
+                                    if (err) {
+                                        console.log("Error: " + err);
+                                        return callback(err, null, null);
+                                    } else {
+                                        var token = "";
+                                        var i;
+                                        if (result.length == 1) {
+                                            token = jwt.sign({ id: result[0].adminNo, password: result[0].password}, config.key, {
+                                                expiresIn: 36000 //expires in >1 hr
+                                            });
+                                            console.log("@@token " + token);
+                                            return callback(null, token, result);
+                                        } else {
+                                            var err2 = new Error("Username/Password does not match.");
+                                            err2.statusCode = 500;
+                                            return callback(err2, null, null);
+                                        }
+                                    }
+                                });
+                            } else{
+                                console.log("false")
+                            }
+                            
+                        }catch(err){
+                            console.log(err)
                             var err2 = new Error("AdminNo/Password does not match.");
                             err2.statusCode = 500;
                             return callback(err2, null, null);
                         }
+
                     }
-                });
+                })
             }
         });
     },
@@ -150,7 +190,7 @@ var studentsDB = {
                     if (err) {
                         console.log(err);
                     } else {
-
+                        console.log("Hello")
                         console.log(result);
                     }
                     return callback(err, result);
@@ -193,6 +233,24 @@ var studentsDB = {
 
         });
 
+    },
+
+
+    getStudentsFlags: function (callback) {    // Get all Students Flags
+        var dbConn = db.getConnection();
+        dbConn.connect(function (err) {
+            if (err) {
+                console.log(err);
+                return callback(err, null);
+            }
+            else {
+                var sql = "select studentName, studentClass, points from login.students"
+                dbConn.query(sql, function (err, result) {
+                    dbConn.end();
+                    return callback(err, result);
+                });
+            }
+        });
     },
 
 
