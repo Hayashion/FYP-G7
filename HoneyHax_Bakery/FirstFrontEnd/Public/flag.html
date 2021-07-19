@@ -267,8 +267,11 @@
     window.alert('Unauthorized. You will be redirected to home page.');
     window.location.assign("/login.html");
   }
-
-  if (token === nuil){
+  if (userJsonData === undefined) {
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
+  if (token === null){
     window.alert('Unauthorized. You will be redirected to home page.');
     window.location.assign("/login.html");
   }
