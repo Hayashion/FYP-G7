@@ -108,6 +108,10 @@
       padding: 0;
     } */
 
+    .login-tab {
+      text-align: center;
+    }
+
     a {
       color: #666;
       text-decoration: none;
@@ -140,10 +144,10 @@
       overflow: hidden;
     }
 
-    .form-wrap .tabs h3 {
+    /* .form-wrap .tabs h3 {
       float: left;
       width: 50%;
-    }
+    } */
 
     .form-wrap .tabs h3 a {
       padding: 0.5em 0;
@@ -162,9 +166,9 @@
       padding: 1.5em;
     }
 
-    .form-wrap .tabs-content div[id$="tab-content"] {
+    /* .form-wrap .tabs-content div[id$="tab-content"] {
       display: none;
-    }
+    } */
 
     .form-wrap .tabs-content .active {
       display: block !important;
@@ -270,48 +274,7 @@
 
 </head>
 
-<script> // sign up
-  $(document).ready(function () {
 
-    $("#Signup").click(function () { // # = id
-
-      var data = {};
-
-      
-      data.username = $("#new_username").val();
-      data.password = $("#new_pwd").val();
-      
-
-      // data collection and creation of json data that we're sending back  
-      console.log(data);
-
-      $.ajax({
-        url: 'http://localhost:8081/users',
-        type: 'POST', // insertStudents
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result, textStatus, xhr) {
-          if (result != null) {                     // managed to retrieve some data
-            alert("Registered Successfully! Please login now.");
-            window.location.assign("http://localhost:3001/login(test).html"); // successful redirected to this page
-          } else {
-            console.log("Error");
-          }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          alert("Error Signing up. Please contact administrator.")
-          console.log('Error in Operation');
-        }
-      });
-
-      return false;
-
-    });
-
-  });
-
-</script>
 
 <script>
 
@@ -336,9 +299,8 @@
         dataType: "json",
         success: function (result, textStatus, xhr) {
           if (result != null) {                     // managed to retrieve some data
-            console.log(result);
-            localStorage.setItem('token', result.token);
             localStorage.setItem('userInfo', result.UserData);
+            window.alert('Successfully logged in!')
             window.location.assign("http://localhost:3001/flag(test).html"); // successful redirected to this page
           } else {
             alert("Invalid Username/Password")
@@ -393,45 +355,13 @@
       <!-- end header inner -->
       <div class="form-wrap">
         <div class="tabs">
-          <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
-          <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+         
+          <h3 class="login-tab"><a class="active" href="#login-tab-content">Login</a></h3>
         </div>
         <!--.tabs-->
 
         <div class="tabs-content">
 
-          <div id="signup-tab-content" class="active">
-            <!-- <form class="signup-form" action="" method="post">
-              <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email">
-              <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username">
-              <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
-              <input type="submit" class="button" value="Sign Up"> -->
-
-            <form class="signup-form" action="" method="POST">
-
-              <div class="form-group">
-                <!-- <label>Username</label> -->
-                <input type="text" class="form-control form-control-lg" id="new_username" placeholder="Username"
-                  autocomplete="off">
-              </div>
-              <div class="form-group">
-                <!-- <label>Password</label> -->
-                <input type="password" class="form-control form-control-lg" id="new_pwd" placeholder="Password"
-                  autocomplete="off">
-              </div>
-              <button type="submit" id="Signup" class="btn btn-danger btn-lg btn-block">
-                SIGN UP
-              </button>
-
-            </form>
-            <!--.login-form-->
-            <div class="help-text">
-              <p>By signing up, you agree to our</p>
-              <p><a href="#">Terms of service</a></p>
-            </div>
-            <!--.help-text-->
-          </div>
-          <!--.signup-tab-content-->
 
           <div id="login-tab-content">
             <!-- <form class="login-form" action="" method="post">

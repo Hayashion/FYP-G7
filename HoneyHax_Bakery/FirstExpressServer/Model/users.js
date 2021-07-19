@@ -7,7 +7,7 @@
 
 const mysql = require('mysql');
 const db = require('./databaseConfig');
-var jwt = require('jsonwebtoken');
+// var jwt = require('jsonwebtoken');
 var config = require('../config.js');
 
 var usersDB = {
@@ -102,10 +102,7 @@ var usersDB = {
                         var token = "";
                         var i;
                         if (result.length == 1) {
-                            token = jwt.sign({ id: result[0].userid, role: result[0].role }, config.key, {
-                                expiresIn: 86400 //expires in 24 hrs
-                            });
-                            console.log("@@token " + token);
+                          
                             return callback(null, token, result);
                         } else {
                             var err2 = new Error("Username/Password does not match.");

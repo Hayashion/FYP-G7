@@ -260,6 +260,7 @@
   var adminNo = undefined;
   var userJsonData = undefined;
   var userData = localStorage.getItem("userInfo");
+  var token = localStorage.getItem("token")
   var userJsonData = JSON.parse(userData);
 
   if (userJsonData === null) {
@@ -267,12 +268,18 @@
     window.location.assign("/login.html");
   }
 
+  if (token === nuil){
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
 
 
-  if (userJsonData != null) {
+  if (userJsonData != null && token != null) {
     // var userRole = userJsonData[0].role;
     var userName = userJsonData[0].username
   }
+
+
 
   // if(userRole!="student"){
   //     window.alert('Unauthorized. You will be redirected to home page.')
