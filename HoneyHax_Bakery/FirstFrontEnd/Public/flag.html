@@ -260,6 +260,7 @@
   var adminNo = undefined;
   var userJsonData = undefined;
   var userData = localStorage.getItem("userInfo");
+  var token = localStorage.getItem("token");
   var userJsonData = JSON.parse(userData);
 
   if (userJsonData === null) {
@@ -267,9 +268,17 @@
     window.location.assign("/login.html");
   }
 
+  if (userJsonData === undefined) {
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
 
+  if (token === null){
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login.html");
+  }
 
-  if (userJsonData != null) {
+  if (userJsonData != null && token != null) {
     // var userRole = userJsonData[0].role;
     var userName = userJsonData[0].username
   }
@@ -432,11 +441,22 @@
         </div>
       </div>
 
-      <!-- Testing -->
+      <!-- Testing Student leaderboards -->
       <div class="row justify-content-center">
-        <div class="m-4 col-8 border rounded shadow">
-          Testing, Will continue later. Sorry bout it.
+        <!-- Left big scoreboard -->
+        <div class="col-5">
+           <div class="m-5 border">Hello</div>
         </div>
+
+        <!-- Right small scoreboard -->
+        <div class="col-7">
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello</div>
+          <div class="row border m-2 rounded">hello </div>
+        </div>
+
       </div>
 
 
@@ -527,6 +547,7 @@
       }
     });
     document.getElementById('studentNameOfUsername').innerHTML = `${userName}`
+    
   });
 
   jQuery(document).ready(function ($) {
