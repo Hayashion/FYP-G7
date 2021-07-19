@@ -260,11 +260,7 @@
   var adminNo = undefined;
   var userJsonData = undefined;
   var userData = localStorage.getItem("userInfo");
-<<<<<<< HEAD
   var token = localStorage.getItem("token");
-=======
-  var token = localStorage.getItem("token")
->>>>>>> origin/yikang
   var userJsonData = JSON.parse(userData);
 
   if (userJsonData === null) {
@@ -285,14 +281,11 @@
     window.location.assign("/login.html");
   }
 
-<<<<<<< HEAD
   if (token === null){
     window.alert('Unauthorized. You will be redirected to home page.');
     window.location.assign("/login.html");
   }
 
-=======
->>>>>>> origin/yikang
   if (userJsonData != null && token != null) {
     // var userRole = userJsonData[0].role;
     var userName = userJsonData[0].username

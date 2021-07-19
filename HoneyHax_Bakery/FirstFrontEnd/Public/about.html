@@ -173,11 +173,12 @@
                   var divOutput = "";
                   for (var i = 0; i < data.length; i++) {
                      divOutput += `
-                                    <div>${data[i].location}
+                                    <div class="m-4">${data[i].location}
                                     </div>
 
-                                 `
+                               `
                      // divOutput+=data[0].price
+                     console.log(i)
                   }
                   $('#products-section').html(divOutput)
                } else {

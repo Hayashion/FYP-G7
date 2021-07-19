@@ -93,7 +93,7 @@ searchLocation: function (locationName, callback) {
             return callback(err, null);
 
         } else {
-            var sql = `SELECT * FROM locations WHERE location = '${'%' + locationName + '%'}'` //where should be the search field
+            var sql = `SELECT * FROM locations WHERE location = '${locationName}'` //where should be the search field
             // 1' or 1=1;-- -
             dbConn.query(sql, [], function (err, result) {
 

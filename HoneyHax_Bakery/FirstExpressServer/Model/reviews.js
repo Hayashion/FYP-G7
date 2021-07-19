@@ -8,17 +8,10 @@ var db = require('./databaseConfig');
 
 var reviewsDB = {
 
-<<<<<<< HEAD
-    //GET /reviews
-    processReview: function (name, review, callback) {
-        var flag = "SG9uZXlIYXh7Q3JvNTVfczF0M19zY3IxcHRpTmd9"
-        var args = [name, review]
-=======
     // GET /reviews
     processReview: function (name, review, callback) {
         var args = [name, review]
         var regExp = /<a\s*.*>\s*.*<\/a>/g;
->>>>>>> origin/yuran
         var filtered = [];
         var attack = false;
         args.forEach(function (item) {
@@ -28,26 +21,10 @@ var reviewsDB = {
                 item = item.replace('</script>', '');
                 filtered.push(item);
             }
-<<<<<<< HEAD
-            else {filtered.push(item)}
-        });
-
-        if (attack) {
-            return callback(null, [filtered[0], filtered[1], attack, flag])
-        }
-
-        console.log(filtered, attack)
-        return callback(null, [filtered[0], filtered[1], attack])
-
-=======
->>>>>>> origin/yuran
 
             else {filtered.push(item)}
         }),
 
-<<<<<<< HEAD
-
-=======
         args.forEach(function(item){
             // if(regExp==args){
             if(regExp.test(args)){
@@ -68,7 +45,6 @@ var reviewsDB = {
 
 
 
->>>>>>> origin/yuran
     },
 
     // injectReviews: function (name,review,callback){
