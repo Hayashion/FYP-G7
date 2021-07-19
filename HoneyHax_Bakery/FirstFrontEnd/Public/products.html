@@ -54,6 +54,11 @@
          font-size: 10px;
       }
 
+      footer {
+         position: relative;
+         margin-top: 35%;
+      }
+
       *,
       *::before,
       *::after {
@@ -71,10 +76,29 @@
          text-align: center;
       }
 
+<<<<<<< HEAD
+      /* input:not(:placeholder-shown) {
+      border-radius: var(--rad) 0 0 var(--rad);
+      width: calc(100% - var(--btn-width));
+      /* + button {
+        display: block;
+      } */
+      /* } */
+      /* label {
+         position: absolute;
+         clip: rect(1px, 1px, 1px, 1px);
+         padding: 0;
+         border: 0;
+         height: 1px;
+         width: 1px;
+         overflow: hidden;
+      } */
+=======
       #products-body {
          padding-top: 100px;
          padding-bottom: 70px;
       }
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 
       .product-body {
          border: 1px solid black;
@@ -140,7 +164,8 @@
                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                      <div class="full">
                         <div class="center-desk">
-                           <div class="logo"><a href="#home"><img src="images/logo.png" style="max-width: 100%;"></a>
+                           <div class="logo"><a href="home.html"><img src="images/logo.png"
+                                    style="max-width: 100%;"></a>
                            </div>
                         </div>
                      </div>
@@ -151,10 +176,16 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li><a href="home.html">Home</a></li>
+<<<<<<< HEAD
+                                 <li class="active"><a href="products.html">Products</a></li>
+
+=======
                                  <!-- <li><a href="about.html">About</a></li> -->
                                  <li class="active"><a href="products.html">products</a></li>
                                  <li><a href="search.html">search</a></li>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
                                  <li><a href="login.html">Login</a></li>
+                                 <li><a href="cart.html">Cart</a></li>
                               </ul>
                            </nav>
                         </div>
@@ -177,8 +208,81 @@
       </div>
    </main>
 
-   
+<<<<<<< HEAD
 
+
+   <!-- copyright end-->
+=======
+   
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
+
+
+</body>
+<footer>
+	<!-- contact start-->
+	<div id="contact" class="contact_section">
+		<div class="container">
+			<div class="contact-taital">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="contact_text"><strong>Contact Us</strong></div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+
+				<div class="row">
+					<div class="col-4 box">
+						<label class="adderess_text">Address</label>
+
+						<div class="row">
+							<div class="image_icon">
+								<img class="img-fluid" src="images/map-icon.png">
+							</div>
+							<div class="email_text">500 Dover Rd, Singapore 139651</div>
+
+
+						</div>
+
+					</div>
+
+					<div class="col-4 box">
+						<label class="adderess_text">Phone Number</label>
+						<div class="row">
+							<div class="image_icon">
+								<img class="img-fluid" src="images/phone-icon.png">
+							</div>
+
+							<div class="email_text">(+65) 67751133</div>
+						</div>
+					</div>
+
+					<div class="col-4 box">
+						<label class="adderess_text">Email</label>
+						<div class="row">
+							<div class="image_icon">
+								<img class="img-fluid" src="images/email-icon.png">
+							</div>
+
+							<div class="email_text">honeyhax@gmail.com</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- contact end-->
+	<!-- copyright start-->
+	<div class="copyright_section">
+
+		<p class="copyright_text">| &copy; HoneyHAX. All rights reserved. |</p>
+
+	</div>
+	<!-- copyright end-->
+
+</footer>
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/popper.min.js"></script>
@@ -191,6 +295,126 @@
    <!-- javascript -->
    <script src="js/owl.carousel.js"></script>
    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<<<<<<< HEAD
+   <script>
+      $(document).ready(function () {
+         $("#product-form").submit(function (e) {
+            var searchValue = $('#search').val()
+            var url = `products.html?product=${searchValue}`
+            // console.log(searchValue)
+            if (searchValue != '') {
+               window.location.replace(url)
+            }
+         })
+         // $("#Login").click(function () {  
+         //     var id=$('#email').val();
+         //     var pwd=$('#pwd').val();
+         //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
+         //     console.log(data)
+         // searchParam = new URLSearchParams(windows.location.search)
+         // var wsUrl = 'http://localhost:8081/products'
+         // if(searchParams.has("productSearch")){
+         //    searchParams.get("productSearch")
+         // }
+         // if (searchParams.has('query')){
+         //       var product =searchParams.get("query");
+         //       console.log(product)
+         // }
+         var searchParams = new URLSearchParams(window.location.search)
+         if (searchParams.has("product")) {
+            var product = searchParams.get("product");
+         }
+         $.ajax({
+            url: `http://localhost:8081/products/${product}`,
+            type: 'GET',
+            //   data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+               if (data != null) {
+                  var divOutput = "";
+                  for (var i = 0; i < data.length; i++) {
+                     divOutput += `
+                                    <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
+                                       <img class="product-img center-block img-thumbnail" src="${data[i].productImg}">
+                                       <p class="product-name text-center">${data[i].productName}
+                                       <p class="product-price text-center">$${data[i].price}
+                                       <p class="product-description text-center">${data[i].description}
+                                    </div>
+                                 `
+                     console.log(divOutput)
+                     // divOutput+=data[0].price
+                  }
+                  $('#products-section').html(divOutput)
+               } else {
+                  console.log("Error");
+               }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+               console.log('Error in Operation');
+            }
+         });
+         return false;
+      });
+   //    $(document).ready(function(){
+   //       $.ajax({                                                               
+   //       url: 'http://localhost:8081/products',  
+   //       type: 'GET', 
+   //       data: data,
+   //       contentType: "application/json; charset=utf-8",
+   //       dataType: "json",  
+   //       success: function (result, textStatus, xhr) {  
+   //           if (result != null){     
+   //                for(var i=0;i<result.length;i++){
+   //                   console.log(result[i]);
+   //                }               
+   //             //   localStorage.setItem('token',data.token);
+   //             //   console.log(data)
+   //             //   localStorage.setItem('userInfo',data.UserData);
+
+   //               location.reload
+   //           } else {
+   //               console.log("Error");
+   //           }                                                                 
+   //       },  
+   //       error: function (xhr, textStatus, errorThrown) {  
+   //           console.log('Error in Operation');  
+   //       }  
+   //    });  
+   //    return false;
+
+   // });
+      // $(".fancybox").fancybox({
+      //    openEffect: "none",
+      //    closeEffect: "none"
+      //    });
+
+      //    $(".zoom").hover(function(){
+
+      //    $(this).addClass('transition');
+      //    }, function(){
+
+      //    $(this).removeClass('transition');
+      //    }),
+
+      //   jQuery(document).ready(function($) {
+      //       tab = $('.tabs h3 a');
+
+      //       tab.on('click', function(event) {
+      //           event.preventDefault();
+      //           tab.removeClass('active');
+      //           $(this).addClass('active');
+
+      //           tab_content = $(this).attr('href');
+      //           $('div[id$="tab-content"]').removeClass('active');
+      //           $(tab_content).addClass('active');
+      //       });
+      //   });
+      //   $(document).ready(function()){
+      //      console.log()
+      //   }
+   </script>
+=======
 
 
 
@@ -260,4 +484,5 @@
    <!-- copyright end-->
 
 </footer>
+>>>>>>> e7594c168e392327844adee29cb05ddfc242b080
 </html>

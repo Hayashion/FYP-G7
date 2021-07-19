@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>Den</title>
+  <title>HoneyHAX Flag</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -49,28 +49,6 @@
     html { box-sizing: border-box; height: 100%; font-size: 10px; } *, *::before, *::after { box-sizing: inherit; } */
 
     /* // Main styles */
-    .banner_section_start {
-      width: 100%;
-      float: left;
-      background-color: #fefcfb;
-      height: auto;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      border-bottom: 0px solid #000;
-    }
-
-    .footer {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      background-color: #393838;
-      
-    }
-    .footertext {
-      color: white;
-    }
     .formandbutton {
       float: left;
       margin: 10%;
@@ -79,9 +57,9 @@
     /* button{
         float: right;
     } */
-    .scoreboard {
+    /* .scoreboard {
       margin-left: 66%;
-    }
+    } */
 
     .name-wrapper {
       position: relative;
@@ -277,16 +255,58 @@
         text-transform: uppercase;
       }
 
-
       table td:last-child {
         border-bottom: 0;
       }
-
-
     }
   </style>
 
 </head>
+<script>
+
+  var userData = undefined;
+  
+  var userJsonData = undefined;
+  var userData = localStorage.getItem("userInfo");
+  var userJsonData = JSON.parse(userData);
+  
+  if (userJsonData === null) {
+    window.alert('Unauthorized. You will be redirected to home page.');
+    window.location.assign("/login(test).html");
+  }
+
+
+
+  if (userJsonData != null) {
+    
+    var userName = userJsonData[0].username;
+  }
+
+  // if(userRole!="student"){
+  //     window.alert('Unauthorized. You will be redirected to home page.')
+  //     window.location.assign("/index.html");
+  // }
+
+  // <form id="flagMainForm">
+  //   <div class="name-wrapper">
+  //     <input type="text" required="">
+  //     <span class="highlight"></span>
+  //     <span class="bar"></span>
+  //     <label class="inputFlag">Input Flag</label>
+  //   </div>
+  //   <!-- <button type="submit" id="flagEnter" value="submit">Submit</button> -->
+  // </form>
+
+
+  //         <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();" role="search">
+  //     <!-- <label for="search">Search for stuff</label> -->
+  //     <input id="search" class="mt-4 border col-6" type="search" placeholder="Search..." autofocus required />
+  //     <button type="submit">Go<img src="images/searchicon.png"></button>
+  //  </form>
+
+
+
+</script>
 
 <body>
   <header>
@@ -308,8 +328,9 @@
                 <div class="limit-box">
                   <nav class="main-menu">
                     <ul class="menu-area-main">
-                      <li class="active"><a href="#studentprofile">Name</a></li>
-                      <li><a href="#logout">Logout</a></li>
+                      <li><a href="home.html" target="_blank">HoneyHAX Page</a></li>
+                      <li class="active"><a href="" id="studentNameOfUsername">name</a></li>
+                      <li><a href="#logout" id="logout">Logout</a></li>
                     </ul>
                   </nav>
                 </div>
@@ -319,43 +340,66 @@
         </div>
       </div>
       <!-- end header inner -->
-      <div class="formandbutton">
-        <form>
-          <div class="name-wrapper">
-            <input type="text" required>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="inputFlag">Input Flag</label>
-          </div>
-        </form>
-        <!-- <button type="submit" form="flagform" value="submit">Submit</button> -->
-      </div>
-      <table class="scoreboard">
-        <tr class="header">
-          <th>Student Name</th>
-          <th>Score</th>
-        </tr>
-        <tr>
-          <td class="student">Bob</td>
-          <td class="score">2800</td>
-        </tr>
-        <tr>
-          <td class="student">Mary</td>
-          <td class="score">2600</td>
-        </tr>
-        <tr>
-          <td class="student">John</td>
-          <td class="score">2400</td>
-        </tr>
-        <tr>
-          <td class="student">Cob</td>
-          <td class="score">2000</td>
-        </tr>
-      </table>
+      <br>
+   
+    
+      
+    
 
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+      <script src="js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/custom.js"></script>
+      <!-- javascript -->
+      <script src="js/owl.carousel.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script>
+
+
+
+
+
+$(document).ready(function () {
+  if (userName!=undefined){
+    document.getElementById('studentNameOfUsername').innerHTML = `${userName}`
+  } else {
+    document.getElementById('studentNameOfUsername').innerHTML = `HoneyHax{lolinsecurelogin}`
+  }
+  
+});
+
+
+        
+
+        jQuery(document).ready(function ($) {
+          tab = $('.tabs h3 a');
+
+          tab.on('click', function (event) {
+            event.preventDefault();
+            tab.removeClass('active');
+            $(this).addClass('active');
+
+            tab_content = $(this).attr('href');
+            $('div[id$="tab-content"]').removeClass('active');
+            $(tab_content).addClass('active');
+          });
+        });
+
+
+        $('#logout').click(function () {
+          window.localStorage.clear();
+          console.log('Cleared the localStorage!')
+          window.location.assign("/login(test).html");
+        })
+      </script>
 
 </body>
-<!-- copyright start-->
 <footer>
   <div class="copyright_section">
 
@@ -363,47 +407,5 @@
   
   </div>
 </footer>
-
-<!-- Javascript files-->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery-3.0.0.min.js"></script>
-<script src="js/plugin.js"></script>
-<!-- sidebar -->
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/custom.js"></script>
-<!-- javascript -->
-<script src="js/owl.carousel.js"></script>
-<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $(".fancybox").fancybox({
-      openEffect: "none",
-      closeEffect: "none"
-    });
-
-    $(".zoom").hover(function () {
-
-      $(this).addClass('transition');
-    }, function () {
-
-      $(this).removeClass('transition');
-    });
-  });
-  jQuery(document).ready(function ($) {
-    tab = $('.tabs h3 a');
-
-    tab.on('click', function (event) {
-      event.preventDefault();
-      tab.removeClass('active');
-      $(this).addClass('active');
-
-      tab_content = $(this).attr('href');
-      $('div[id$="tab-content"]').removeClass('active');
-      $(tab_content).addClass('active');
-    });
-  });
-</script>
 
 </html>

@@ -28,6 +28,10 @@ app.use(function(req,res,next){
 
 app.use(serveStatic(__dirname+"/Public",{index:'home.html'})); 
 
+app.get('/secret', function(req, res) {
+    res.redirect('/secret/secretcart.html');
+});
+
 app.get('*', function(req, res) {
     res.redirect('/');
 });
