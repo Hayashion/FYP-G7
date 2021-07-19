@@ -16,6 +16,8 @@ const studentsDB = require('../Model/students');
 const reviewsDB = require('../Model/reviews');
 const adminDB = require('../Model/admin');
 
+const aboutDB = require('../Model/about');
+
 
 const voucherDB = require('../Model/voucher');
 
@@ -95,25 +97,24 @@ app.get("/studentsflag", function (req, res) {
 
 // PUT /students/:adminNo update students
 app.put('/students/:adminNo',function(req,res){
-
+    var studentName = req.body.studentName;
     var username = req.body.username;
+    var studentClass = req.body.studentClass;
     var password = req.body.password;
-    var adminNo = req.params.adminNo;
-    
-    console.log(username);
-    console.log(password);
-    console.log(adminNo);
+    var newAdminNo = req.body.adminNo;
+    var oldAdminNo = req.params.adminNo;
+    if(password == "" || password == null || typeof(password) == "undefined"){
+        password = null;
+    }
 
-    studentsDB.updateStudents(username, password, adminNo, function (err, result) {
-
+    studentsDB.updateStudents(studentName, username, studentClass, password, newAdminNo, oldAdminNo, function (err, result) {
         res.type('json');
         if (err) {
             res.status(500);
             res.send(`{"message":"Internal Server Error"}`);
-
         } else {
             res.status(201);
-            res.send(`{"Updated Student": ${result.affectedRows}}`);
+            res.send(`{"affectedRows": "${result.affectedRows}"}`);
         }
     });
 });
@@ -341,6 +342,29 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
+//Search /location/:locationName/
+app.get('/location/:locationName/', function (req, res) {
+
+    var locationName = req.params.locationName;
+    console.log(locationName)
+
+    productsDB.searchLocation(locationName, function (err, result) {
+        
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
+
 //Search /voucher/:voucherCode/
 app.get('/voucher/:voucherCode/', function (req, res) {
 
@@ -477,6 +501,24 @@ app.get('/review', function (req, res) {
 
     res.type('json');
     reviewsDB.processReview(name,review, function (err, result) {
+        console.log(err);
+        if (err) {
+            res.status(500);
+            res.send(`"Internal Server Error"`);
+        } else {
+            res.status(200);
+            res.send(result); //
+        }
+    });
+});
+
+// GET /about
+app.get('/about', function (req, res) {
+    var url = req.query.url;
+    console.log(url)
+
+    res.type('json');
+    aboutDB.processAbout(url, function (err, result) {
         console.log(err);
         if (err) {
             res.status(500);

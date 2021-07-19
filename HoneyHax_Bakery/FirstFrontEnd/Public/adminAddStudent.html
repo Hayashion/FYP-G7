@@ -16,7 +16,7 @@
     <div id="header-wrapper">
         <div id="header" class="container">
             <div id="logo">
-                <h1><a href="#"><strong>HoneyHAX Admin</strong></a></h1>
+                <h1><a href="admin.html"><strong>HoneyHAX Admin</strong></a></h1>
             </div>
             <div id="menu">
                 <ul>
@@ -48,7 +48,7 @@
                             <input type="text" class="form-control" id="studentClass" placeholder="Class" required="required">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="adminNo" placeholder="Admin Number (Without 'P')" required="required">
+                            <input type="number" class="form-control form-control-lg" id="adminNo" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;" placeholder="Admin Number (Without 'P')" required="required">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="password" placeholder="Default Password" required="required">

@@ -10,7 +10,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
    <!-- site metas -->
-   <title>Den</title>
+   <title>HoneyHAX</title>
    <meta name="keywords" content="">
    <meta name="description" content="">
    <meta name="author" content="">
@@ -53,7 +53,7 @@
       }
       footer {
          position: relative;
-         margin-top: 35%;
+         margin-top: 27.7%;
       }
       *,
       *::before,
@@ -161,7 +161,7 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li><a href="home.html">Home</a></li>
-                                 <li><a href="about.html">About</a></li>
+                                 <!-- <li><a href="about.html">About</a></li> -->
                                  <li><a href="products.html">products</a></li>
                                  <li class="active"><a href="search.html">search</a></li>
                                  <li><a href="login.html">Login</a></li>
@@ -214,7 +214,7 @@
       $(document).ready(function () {
          $("#product-form").submit(function (e) {
             var searchValue = $('#search').val()
-            var url = `products.html?product=${searchValue}`
+            var url = `search.html?product=${searchValue}`
             // console.log(searchValue)
             if (searchValue != '') {
                window.location.replace(url)

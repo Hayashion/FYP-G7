@@ -1,0 +1,209 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HoneyHAX Admin</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="logo">
+                <h1><a href="admin.html"><strong>HoneyHAX Admin</strong></a></h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li class="home"><a href="admin.html" accesskey="1" title="">Home</a></li>
+                    <li class="current_page_item itinerary"><a href="adminManagement.html" accesskey="2" title="">Management</a></li>
+                    <li class="itinerary"><a href="#" accesskey="3" title="" id="teacherName">Name</a></li>
+                    <li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="page" class="container">
+        <div id="content">
+            <div id="infomation">
+                <div class="title">
+                    <h2>Update Student Details</h2>
+                    <span class="byline">Welcome! Please update the details of the student</span>
+                </div>
+                
+                <div id="addform">
+                    <form id="add-student">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="studentName" placeholder="Student Name (Full Name)" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" placeholder="Username" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="studentClass" placeholder="Class" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control form-control-lg" id="adminNo" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;" placeholder="Admin Number (Without 'P')" required="required">
+                        </div>
+                        
+                        <div class="form-group">
+                            <div>Leave as blank if no change in password</div>
+                            <input type="text" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block" id="UpdateStudent">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="copyright">
+        <p>| &copy; HoneyHAX. All rights reserved. |</p>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+
+
+
+<!-- AXIOS HERE -->
+
+<!-- JQuery is aso another dependency of BootStrap -->
+<!-- Load Popper JS, Javascript code. Popper is a dependency of BootStrap, BootStrap relies on Popper for some functionality -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<!-- href specifies where is the file is, it is URL as the file is hosted online on a CDN -->
+<!-- Load BootStrap JS, javascript code -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<!-- href specifies where is the file is, it is URL as the file is hosted online on a CDN -->
+<!-- Axios, a library used to make HTTP requests. We can use it to make requests to our backend. It is similar to JQuery which is tought in lecture. (Ajax ->JQuery method -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- this can trigger off postman like request. some people like Axios better because got promise, more modern. -->
+<!--Link Slideshow Gallery To JS -->
+
+
+
+
+<script>
+    
+
+    $(document).ready(function () {
+        var tmpToken = localStorage.getItem("token");
+        var adminNum = new URL(window.location.href).searchParams.get("adminNum");
+        $.ajax({
+                headers: { 'authorization': 'Bearer ' + tmpToken },
+                url: `http://localhost:8081/students/${adminNum}`,
+                type: 'GET',
+                // contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, textStatus, xhr) {
+                    if (data != null) {
+                        $("#studentName").val(data[0].studentName);
+                        $("#username").val(data[0].username);
+                        $("#studentClass").val(data[0].studentClass);
+                        $("#adminNo").val(data[0].adminNo);
+                    } else {
+                        console.log("Error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                    if (errorThrown == "Forbidden") {
+                        alert("Unauthorised!")
+                    } else {
+                        alert("Internal Server error")
+                    }
+
+                }
+            });
+
+        $("#addform form").submit(function(e){
+            e.preventDefault();
+            var confirmText = "Are you sure you want to update user?";
+            var data = `{"studentName":"${$("#studentName").val()}","username":"${$("#username").val()}","studentClass":"${$("#studentClass").val()}","adminNo":"${$("#adminNo").val()}","password":"${$("#password").val()}"}`
+            if (confirm(confirmText)) {
+                $.ajax({
+                    headers: { 'authorization': 'Bearer ' + tmpToken },
+                    url: `http://localhost:8081/students/${adminNum}/`,
+                    type: 'PUT',
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    success: function (result, textStatus, xhr) {
+                        if (result.affectedRows == 1) {
+                            alert("Update Successful!");
+                            window.location.assign("http://localhost:3001/adminManagement.html");
+                        } else {
+                            console.log("Error");
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                        console.log(xhr)
+                        if (errorThrown == "Forbidden") {
+                            alert("Unauthorised!")
+                        } else {
+                            alert("Internal Server error")
+                        }
+
+                    }
+                });
+            } else {
+                return
+            }
+        });
+
+
+
+        $("#logout").click(function () {
+            window.localStorage.clear();
+            window.location.assign("http://localhost:3001/home.html");
+        });
+
+        var a = JSON.parse(localStorage.getItem("userInfo"))
+        
+        if (a==null || a[0].role != "admin") {
+            window.location.assign("http://localhost:3001/home.html");
+        }
+
+        var a = localStorage.getItem("userInfo")
+        if (a == null) {
+            // window.location.assign("http://localhost:3001/login.html");
+        }
+        else {
+            var teacherName = JSON.parse(a)
+            var username = teacherName[0].username
+            console.log(username)
+            console.log(`${username}`)
+            document.getElementById('teacherName').innerHTML = `${username}`
+        }   
+    })
+
+</script>
+
+</html>

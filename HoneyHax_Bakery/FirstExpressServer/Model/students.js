@@ -36,24 +36,6 @@ var studentsDB = {
 
 
 
-    // insertStudents: function (adminNo, username, password, studentClass, callback) {   // Create/Register Students
-    //     var dbConn = db.getConnection();
-    //     dbConn.connect(function (err) {
-    //         if (err) {
-    //             console.log(err);
-    //             return callback(err, null);
-    //         }
-    //         else {
-    //             var sql = "insert into login.students (adminNo, username, password, studentClass) Values(?,?,?,?)";
-    //             dbConn.query(sql, [adminNo, username, password, studentClass], function (err, result) {
-    //                 dbConn.end();
-    //                 return callback(err, result);
-    //             });
-    //         }
-    //     });
-    // },
-
-
 
     insertStudents: function (adminNo, studentName,username, password, studentClass, callback) {   // Create/Register Students
         var dbConn = db.getConnection();
@@ -95,7 +77,7 @@ var studentsDB = {
 
 
 
-    updateStudents: function (username, password, adminNo, callback) {     // Updating Student's info
+    updateStudents: function (studentName, username, studentClass, password, newAdminNo, oldAdminNo, callback) {     // Updating Student's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
@@ -103,8 +85,16 @@ var studentsDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "update login.students set username=?, password=? where adminNo=?"
-                dbConn.query(sql, [username, password, adminNo], function (err, result) {
+                var data = [studentName, username, studentClass, newAdminNo, oldAdminNo];
+                if (password == null){
+                    var sql = "update login.students set studentName=?, username=?, studentClass=?, adminNo=? where adminNo=?";
+                }else{
+                    var hashedPassword = bcrypt.hashSync(`${password}`, salt);
+                    data.splice(3, 0, hashedPassword);
+                    var sql = "update login.students set studentName=?, username=?, studentClass=?, password=?, adminNo=? where adminNo=?";
+                }
+                
+                dbConn.query(sql, data, function (err, result) {
                     dbConn.end();
                     return callback(err, result);
                 });

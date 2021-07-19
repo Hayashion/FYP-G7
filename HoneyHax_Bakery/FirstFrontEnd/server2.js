@@ -34,5 +34,5 @@ app.get('*', function(req, res) {
 
 app.listen(port,hostname,function(){
 
-    console.log(`Server hosted at http://${hostname}:${port}`);
+    console.log(`HoneyHAX Frontend hosted at http://${hostname}:${port}`);
 });
