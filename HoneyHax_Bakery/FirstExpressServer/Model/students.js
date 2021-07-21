@@ -146,7 +146,7 @@ var studentsDB = {
                                         } else {
                                             var err2 = new Error("Username/Password does not match.");
                                             err2.statusCode = 500;
-                                            return callback(err2, null, null);
+                                            return callback(null, null, null);
                                         }
                                     }
                                 });
