@@ -339,18 +339,20 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result, textStatus, xhr) {
-          if (result != null) {                     // managed to retrieve some data
+          if (result != null || 'Internal Server Error') {                     // managed to retrieve some data
             console.log(result)
             localStorage.setItem('token', result.token);
             localStorage.setItem('userInfo', result.UserData);
             window.location.assign("http://localhost:3001/flag.html"); // successful redirected to this page
           } else {
             alert("Invalid Username/Password")
+            console.log('here')
             console.log("Error");
           }
         },
         error: function (xhr, textStatus, errorThrown) {
           alert("Invalid Username/Password")
+          console.log('hereee2')
           console.log('Error in Operation');
           console.log("Error");
         }

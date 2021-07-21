@@ -75,8 +75,6 @@ var studentsDB = {
     },
 
 
-
-
     updateStudents: function (studentName, username, studentClass, password, newAdminNo, oldAdminNo, callback) {     // Updating Student's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
@@ -102,67 +100,84 @@ var studentsDB = {
         });
     },
 
-
-
     
     loginStudents: function (username, password, callback) {     // Login Student
         var conn = db.getConnection();
         conn.connect(function (err) {
             if (err) {
                 console.log(err);
-                return callback(err, null);
+                var err2 = new Error("AdminNo/Password does not match.");
+                err2.statusCode = 500;
+                return callback(err2, null, null);
             }
             else {
                 console.log("Connected!");
-                var sql2 = 'select password from login.students where username = ?';
+                try{
+                    var sql2 = 'select password from login.students where username = ?';
 
-                conn.query(sql2,[username],function(err,result){
-                    if(err){
-                        console.log(err)
-                    }else{
-                        
-                        result=JSON.parse(JSON.stringify(result))
-                        try{
-                            console.log(result)
-                            var hashedPassword = result[0]['password']
-                            console.log(hashedPassword)
-                            if (bcrypt.compareSync(password,hashedPassword)==true){
-                                console.log("Connected!");
-                                var sql = 'select * from login.students where username=? and password=?';
-                                conn.query(sql, [username,hashedPassword], function (err, result) {
-                                    conn.end();
-                                    if (err) {
-                                        console.log("Error: " + err);
-                                        return callback(err, null, null);
-                                    } else {
-                                        var token = "";
-                                        var i;
-                                        if (result.length == 1) {
-                                            token = jwt.sign({ id: result[0].adminNo, password: result[0].password}, config.key, {
-                                                expiresIn: 36000 //expires in >1 hr
-                                            });
-                                            console.log("@@token " + token);
-                                            return callback(null, token, result);
-                                        } else {
-                                            var err2 = new Error("Username/Password does not match.");
-                                            err2.statusCode = 500;
-                                            return callback(null, null, null);
-                                        }
-                                    }
-                                });
-                            } else{
-                                console.log("false")
-                            }
-                            
-                        }catch(err){
-                            console.log(err)
-                            var err2 = new Error("AdminNo/Password does not match.");
+                    conn.query(sql2,[username],function(err,result){
+                        if(err){
+                            conn.end();
+                            var err2 = new Error("Username/Password does not match.");
                             err2.statusCode = 500;
                             return callback(err2, null, null);
+                        }else{
+                            
+                            result=JSON.parse(JSON.stringify(result))
+                            try{
+                                console.log(result)
+                                var hashedPassword = result[0]['password']
+                                console.log(hashedPassword)
+                                if (bcrypt.compareSync(password,hashedPassword)==true){
+                                    console.log("Connected!");
+                                    var sql = 'select * from login.students where username=? and password=?';
+                                    conn.query(sql, [username,hashedPassword], function (err, result) {
+                                        conn.end();
+                                        if (err) {
+                                            console.log("Error: " + err);
+                                            var err2 = new Error("Username/Password does not match.");
+                                            err2.statusCode = 500;
+                                            return callback(err2, null, null);
+                                        } else {
+                                            var token = "";
+                                            var i;
+                                            if (result.length == 1) {
+                                                token = jwt.sign({ id: result[0].adminNo, password: result[0].password}, config.key, {
+                                                    expiresIn: 36000 //expires in >1 hr
+                                                });
+                                                console.log("@@token " + token);
+                                                return callback(null, token, result);
+                                            } else {
+                                                var err2 = new Error("Username/Password does not match.");
+                                                err2.statusCode = 500;
+                                                return callback(err2, null, null);
+                                            }
+                                        }
+                                    });
+                                } else{
+                                    console.log("false")
+                                    var err2 = new Error("AdminNo/Password does not match.");
+                                    err2.statusCode = 500;
+                                    return callback(err2, null, null);
+                                }
+                                
+                            }catch(err){
+                                console.log(err)
+                                var err2 = new Error("AdminNo/Password does not match.");
+                                err2.statusCode = 500;
+                                return callback(err2, null, null);
+                            }
+    
                         }
+                    })
 
-                    }
-                })
+                }catch(err){
+                    console.log(err)
+                    var err2 = new Error("AdminNo/Password does not match.");
+                    err2.statusCode = 500;
+                    return callback(err2, null, null);
+                }
+
             }
         });
     },
