@@ -541,19 +541,18 @@
   $("#congratulatebtn").click(function(){
     var end = Date.now() + (15 * 50);
 
-    // go Buckeyes!
     var colors = ['#bb0000', '#FFD700'];
 
-    (function frame() {
+    (setTimeout(function frame() {
       confetti({
-        particleCount: 2,
+        particleCount: 200,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
         colors: colors
       });
       confetti({
-        particleCount: 2,
+        particleCount: 200,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
@@ -563,7 +562,7 @@
       if (Date.now() < end) {
         requestAnimationFrame(frame);
       }
-    }());
+    },2000));
 
   })
   
