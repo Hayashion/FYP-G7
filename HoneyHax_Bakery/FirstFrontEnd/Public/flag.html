@@ -32,6 +32,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
     media="screen">
 
+
+
   <style>
     :root {
       --rad: .7rem;
@@ -63,8 +65,8 @@
       padding: 10px 10px 10px 5px;
       display: block;
       border: none;
-      border : 1px solid #c41010;
-      border-radius:5px ;
+      border: 1px solid #c41010;
+      border-radius: 5px;
     }
 
     input:focus {
@@ -251,10 +253,193 @@
         border-bottom: 0;
       }
     }
+
+
+
+
+    .bigscoreboard {
+      background-color: #1bcb7b;
+      border-radius: 15px;
+    }
+
+    .smallscoreboard{
+      opacity: 0;
+    }
+
+    #congratulatebtn {
+      background-color: #f1ff79;
+      border-radius: 20px;
+      font-size: large;
+      color: black;
+      font-weight: thin;
+      padding: 15px;
+      width: 75%;
+    }
+
+    .currentuser{
+      background-color: #f2ff7960;
+    }
   </style>
 
 </head>
+
+
+<body>
+  <div class="containter-fluid">
+    <header class="row mb-4">
+      <div class="layout_padding banner_section_start">
+
+        <!-- header inner -->
+        <div class="header">
+          <div class="container">
+            <div class="row">
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                <div class="full">
+                  <div class="center-desk">
+                    <div class="logo"><a href="#home"><img src="images/logo.png" style="max-width: 100%;"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                <div class="menu-area">
+                  <div class="limit-box">
+                    <nav class="main-menu">
+                      <ul class="menu-area-main">
+                        <li><a href="home.html" target="_blank">HoneyHAX Page</a></li>
+                        <li class="active"><a href="" id="studentNameOfUsername">Name</a></li>
+                        <li><a href="#logout" id="logout">Logout</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end header inner -->
+
+    </header>
+
+    <!-- Flag and Scoreboard start-->
+    <section id="content">
+
+      <!-- Instuctions -->
+      <div class="row justify-content-center">
+        <div class=" m-4 col-6 shadow border">
+          <h2 class="mt-3 mb-2">Welcome to the flag page</h2>
+          <p class="m-2">Put in your flag to earn score to be on the leaderboards!</p>
+          <p class="m-2">Easy - 5 Points</p>
+          <p class="m-2">Medium - 10 Points</p>
+          <p class="m-2">Hard - 15 Points</p>
+        </div>
+
+      </div>
+
+
+      <!-- Enter flag input -->
+      <form id="flagMainForm" class="m-4 row justify-content-center">
+        <div class="col-8">
+          <input class="w-100" id='inputText' type="text" required="">
+          <span class="highlight w-100"></span>
+          <span class="bar w-100"></span>
+          <label class="inputFlag w-100 pl-3">Input Flag Example: {Flag}</label>
+        </div>
+        <!-- <button type="submit" onclick='flagSubmit()'>Submit</button> -->
+      </form>
+
+
+      <!-- Testing Student leaderboards -->
+      <div class="row justify-content-center mb-5">
+        <!-- Left big scoreboard -->
+        <div class="col-3 align-self-center shadow bigscoreboard">
+
+          <!-- Profile picture -->
+          <div class="row m-2 mt-3 justify-content-center">
+            <div class="col-12 p-3 text-center"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+              <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z"/>
+            </svg></div>
+          </div>
+
+          <!-- Student name -->
+          <div class="row m-2 mt-5 justify-content-center">
+            <h2 id="TopStudent" class="text-center border-bottom border-secondary text-light">Student Name</h2>
+          </div>
+
+          <!-- Class -->
+          <div class="row m-2 justify-content-center">
+            <h2 id="TopStudentClass" class="text-center text-light">Class</h2>
+          </div>
+
+          <!-- Points -->
+          <div class="row mt-5  justify-content-center">
+            <h2  class="text-center text-light border-bottom border-warning">Points</h2>
+          </div>
+          <div class="row mt-3 mb-4 justify-content-center">
+            <h3 id="TopStudentPoints" class="text-center text-light">0</h3>
+          </div>
+
+          <!-- Congratulate -->
+          <div class="row m-4  justify-content-center">
+            <div id="congratulatebtn" class="btn">Congratulate!</div>
+          </div>
+
+
+        </div>
+
+        <!-- Right small scoreboard -->
+        <div id="Rightscoreboard" class="col-6">
+
+          <!-- Header -->
+          <div class="row m-2 pb-4 border-bottom rounded justify-content-center">
+
+            <h4 class="col-8 p-2 rounded text-center"> <b>Top 10 Scores!</b></h4>
+
+          </div>
+
+
+          <!-- Students -->
+    
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <footer>
+      <div class="copyright_section">
+
+        <p class="copyright_text">| &copy; HoneyHAX. All rights reserved. |</p>
+
+      </div>
+    </footer>
+  </div>
+
+
+
+
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- javascript -->
+<script src="js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Confetti JS script -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 <script>
+  
+
   var userData = undefined;
   var studentClass = undefined;
   var adminNo = undefined;
@@ -263,15 +448,7 @@
   var token = localStorage.getItem("token");
   var userJsonData = JSON.parse(userData);
 
-  if (userJsonData === null) {
-    window.alert('Unauthorized. You will be redirected to home page.');
-    window.location.assign("/login.html");
-  }
-  if (userJsonData === undefined) {
-    window.alert('Unauthorized. You will be redirected to home page.');
-    window.location.assign("/login.html");
-  }
-  if (token === null){
+  if (userJsonData === null || userJsonData === undefined || token === null) {
     window.alert('Unauthorized. You will be redirected to home page.');
     window.location.assign("/login.html");
   }
@@ -281,7 +458,7 @@
     window.location.assign("/login.html");
   }
 
-  if (token === null){
+  if (token === null) {
     window.alert('Unauthorized. You will be redirected to home page.');
     window.location.assign("/login.html");
   }
@@ -289,6 +466,7 @@
   if (userJsonData != null && token != null) {
     // var userRole = userJsonData[0].role;
     var userName = userJsonData[0].username
+    var userPoint = userJsonData[0].points
   }
 
 
@@ -359,158 +537,40 @@
   // }
 
 </script>
-
-<body>
-  <div class="containter-fluid">
-    <header class="row mb-4">
-      <div class="layout_padding banner_section_start">
-
-        <!-- header inner -->
-        <div class="header">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                <div class="full">
-                  <div class="center-desk">
-                    <div class="logo"><a href="#home"><img src="images/logo.png" style="max-width: 100%;"></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                <div class="menu-area">
-                  <div class="limit-box">
-                    <nav class="main-menu">
-                      <ul class="menu-area-main">
-                        <li><a href="home.html" target="_blank">HoneyHAX Page</a></li>
-                        <li class="active"><a href="" id="studentNameOfUsername">Name</a></li>
-                        <li><a href="#logout" id="logout">Logout</a></li>
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end header inner -->
-
-    </header>
-
-    <!-- Flag and Scoreboard start-->
-    <section id="content">
-
-      <!-- Instuctions -->
-      <div class="row justify-content-center">
-        <div class=" m-4 col-6 shadow border">
-          <h2 class="mt-3 mb-2">Welcome to the flag page</h2>
-          <p class="m-2">Put in your flag to earn score to be on the leaderboards!</p>
-          <p class="m-2">Easy - 5 Points</p> 
-          <p class="m-2">Medium - 10 Points</p> 
-          <p class="m-2">Hard - 15 Points</p> 
-        </div>
-
-      </div>
-
-
-      <!-- Enter flag input -->
-      <form id="flagMainForm"  class="m-4 row justify-content-center">
-        <div class="col-8">
-          <input class="w-100" id='inputText' type="text" required="">  
-          <span class="highlight w-100"></span>
-          <span class="bar w-100"></span>
-          <label class="inputFlag w-100 pl-3">Input Flag  Example: {Flag}</label>
-        </div>
-        <!-- <button type="submit" onclick='flagSubmit()'>Submit</button> -->
-      </form>
-
-      
-
-      <!-- Student leaderboards -->
-      <div class="row justify-content-center mb-3">
-        <div class="col-sm-3">
-          <div id="score">
-            <table class="scoreboard">
-              <thead id="head">
-                <!-- <tr class="header">
-                      <th>Class</th>
-                      <th>Student Name</th>
-                      <th>Score</th>
-                    </tr> -->
-              </thead>
-              <tbody id="myStudentNames">
-                <!-- <tr>
-                      <td class="studentClass">2A02</td>
-                      <td class="student">Bob</td>
-                      <td class="score">2800</td>
-                    </tr> -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testing Student leaderboards -->
-      <div class="row justify-content-center">
-        <!-- Left big scoreboard -->
-        <div class="col-5">
-           <div class="m-5 border">Hello</div>
-        </div>
-
-        <!-- Right small scoreboard -->
-        <div class="col-7">
-          <div class="row border m-2 rounded">hello</div>
-          <div class="row border m-2 rounded">hello</div>
-          <div class="row border m-2 rounded">hello</div>
-          <div class="row border m-2 rounded">hello</div>
-          <div class="row border m-2 rounded">hello </div>
-        </div>
-
-      </div>
-
-
-    </section>
-
-
-    <footer>
-      <div class="copyright_section">
-
-        <p class="copyright_text">| &copy; HoneyHAX. All rights reserved. |</p>
-
-      </div>
-    </footer>
-  </div>
-
-</body>
-
-
-<!-- Javascript files-->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery-3.0.0.min.js"></script>
-<script src="js/plugin.js"></script>
-<!-- sidebar -->
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/custom.js"></script>
-<!-- javascript -->
-<script src="js/owl.carousel.js"></script>
-<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
+  $("#congratulatebtn").click(function(){
+    var end = Date.now() + (15 * 50);
 
+    // go Buckeyes!
+    var colors = ['#bb0000', '#FFD700'];
 
+    (function frame() {
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors
+      });
 
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    }());
+
+  })
+  
 
 
 
   $(document).ready(function () {
-
-
-
-
-
 
     var wsURL = 'http://localhost:8081/studentsflag'
 
@@ -524,27 +584,51 @@
       dataType: 'json',
       success: function (result, textStatus, xhr) {
         if (result != null) {
-          var divOutput = "";
-          var divOutput2 = "";
-          divOutput += `<tr>
-                              <th>Class</th>
-                              <th>Student Name</th>
-                              <th>Score</th>
-                            </tr>`
 
-          for (var i = 0; i < result.length; i++) {
-            // console.log(result[i]);
-            divOutput2 += `<tr>
-                                <td class="studentClass">${result[i].studentClass}</td>
-                                <td class="student">${result[i].studentName}</td>
-                                <td class="score">${result[i].points}</td>
-                              </tr>
-                              `
+          result.sort((a, b) => parseFloat(b.points) - parseFloat(a.points));
+
+          for (var i = 0; i < 10; i++) {
+            if(i==0){
+              $('#TopStudent').text(result[i].studentName);
+              $('#TopStudentClass').text(result[i].studentClass);
+              $('#TopStudentPoints').text(result[i].points);
+            }else{
+              
+              var htmloutput = `       
+              <div id="rank-${i+1}" class="row border-bottom mx-2 p-1 smallscoreboard">
+                <!-- Rating -->
+                <div class="col-1 align-self-center">
+                  <div class="float-right "><b>${i+1}</b> </div>
+                </div>
+
+
+                <!-- Name n class -->
+                <div class="col-9 align-self-center">
+                  <div class="pl-3 row">${result[i].studentName}</div>
+                  <div class="pl-3 row"> ${result[i].studentClass} </div>
+                </div>
+
+                <!-- Point on the right -->
+                <div class="col-2 align-self-center"> <span class="border-bottom border-warning">${result[i].points}</span></div>
+              </div> `
+
+              var delayInMilliseconds = 1000; //1 second
+
+              console.log(result,userName)
+              
+              setTimeout(function(htmloutput,i) {
+                $("#Rightscoreboard").append(htmloutput);
+                $(`#rank-${i+1}`).animate({opacity:1,});
+                if(userName == result[i].username){
+
+                  $(`#rank-${i+1}`).addClass("currentuser");
+                }
+                
+              }, i*250, htmloutput, i);
+
+            }
           }
 
-
-          $('#head').html(divOutput);
-          $('#myStudentNames').html(divOutput2);
 
         } else {
           console.log("Error");
@@ -556,8 +640,8 @@
 
       }
     });
-    document.getElementById('studentNameOfUsername').innerHTML = `${userName}`
-    
+    document.getElementById('studentNameOfUsername').innerHTML = `${userName} - ${userPoint} pts`
+
   });
 
   jQuery(document).ready(function ($) {
@@ -582,6 +666,6 @@
   })
 </script>
 
-
+</body>
 
 </html>
