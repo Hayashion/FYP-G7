@@ -496,13 +496,12 @@ app.get('/product/:productId/reviews/', function (req, res) {
 });
 
 // GET /reviews
-app.get('/review', function (req, res) {
-    var name = req.query.name;
-    var review = req.query.review;
-    console.log(name,review)
+app.post('/review', function (req, res) {
+    var review = req.body.review
+    console.log(review)
 
     res.type('json');
-    reviewsDB.processReview(name,review, function (err, result) {
+    reviewsDB.processReview(review, function (err, result) {
         console.log(err);
         if (err) {
             res.status(500);

@@ -8,41 +8,23 @@ var db = require('./databaseConfig');
 
 var reviewsDB = {
 
-    // GET /reviews
-    processReview: function (name, review, callback) {
-        var args = [name, review]
-        var regExp = /<a\s*.*>\s*.*<\/a>/g;
-        var filtered = [];
-        var attack = false;
-        args.forEach(function (item) {
-            if (item.includes("<script>") && item.includes('</script>')) {
-                attack = true;
-                item = item.replace('<script>', '');
-                item = item.replace('</script>', '');
-                filtered.push(item);
-            }
-
-            else {filtered.push(item)}
-        }),
-
-        args.forEach(function(item){
-            // if(regExp==args){
-            if(regExp.test(args)){
-                attack = "true"
-                // filtered.push(item);
-            } else {
-
-                filtered.push(item);
-            }
+    // POST /reviews
+    processReview: function (review, callback) {
+        var filtered = { review: '', flag: '{xssishard}', attack: false };
+        const regExpScript = /<script>.*<\/script>/i;
+        const regExpAlert = /alert/ig;
 
 
-        });
+        filtered.review = review.replace(regExpAlert, '');
+        if (review.match(regExpScript) !== null) {
+            filtered.attack = true;
+        }
 
-        console.log(filtered, attack)
-        return callback(null, [filtered[0], filtered[1], attack])
+        console.log(filtered)
+        return callback(null, filtered)
 
 
-
+        //<script>al\u0065rt(1)</Script>
 
 
     },
@@ -61,7 +43,7 @@ var reviewsDB = {
     //             console.log(item);
     //         }
     //         console.log(filtered,res);
-            
+
     //     });
 
     // }

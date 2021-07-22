@@ -6,6 +6,7 @@
 const mysql = require('mysql');
 const db = require('./databaseConfig');
 const util = require('util');
+const { exception } = require('console');
 
 function makeDb(db) { //sql promise wrapper
     const connection = db.getConnection()
@@ -37,12 +38,16 @@ var flagsDB = {
         var dbConn = makeDb(db)
 
         // Check if Flag is valid in DB
+        console.log(adminID,flagValue)
 
         try{
-            flagValue = flagValue.split('{')[1].split('}')[0];
+            flagValue = flagValue.match(/{.*}/)[0].slice(1,-1)
+            if (flagValue.length < 1) {
+                throw exception(null)
+            }
         }
         catch (err) {
-            return callback (null,"Flag Invalid")
+            return callback (null,null)
         }
 
 
@@ -50,7 +55,7 @@ var flagsDB = {
             var sql = "SELECT * FROM login.vulntable WHERE flagValue=?";
             flagInfo = await dbConn.query(sql, [flagValue]); //pointValue + vulnID
             console.log(flagInfo)
-            if (flagInfo.length == 0){ return callback (null,"Flag Invalid") }
+            if (flagInfo.length == 0){ return callback (null,null) }
 
             var sql = "SELECT vulnStr,points FROM login.students WHERE adminNo=?";
             studentInfo = await dbConn.query(sql, [adminID]); //vulnStr + points
@@ -64,14 +69,14 @@ var flagsDB = {
             // Check for completion, returns true if completed, false if points added 
             vulnStrSplit = vulnString.split(',');
             if (vulnStrSplit.includes(vulnID)) {
-                return callback(null,"Valid but already completed");
+                return callback(null,JSON.stringify({'message':'Already Completed'}));
             }
             vulnString += "," + vulnID;
             points = points + pointValue;
 
             var sql = "update login.students set vulnStr=?, points=? where adminNo=?"
             await dbConn.query(sql, [vulnString, points, adminID])
-            return callback(null,"Valid, Points Scored: " + points);
+            return callback(null,JSON.stringify({'message':'Well done! Points scored: '+pointValue}));
 
 
         }

@@ -304,6 +304,7 @@ nav.main-menu {
 .banner_bt{ 
 	width: 15%;
 	margin: 0 auto;
+    padding-top: 5%;
  }
 
  .about_section{
@@ -645,8 +646,6 @@ button.main_bt a:hover { color: #fa3e19; }
 }
 
 .review_section .images {
-    border: solid #fa3e19 5px;
-    border-radius: 20px;
     text-align: center;
 }
 

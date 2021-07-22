@@ -51,33 +51,31 @@
 
 
 			sessionStorage.setItem('name', name);
-			sessionStorage.setItem('reviewContent', reviewContent)
+			// sessionStorage.setItem('reviewContent', reviewContent)
 
 			$.ajax({
-				url: `http://localhost:8081/review?name=${name}&review=${reviewContent}`,
-				type: 'GET',
-				//   data: data,
+				url: `http://localhost:8081/review`,
+				type: 'POST',
+				data: JSON.stringify({ review: reviewContent }),
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (data, textStatus, xhr) {
-					var filteredName = data[0];
-					var filteredReview = data[1];
-					var attack = data[2];
-					var glaf = "";
+					var reviewContent = data.review;
 
-					if (attack) {
+
+					if (data.attack) {
 						try {
-							var glaf = data[3];
-							//eval(filteredReview)
+							window.alert = function () {
+								window.confirm("Damn, {xssishard}!")
+							}
 						}
 						catch (err) {
 							console.log(err)
 						}
 					}
 					var name = sessionStorage.getItem("name");
-					var reviewContent = sessionStorage.getItem('reviewContent');
-					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}<br>${glaf}</a></h2>`
-					console.log(reviewFormat)
+					// var reviewContent = sessionStorage.getItem('reviewContent');
+					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}<br></a></h2>`
 					$("#comment").html(reviewFormat);
 				},
 				error: function (xhr, textStatus, errorThrown) {
@@ -166,7 +164,7 @@
 							<div class="carousel-item">
 								<div class="row ">
 									<div class="col-md-6 taital">
-										<h1>Quality<strong class="banner_taital">Products with breads sweet Den</strong>
+										<h1>Heritage<strong class="banner_taital">Made in Singapore since 2000</strong>
 										</h1>
 										<p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -184,14 +182,14 @@
 							<div class="carousel-item">
 								<div class="row ">
 									<div class="col-md-6 taital">
-										<h1>Quality<strong class="banner_taital">Products with breads sweet Den</strong>
+										<h1>Delicious<strong class="banner_taital">Stuffed Doughnuts</strong>
 										</h1>
 										<p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
 										</p>
 									</div>
 									<div class="col-md-6">
-										<div class="banner-image"><img src="images/banner-image.png"
+										<div class="banner-image"><img src="images/#dope-img-of-bread.png"
 												style="max-width: 100%;"></div>
 									</div>
 									<div class="banner_bt">
