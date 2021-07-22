@@ -215,7 +215,6 @@
          $("#product-form").submit(function (e) {
             var searchValue = $('#search').val()
             var url = `search.html?product=${searchValue}`
-            console.log(searchValue)
             if (searchValue != '') {
                pattern = new RegExp("(-)|(')|(;)|(=)")
                var result = ''
@@ -223,7 +222,6 @@
                if (result==false){
                   if(searchValue.includes("%")){
                      url = 'search.html?product=1%27%20or%201=1;--%20-'
-                     console.log(url);
                      window.location.replace(url)
                   }else{
                      window.location.replace(url)
