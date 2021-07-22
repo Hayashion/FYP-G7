@@ -272,6 +272,21 @@
 </head>
 
 <script> // sign up
+
+
+  var userData = undefined;
+  var studentClass = undefined;
+  var adminNo = undefined;
+  var userJsonData = undefined;
+  var userData = localStorage.getItem("userInfo");
+  var token = localStorage.getItem("token");
+  var userJsonData = JSON.parse(userData);
+
+  if (userJsonData != null && token != null) {
+    window.alert('You are already logged in.')
+    window.location.assign("/flag.html")
+  }
+
   $(document).ready(function () {
 
     $("#Signup").click(function () { // # = id
@@ -362,17 +377,17 @@
 
   });
 
-// Select your input element.
-var number = document.getElementById('adminNo');
+  // Select your input element.
+  var number = document.getElementById('adminNo');
 
-// Listen for input event on numInput.
-number.onkeydown = function(e) {
-    if(!((e.keyCode > 95 && e.keyCode < 106)
-      || (e.keyCode > 47 && e.keyCode < 58) 
+  // Listen for input event on numInput.
+  number.onkeydown = function (e) {
+    if (!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58)
       || e.keyCode == 8)) {
-        return false;
+      return false;
     }
-}
+  }
 </script>
 
 
@@ -449,7 +464,7 @@ number.onkeydown = function(e) {
               <div class="form-group">
                 <!-- <label>Password</label> -->
                 <input type="text" class="form-control form-control-lg" id="new_studentClass"
-                  placeholder="Student Class" autocomplete="off">
+                  placeholder="Student Class (2A01)" autocomplete="off">
               </div>
 
               <button type="submit" id="Signup" class="btn btn-danger btn-lg btn-block">
