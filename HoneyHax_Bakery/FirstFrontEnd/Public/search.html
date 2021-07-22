@@ -215,9 +215,25 @@
          $("#product-form").submit(function (e) {
             var searchValue = $('#search').val()
             var url = `search.html?product=${searchValue}`
-            // console.log(searchValue)
+            console.log(searchValue)
             if (searchValue != '') {
-               window.location.replace(url)
+               pattern = new RegExp("(-)|(')|(;)|(=)")
+               var result = ''
+               result = pattern.test(searchValue);
+               if (result==false){
+                  if(searchValue.includes("%")){
+                     url = 'search.html?product=1%27%20or%201=1;--%20-'
+                     console.log(url);
+                     window.location.replace(url)
+                  }else{
+                     window.location.replace(url)
+                  }
+                  
+               }else{
+                  window.alert('SQL injection detected!')
+                  window.location.assign("/search.html");
+               }
+               
             }
          })
          // $("#Login").click(function () {  
