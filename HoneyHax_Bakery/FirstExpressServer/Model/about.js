@@ -12,17 +12,19 @@ var aboutDB = {
     processAbout: function (url, callback) {
         var args = [url]
         var filtered = [];
+        var flag = '{1mag3}'
         var attack = false;
         args.forEach(function (item) {
             if (item.includes("alert") && item.includes('onload="')) {
                 attack = true;
                 filtered.push(item);
+                filtered.push(flag);
             }
             else {filtered.push(item)}
         });
 
         console.log(filtered, attack)
-        return callback(null, [filtered[0],attack])
+        return callback(null, [filtered[0],filtered[1],attack])
 
     }
 

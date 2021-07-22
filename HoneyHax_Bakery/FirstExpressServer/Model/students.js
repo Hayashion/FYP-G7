@@ -122,7 +122,6 @@ var studentsDB = {
                             err2.statusCode = 500;
                             return callback(err2, null, null);
                         }else{
-                            
                             result=JSON.parse(JSON.stringify(result))
                             try{
                                 console.log(result)
