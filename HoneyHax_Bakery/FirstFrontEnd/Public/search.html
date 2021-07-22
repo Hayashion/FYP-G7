@@ -220,7 +220,7 @@
                var result = ''
                result = pattern.test(searchValue);
                if (result==false){
-                  if(searchValue.includes("%27" && "%3D" && "%2D" && "%3B")){
+                  if(searchValue.includes("%27" && "%3D" && "%2D" && "%3B" && "1" && "or")){
                      url = 'search.html?product=1%27%20or%201=1;--%20-'
                      window.location.replace(url)
                   }else{
