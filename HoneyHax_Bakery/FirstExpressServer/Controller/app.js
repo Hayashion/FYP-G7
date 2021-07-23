@@ -495,7 +495,8 @@ app.get('/product/:productId/reviews/', function (req, res) {
     });
 });
 
-// GET /reviews
+
+// POST /review
 app.post('/review', function (req, res) {
     var review = req.body.review
     console.log(review)
@@ -512,6 +513,7 @@ app.post('/review', function (req, res) {
         }
     });
 });
+
 
 // GET /about
 app.get('/about', function (req, res) {
