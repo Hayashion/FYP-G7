@@ -322,13 +322,8 @@ app.get('/products/', function (req, res) {
 
 //Search /products/:productName/
 app.get('/products/:productName/', function (req, res) {
-
     var productName = req.params.productName;
-    console.log(productName)
-
     productsDB.searchProducts(productName, function (err, result) {
-        
-
         res.type('json');
         if (err) {
             res.status(500);
@@ -343,37 +338,25 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
-//Search /staff/:staffName/
-app.get('/staff/:staffName/', function (req, res) {
-
-    var staffName = req.params.staffName;
-    console.log(staffName)
-
-    productsDB.searchStaff(staffName, function (err, result) {
-        
-
+//Search /location/:locationName/
+app.get('/location/:locationName/', function (req, res) {
+    var locationName = req.params.locationName;
+    productsDB.searchLocation(locationName, function (err, result) {
         res.type('json');
         if (err) {
             res.status(500);
             res.send(`{"message":"Internal Server Error"}`);
-
         } else {
             res.status(200);
             res.send(result);
         }
-
     });
-
 });
 
 //Search /voucher/:voucherCode/
 app.get('/voucher/:voucherCode/', function (req, res) {
-
     var voucherCode = req.params.voucherCode;
-    
-
     voucherDB.searchvoucher(voucherCode, function (err, result) {
-
         res.type('json');
         if (err) {
             res.status(500);
