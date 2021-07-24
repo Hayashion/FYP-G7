@@ -150,7 +150,7 @@
       $(document).ready(function () {
          $("#product-form").submit(function (e) {
             var searchValue = $('#search').val()
-            var url = `about.html?location=${searchValue}`
+            var url = `about.html?staff=${searchValue}`
             // console.log(searchValue)
             if (searchValue != '') {
                window.location.replace(url)
@@ -158,11 +158,11 @@
          })
 
          var searchParams = new URLSearchParams(window.location.search)
-         if (searchParams.has("location")) {
-            var location = searchParams.get("location");
+         if (searchParams.has("staff")) {
+            var staff = searchParams.get("staff");
          }
          $.ajax({
-            url: `http://localhost:8081/location/${location}`,
+            url: `http://localhost:8081/staff/${staff}`,
             type: 'GET',
             //   data: data,
             contentType: "application/json; charset=utf-8",
@@ -173,9 +173,10 @@
                   var divOutput = "";
                   for (var i = 0; i < data.length; i++) {
                      divOutput += `
-                                    <div class="m-4">${data[i].location}
+                                    <div class="m-4">${data[i].staffName}
                                     </div>
-
+                                    <div hidden class="m-4">${data[i].salary}
+                                    </div>
                                `
                      // divOutput+=data[0].price
                      console.log(i)
@@ -328,13 +329,13 @@
 
          <div class='search'>
             
-            <h2 style="text-align: center;">Our <a href="pcap_files/flag.pcap" download id='pcap'>Locations</a>:</h2>
+            <h2 style="text-align: center;">Our <a href="pcap_files/flag.pcap" download id='pcap'>Staffs</a>:</h2>
             
             <!-- Search bar -->
             <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();"
                role="search">
                <!-- <label for="search">Search for stuff</label> -->
-               <input id="search" class="mt-4 border col-6" type="search" placeholder="Search... (Example: Orchard, Clementi, etc...)" autofocus
+               <input id="search" class="mt-4 border col-6" type="search" placeholder="Search..." autofocus
                   required />
                <button type="submit">Go<img src="images/searchicon.png"></button>
             </form>
