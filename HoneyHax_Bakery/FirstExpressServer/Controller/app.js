@@ -276,7 +276,6 @@ app.post('/admin/logout', function (req, res) {
 
 // DELETE /students/:adminNo/ 
 
-// app.delete('/students/:adminNo/',verifyToken.verifyToken, function (req, res) {
 
 app.delete('/students/:adminNo/', function (req, res) {
 
