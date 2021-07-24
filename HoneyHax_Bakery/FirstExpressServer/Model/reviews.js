@@ -10,7 +10,7 @@ var reviewsDB = {
 
     // POST /reviews
     processReview: function (review, stars, callback) {
-        var filtered = { review: '', stars:'', flag: '', flag2:'{y_s0_m3an}?', attack: false, mean:false };
+        var filtered = { review: '', stars:'', flag: '', flag2:'', attack: false, mean:false };
         var inject = { review: '', flag: "{Ra_1n3_oW}", attack: false };
         var msg = {review: '', attack: false };
         const regExpscript = /<script>.*<\/script>/i;
@@ -30,7 +30,7 @@ var reviewsDB = {
 
         if (stars == 0) {
             filtered.mean = true
-            filtered.flag2 = '{y_s0_m3an?}'
+            filtered.flag2 = '{y_s0_m3an}?'
             return callback(null,filtered)
         }
 
