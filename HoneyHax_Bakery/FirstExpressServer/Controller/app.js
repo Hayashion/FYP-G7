@@ -80,7 +80,7 @@ app.get('/students/:adminNo', function(req,res){
     });
 });
 
-
+// get all student flags
 app.get("/studentsflag", function (req, res) {
     studentsDB.getStudentsFlags(function (err, result) {
         res.type("json")
@@ -240,7 +240,7 @@ app.post("/admin", function (req, res) {
 });
 
 
-// POST /students/login 
+// POST /admin/login  allow the admin acct to log in
 app.post('/admin/login',function(req,res){
 
     var username = req.body.username;
