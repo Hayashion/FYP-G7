@@ -2,454 +2,534 @@
 <html lang="en">
 
 <head>
-	<!-- basic -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- mobile metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
-	<!-- site metas -->
-	<title>HoneyHax</title>
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<!-- bootstrap css -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<!-- style css -->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<!-- Responsive-->
-	<link rel="stylesheet" href="css/responsive.css">
-	<!-- fevicon -->
-	<link rel="icon" href="images/fevicon.png" type="image/gif" />
-	<!-- Scrollbar Custom CSS -->
-	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-	<!-- Tweaks for older IEs-->
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-	<!-- owl stylesheets -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-		media="screen">
-	<!-- Javascript files-->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/jquery-3.0.0.min.js"></script>
-	<script src="js/plugin.js"></script>
-	<!-- sidebar -->
-	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="js/custom.js"></script>
-	<!-- javascript -->
-	<script src="js/owl.carousel.js"></script>
-	<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$(".fancybox").fancybox({
-				openEffect: "none",
-				closeEffect: "none"
-			});
+  <!-- basic -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- mobile metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <!-- site metas -->
+  <title>HoneyHAX</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <!-- style css -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- Responsive-->
+  <link rel="stylesheet" href="css/responsive.css">
+  <!-- fevicon -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <!-- Scrollbar Custom CSS -->
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <!-- Tweaks for older IEs-->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <!-- owl stylesheets -->
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+    media="screen">
+  <!-- Javascript files-->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-3.0.0.min.js"></script>
+  <script src="bootstrap-autocomplete.min.js"></script>
+  <script src="js/plugin.js"></script>
+  <!-- sidebar -->
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="js/custom.js"></script>
+  <!-- javascript -->
+  <script src="js/owl.carousel.js"></script>
+  <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  <script src="js/secret.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+      });
 
-			$(".zoom").hover(function () {
+      $(".zoom").hover(function () {
 
-				$(this).addClass('transition');
-			}, function () {
+        $(this).addClass('transition');
+      }, function () {
 
-				$(this).removeClass('transition');
-			});
-		});
-		jQuery(document).ready(function ($) {
-			tab = $('.tabs h3 a');
+        $(this).removeClass('transition');
+      });
+    });
+    jQuery(document).ready(function ($) {
+      tab = $('.tabs h3 a');
 
-			tab.on('click', function (event) {
-				event.preventDefault();
-				tab.removeClass('active');
-				$(this).addClass('active');
+      tab.on('click', function (event) {
+        event.preventDefault();
+        tab.removeClass('active');
+        $(this).addClass('active');
 
-				tab_content = $(this).attr('href');
-				$('div[id$="tab-content"]').removeClass('active');
-				$(tab_content).addClass('active');
-			});
-		});
-	</script>
+        tab_content = $(this).attr('href');
+        $('div[id$="tab-content"]').removeClass('active');
+        $(tab_content).addClass('active');
+      });
+    });
+  </script>
 
-	<style>
-		:root {
-			--rad: .7rem;
-			--dur: .3s;
-			/* --color-dark: #2f2f2f; */
-			--color-light: #fff;
-			--color-brand: #57bd84;
-			--font-fam: 'Lato', sans-serif;
-			--height: 5rem;
-			--btn-width: 6rem;
-			--bez: cubic-bezier(0, 0, 0.43, 1.49);
-		}
+  <style>
+    :root {
+      --rad: .7rem;
+      --dur: .3s;
+      /* --color-dark: #2f2f2f; */
+      --color-light: #fff;
+      --color-brand: #57bd84;
+      --font-fam: 'Lato', sans-serif;
+      --height: 5rem;
+      --btn-width: 6rem;
+      --bez: cubic-bezier(0, 0, 0.43, 1.49);
+    }
 
-		/* // Setup */
-		/* body {background: var(--color-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh } */
-		html {
-			box-sizing: border-box;
-			height: 100%;
-			font-size: 10px;
-		}
+    /* // Setup */
+    /* body {background: var(--color-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh } */
+    html {
+      box-sizing: border-box;
+      height: 100%;
+      font-size: 10px;
+    }
 
-		*,
-		*::before,
-		*::after {
-			box-sizing: inherit;
-		}
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
 
-		@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
 
-		* {
-			margin: 0;
-			padding: 0;
-		}
+    /* * {
+      margin: 0;
+      padding: 0;
+    } */
 
-		a {
-			color: #666;
-			text-decoration: none;
-		}
+    a {
+      color: #666;
+      text-decoration: none;
+    }
 
-		a:hover {
-			color: #4FDA8C;
-		}
+    a:hover {
+      color: #4FDA8C;
+    }
 
-		input {
-			font: 16px/26px "Raleway", sans-serif;
-		}
+    input {
+      font: 16px/26px "Raleway", sans-serif;
+    }
 
-		body {
-			color: #666;
-			background-color: #f1f2f2;
-			font: 16px/26px "Raleway", sans-serif;
-		}
+    body {
+      color: #666;
+      background-color: white;
+      font: 16px/26px "Raleway", sans-serif;
+    }
 
-		.form-wrap {
-			background-color: #fff;
-			width: 320px;
-			margin: 3em auto;
-			box-shadow: 0px 1px 8px #BEBEBE;
-			-webkit-box-shadow: 0px 1px 8px #BEBEBE;
-			-moz-box-shadow: 0px 1px 8px #BEBEBE;
-		}
+    .form-wrap {
+      background-color: #fff;
+      width: 320px;
+      margin: 3em auto;
+      box-shadow: 0px 1px 8px #BEBEBE;
+      -webkit-box-shadow: 0px 1px 8px #BEBEBE;
+      -moz-box-shadow: 0px 1px 8px #BEBEBE;
+    }
 
-		.form-wrap .tabs {
-			overflow: hidden;
-		}
+    .form-wrap .tabs {
+      overflow: hidden;
+    }
 
-		.form-wrap .tabs h3 {
-			float: left;
-			width: 50%;
-		}
+    .form-wrap .tabs h3 {
+      float: left;
+      width: 50%;
+    }
 
-		.form-wrap .tabs h3 a {
-			padding: 0.5em 0;
-			text-align: center;
-			font-weight: 400;
-			background-color: #e6e7e8;
-			display: block;
-			color: #666;
-		}
+    .form-wrap .tabs h3 a {
+      padding: 0.5em 0;
+      text-align: center;
+      font-weight: 400;
+      background-color: #e6e7e8;
+      display: block;
+      color: #666;
+    }
 
-		.form-wrap .tabs h3 a.active {
-			background-color: #fff;
-		}
+    .form-wrap .tabs h3 a.active {
+      background-color: #fff;
+    }
 
-		.form-wrap .tabs-content {
-			padding: 1.5em;
-		}
+    .form-wrap .tabs-content {
+      padding: 1.5em;
+    }
 
-		.form-wrap .tabs-content div[id$="tab-content"] {
-			display: none;
-		}
+    .form-wrap .tabs-content div[id$="tab-content"] {
+      display: none;
+    }
 
-		.form-wrap .tabs-content .active {
-			display: block !important;
-		}
+    .form-wrap .tabs-content .active {
+      display: block !important;
+    }
 
-		.form-wrap form .input {
-			box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			color: inherit;
-			font-family: inherit;
-			padding: .8em 0 10px .8em;
-			border: 1px solid #CFCFCF;
-			outline: 0;
-			display: inline-block;
-			margin: 0 0 .8em 0;
-			padding-right: 2em;
-			width: 100%;
-		}
+    .form-wrap form .input {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      color: inherit;
+      font-family: inherit;
+      padding: .8em 0 10px .8em;
+      border: 1px solid #CFCFCF;
+      outline: 0;
+      display: inline-block;
+      margin: 0 0 .8em 0;
+      padding-right: 2em;
+      width: 100%;
+    }
 
-		.form-wrap form .button {
-			width: 100%;
-			padding: .8em 0 10px .8em;
-			background-color: #DC143C;
-			border: none;
-			color: #fff;
-			cursor: pointer;
-			text-transform: uppercase;
-		}
+    .form-wrap form .button {
+      width: 100%;
+      padding: .8em 0 10px .8em;
+      background-color: #DC143C;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
 
-		.form-wrap form .button:hover {
-			background-color: #DC143C;
-		}
+    .form-wrap form .button:hover {
+      background-color: #DC143C;
+    }
 
-		.form-wrap form .checkbox {
-			visibility: hidden;
-			padding: 20px;
-			margin: .5em 0 1.5em;
-		}
+    .form-wrap form .checkbox {
+      visibility: hidden;
+      padding: 20px;
+      margin: .5em 0 1.5em;
+    }
 
-		.form-wrap form .checkbox:checked+label:after {
-			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-			filter: alpha(opacity=100);
-			opacity: 1;
-		}
+    .form-wrap form .checkbox:checked+label:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+      filter: alpha(opacity=100);
+      opacity: 1;
+    }
 
-		.form-wrap form label[for] {
-			position: relative;
-			padding-left: 20px;
-			cursor: pointer;
-		}
+    .form-wrap form label[for] {
+      position: relative;
+      padding-left: 20px;
+      cursor: pointer;
+    }
 
-		.form-wrap form label[for]:before {
-			content: '';
-			position: absolute;
-			border: 1px solid #CFCFCF;
-			width: 17px;
-			height: 17px;
-			top: 0px;
-			left: -14px;
-		}
+    .form-wrap form label[for]:before {
+      content: '';
+      position: absolute;
+      border: 1px solid #CFCFCF;
+      width: 17px;
+      height: 17px;
+      top: 0px;
+      left: -14px;
+    }
 
-		.form-wrap form label[for]:after {
-			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-			filter: alpha(opacity=0);
-			opacity: 0;
-			content: '';
-			position: absolute;
-			width: 9px;
-			height: 5px;
-			background-color: transparent;
-			top: 4px;
-			left: -10px;
-			border: 3px solid #28A55F;
-			border-top: none;
-			border-right: none;
-			-webkit-transform: rotate(-45deg);
-			-moz-transform: rotate(-45deg);
-			-o-transform: rotate(-45deg);
-			-ms-transform: rotate(-45deg);
-			transform: rotate(-45deg);
-		}
+    .form-wrap form label[for]:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+      filter: alpha(opacity=0);
+      opacity: 0;
+      content: '';
+      position: absolute;
+      width: 9px;
+      height: 5px;
+      background-color: transparent;
+      top: 4px;
+      left: -10px;
+      border: 3px solid #28A55F;
+      border-top: none;
+      border-right: none;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
 
-		.form-wrap .help-text {
-			margin-top: .6em;
-		}
+    .form-wrap .help-text {
+      margin-top: .6em;
+    }
 
-		.form-wrap .help-text p {
-			text-align: center;
-			font-size: 14px;
-		}
+    .form-wrap .help-text p {
+      text-align: center;
+      font-size: 14px;
+    }
 
-		/*     
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /*     
     .email_text{
       font-size:15px;
     } */
-	</style>
+  </style>
 
 </head>
 
+<script> // sign up
+
+
+  var userData = undefined;
+  var studentClass = undefined;
+  var adminNo = undefined;
+  var userJsonData = undefined;
+  var userData = localStorage.getItem("userInfo");
+  var token = localStorage.getItem("token");
+  var userJsonData = JSON.parse(userData);
+
+  if (userJsonData != null && token != null) {
+    window.alert('You are already logged in.')
+    window.location.assign("/flag.html")
+  }
+
+  $(document).ready(function () {
+
+    $("#Signup").click(function () { // # = id
+
+      var data = {};
+
+      data.adminNo = $("#adminNo").val();
+      data.studentName = $("#studentName").val();
+      data.username = $("#new_username").val();
+      data.password = $("#new_pwd").val();
+      data.studentClass = $("#new_studentClass").val();
+
+      // data collection and creation of json data that we're sending back  
+      console.log(data);
+
+      $.ajax({
+        url: 'http://localhost:8081/students/',
+        type: 'POST', // insertStudents
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result, textStatus, xhr) {
+          if (result != null) {                     // managed to retrieve some data
+            // localStorage.setItem('token', result.token);
+            // localStorage.setItem('userInfo', result.UserData);
+            alert("Registered Successfully! Please login now.");
+            window.location.assign("http://localhost:3001/login.html"); // successful redirected to this page
+          } else {
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Error Signing up. Please contact your teacher")
+          console.log('Error in Operation');
+        }
+      });
+
+      return false;
+
+    });
+
+  });
+
+</script>
+
 <script>
-	$(document).ready(function () {
 
-		$("#login_button").click(function () { // # = id
+  $(document).ready(function () { // Login
 
-			var username = $("#user_login").val();
-			var password = $("#user_pass").val();
+    $("#Login").click(function () { // # = id
 
-			var data = `{"username":"${user_login}","password":"${user_pass}"}`;
-			// const myJSON = JSON.stringify(data);
+      var username = $("#username").val();
+      var password = $("#pwd").val();
 
-			// data collection and creation of json data that we're sending back  
-			console.log(data);
+      var data = `{"username":"${username}","password":"${password}"}`;
+      // const myJSON = JSON.stringify(data);
 
-			$.ajax({
-				url: 'http://localhost:8081/user/login',
-				type: 'POST',
-				data: data, // contain username and password
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (result, textStatus, xhr) {
-					if (result != null) {                     // managed to retrieve some data
-						localStorage.setItem('token', result.token);
-						localStorage.setItem('userInfo', result.UserData);
-						window.location.assign("http://localhost:3001/flags.html"); // successful redirected to this page
-					} else {
-						console.log("Error");
-					}
-				},
-				error: function (xhr, textStatus, errorThrown) {
-					console.log('Error in Operation');
-				}
-			});
+      // data collection and creation of json data that we're sending back  
+      console.log(data);
 
-			return false;
+      $.ajax({
+        url: 'http://localhost:8081/students/login',
+        type: 'POST',
+        data: data, // contain username and password
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result, textStatus, xhr) {
+          if (result != null || 'Internal Server Error') {                     // managed to retrieve some data
+            console.log(result)
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('userInfo', result.UserData);
+            window.location.assign("http://localhost:3001/flag.html"); // successful redirected to this page
+          } else {
+            alert("Invalid Username/Password")
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Invalid Username/Password")
+          console.log('Error in Operation');
+          console.log("Error");
+        }
+      });
 
-		});
+      return false;
 
-	});
+    });
 
+  });
+
+  // Select your input element.
+  var number = document.getElementById('adminNo');
+
+  // Listen for input event on numInput.
+  number.onkeydown = function (e) {
+    if (!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58)
+      || e.keyCode == 8)) {
+      return false;
+    }
+  }
 </script>
 
 
 <body>
-	<header>
-		<div class="layout_padding banner_section_start">
-			<!-- header inner -->
-			<div class="header">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-							<div class="full">
-								<div class="center-desk">
-									<div class="logo"><a href="#home"><img src="images/logo.png"
-												style="max-width: 100%;"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-							<div class="menu-area">
-								<div class="limit-box">
-									<nav class="main-menu">
-										<ul class="menu-area-main">
-											<li><a href="login.html">Do not believe whatever you see :o</a></li>
-										</ul>
-									</nav>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end header inner -->
-			<div class="form-wrap">
-				<div class="tabs">
-					<h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
-					<h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
-				</div>
-				<!--.tabs-->
+  <header>
+    <div class="layout_padding banner_section_start">
+      <!-- header inner -->
+      <div class="header">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+              <div class="full">
+                <div class="center-desk">
+                  <div class="logo"><a href="home.html"><img src="images/logo.png" style="max-width: 100%;"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+              <div class="menu-area">
+                <div class="limit-box">
+                  <nav class="main-menu">
+                    <ul class="menu-area-main">
+                      <li><a href="login.html">Do not believe whatever you see :o</a></li>
+                      <!-- <div hidden>{hideandseek}</div> -->
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end header inner -->
+      <div class="form-wrap">
+        <div class="tabs">
+          <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
+          <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+        </div>
+        <!--.tabs-->
 
-				<div class="tabs-content">
-					<div id="signup-tab-content" class="active">
-						<form class="signup-form" action="" method="post">
-							<input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email">
-							<input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username">
-							<input type="password" class="input" id="user_pass" autocomplete="off"
-								placeholder="Password">
-							<input type="submit" class="button" value="Sign Up">
-						</form>
-						<!--.login-form-->
-						<div class="help-text">
-							<p>By signing up, you agree to our</p>
-							<p><a href="#">Terms of service</a></p>
-						</div>
-						<!--.help-text-->
-					</div>
-					<!--.signup-tab-content-->
+        <div class="tabs-content">
 
-					<div id="login-tab-content">
-						<form class="login-form" action="" method="post">
-							<input type="text" class="input" id="user_login" autocomplete="off"
-								placeholder="Email or Username">
-							<input type="password" class="input" id="user_pass" autocomplete="off"
-								placeholder="Password">
-							<input type="checkbox" class="checkbox" id="remember_me">
-							<label for="remember_me">Remember me</label>
+          <div id="signup-tab-content" class="active">
+            <!-- <form class="signup-form" action="" method="post">
+              <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email">
+              <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username">
+              <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
+              <input type="submit" class="button" value="Sign Up"> -->
 
-							<input type="submit" class="button" value="Login" id="login_button">
-						</form>
-						<!--.login-form-->
-						<div class="help-text">
-							<p><a href="#">Forget your password?</a></p>
+            <form class="signup-form" action="" method="POST">
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="number" class="form-control form-control-lg positive-numeric-only" id="adminNo"
+                  pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;"
+                  placeholder="Admin No (22xxxxx)." autocomplete="off">
+              </div>
 
-	</header>
-	<!-- contact start-->
-	<div id="contact" class="contact_section">
-		<div class="container">
-			<div class="contact-taital">
-				<div class="row">
-					<div class="col-sm-12">
-						<h1 class="contact_text"><strong>Contact Us</strong></h1>
-					</div>
-				</div>
-			</div>
-			<div class="container">
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="studentName" placeholder="Student Name"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="new_username" placeholder="Username"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="password" class="form-control form-control-lg" id="new_pwd" placeholder="Password"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="text" class="form-control form-control-lg" id="new_studentClass"
+                  placeholder="Student Class (2A01)" autocomplete="off">
+              </div>
 
-				<div class="row">
-					<div class="col-4 box">
-						<label class="address_text">Address</label>
+              <button type="submit" id="Signup" class="btn btn-danger btn-lg btn-block">
+                SIGN UP
+              </button>
 
-						<div class="row image-icon">
+            </form>
+            <!--.login-form-->
+            <div class="help-text">
+              <p>By signing up, you agree to our</p>
+              <p><a href="#">Terms of service</a></p>
+            </div>
+            <!--.help-text-->
+          </div>
+          <!--.signup-tab-content-->
 
-							<div>
-								<img class="img-fluid" src="images/map-icon.png">
-							</div>
-							<div class="email_text">500 Dover Rd, Singapore 139651</div>
+          <div id="login-tab-content">
+            <!-- <form class="login-form" action="" method="post">
+              <input type="text" class="input" id="login_user_login" autocomplete="off" placeholder="Email or Username">
+              <input type="password" class="input" id="login_user_pass" autocomplete="off" placeholder="Password">
+              <input type="checkbox" class="checkbox" id="remember_me">
+              <label for="remember_me">Remember me</label>
 
+              <input type="submit" class="button" value="Login" id="login_button">
+            </form> -->
 
-						</div>
-
-					</div>
-
-					<div class="col-4 box">
-						<label class="address_text">Phone Number</label>
-						<div class="row image-icon">
-							<div>
-								<img class="img-fluid" src="images/phone-icon.png">
-							</div>
-
-							<div class="email_text">(+65) 67751133</div>
-						</div>
-					</div>
-
-					<div class="col-4 box">
-						<label class="address_text">Email</label>
-						<div class="row image-icon">
-							<div>
-								<img class="img-fluid" src="images/email-icon.png">
-							</div>
-
-							<div class="email_text">honeyhax@gmail.com</div>
-						</div>
-					</div>
-				</div>
+            <form class="login-form" action="" method="POST">
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="username" placeholder="Username"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password"
+                  autocomplete="off">
+              </div>
 
 
-			</div>
-		</div>
-	</div>
-	<!-- contact end-->
-	<!-- copyright start-->
-	<div class="copyright_section">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<p class="copyright_taital">2021 All Rights Reserved. HoneyHax</p>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
-	<!-- copyright end-->
+              <button type="submit" id="Login" class="btn btn-danger btn-lg btn-block">LOGIN</button>
+            </form>
+            <!--.login-form-->
+            <div class="help-text">
+              <p><a href="#" title="Please contact your teacher :)">Forget your password?</a>
+              </p>
+            </div>
+          </div>
 
+          <!--.login-form-->
+          <!-- <div class="help-text">
+            <p><a href="#">Forget your password?</a></p>
+          </div> -->
+
+  </header>
 
 
 </body>
+<footer>
+  <div class="copyright_section">
+
+    <p class="copyright_text">| &copy; HoneyHAX. All rights reserved. |</p>
+
+  </div>
+</footer>
 
 </html>

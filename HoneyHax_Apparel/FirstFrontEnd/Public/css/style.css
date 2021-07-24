@@ -304,6 +304,7 @@ nav.main-menu {
 .banner_bt{ 
 	width: 15%;
 	margin: 0 auto;
+    padding-top: 5%;
  }
 
  .about_section{
@@ -482,17 +483,16 @@ button.main_bt a:hover { color: #fa3e19; }
 	float: left;
 	background-color: #393838;
 	height: auto;
-	/* padding-top: px; */
-	padding-bottom: 15px;
+
 }
 
-.contact_text{
-	width: 24%;
-	float: left;
-	color: #ffffff;
-	border-bottom: 8px solid #ffffff;
-    margin-top: 15px;
-    margin-bottom: 30px;
+.contact_text {
+    width: 12%;
+    float: left;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding-top: 2%;
+    font-size: 24px;
 }
 .contact_taital{
 	width: 100%;
@@ -502,26 +502,26 @@ button.main_bt a:hover { color: #fa3e19; }
     
 }
 
+.image_icon {
+    padding-left: 4%;
+    margin-right: 3%;
+}
+
 .adderess_text{
 	color: #ffffff;
-	font-size: 15pt;
-	font-weight: 700;
-	margin-top: 10px;
+    font-size: 14pt;
+    margin-top: 10px;
     
 }
 
 .phonenumber_text{
 	color: #ffffff;
-	font-size: 15pt;
-	font-weight: 700;
-	
-    
+	font-size: 10pt;
 }
 
 .email_text{
 	color: #ffffff;
-	font-size: 15pt;
-	font-weight: 700;
+	font-size: 12pt;
 }
 
 .footer-parent{
@@ -559,17 +559,25 @@ button.main_bt a:hover { color: #fa3e19; }
 	margin-top: 15px;
 }
 
-.copyright_section{
-	width: 100%;
-	float: left;
-	background-color: #fefefe;
-	height: auto;
+.copyright_section {
+    width: 100%;
+    float: left;
+    height: auto;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: #393838;
 }
 
 .copyright_taital{
 	font-weight: 18px; 
 	color: #010000;
 	text-align: center;
+}
+
+.copyright_text {
+    color:white;
 }
 
 .copyright_taital a{
@@ -628,4 +636,26 @@ button.main_bt a:hover { color: #fa3e19; }
 
 .product_section_2 .images:hover {
     border-color: #fa3e19;
+}
+
+
+.review_section{
+	width: 100%;
+	float: right;
+    padding-top: 40px;
+}
+
+.review_section .images {
+    text-align: center;
+}
+
+.review_section .nice-select {
+    display: none;
+}
+
+.review_section label {
+    color: white;
+}
+.review_section .three {
+    text-align: center;
 }

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
--- Host: localhost    Database: foodshop
+-- Host: localhost    Database: clothesshop
 -- ------------------------------------------------------
 -- Server version	8.0.16
 
@@ -38,7 +38,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'chocolate chips',4,'100g ','http:localhost:8081/image/cookie'),(2,'chicken floss bread',1,'halal suitable for all ages','http://localhost:8081/image/chickenfloss');
+INSERT INTO `products` VALUES (1,'T-shirt',12,'Light Blue','http://localhost:8081/image/tshirt/'),(2,'Jeans',20,'Ripped jeans','htpp://localhost:8081/image/jeans');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ LOCK TABLES `voucher` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'foodshop'
+-- Dumping routines for database 'clothesshop'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -134,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-31 23:54:05
+-- Dump completed on 2021-05-31 23:53:21
