@@ -80,8 +80,8 @@ searchProducts: function (productName, callback) {
 
 
 
-//GET /location/:locationName/
-searchLocation: function (locationName, callback) {
+//GET /staff/:staffName/
+searchStaff: function (staffName, callback) {
 
     var dbConn = db.getConnection();
 
@@ -93,7 +93,7 @@ searchLocation: function (locationName, callback) {
             return callback(err, null);
 
         } else {
-            var sql = `SELECT * FROM locations WHERE location LIKE '${'%' + locationName + '%'}'` //where should be the search field
+            var sql = `SELECT * FROM staff WHERE staffName LIKE '${'%' + staffName + '%'}'` //where should be the search field
             // 1' or 1=1;-- -
             dbConn.query(sql, [], function (err, result) {
 

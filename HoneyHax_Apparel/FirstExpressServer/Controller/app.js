@@ -276,7 +276,6 @@ app.post('/admin/logout', function (req, res) {
 
 // DELETE /students/:adminNo/ 
 
-// app.delete('/students/:adminNo/',verifyToken.verifyToken, function (req, res) {
 
 app.delete('/students/:adminNo/', function (req, res) {
 
@@ -344,13 +343,13 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
-//Search /location/:locationName/
-app.get('/location/:locationName/', function (req, res) {
+//Search /staff/:staffName/
+app.get('/staff/:staffName/', function (req, res) {
 
-    var locationName = req.params.locationName;
-    console.log(locationName)
+    var staffName = req.params.staffName;
+    console.log(staffName)
 
-    productsDB.searchLocation(locationName, function (err, result) {
+    productsDB.searchStaff(staffName, function (err, result) {
         
 
         res.type('json');
