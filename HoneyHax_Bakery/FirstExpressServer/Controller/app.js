@@ -499,10 +499,11 @@ app.get('/product/:productId/reviews/', function (req, res) {
 // POST /review
 app.post('/review', function (req, res) {
     var review = req.body.review
-    console.log(review)
+    var stars = req.body.rating
+    console.log(review,stars)
 
     res.type('json');
-    reviewsDB.processReview(review, function (err, result) {
+    reviewsDB.processReview(review, stars, function (err, result) {
         console.log(err);
         if (err) {
             res.status(500);

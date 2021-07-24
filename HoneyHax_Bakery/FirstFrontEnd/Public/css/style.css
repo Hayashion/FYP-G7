@@ -649,4 +649,13 @@ button.main_bt a:hover { color: #fa3e19; }
     text-align: center;
 }
 
+.review_section .nice-select {
+    display: none;
+}
 
+.review_section label {
+    color: white;
+}
+.review_section .three {
+    text-align: center;
+}

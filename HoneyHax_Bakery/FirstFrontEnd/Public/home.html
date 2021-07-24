@@ -38,35 +38,41 @@
 
 	<script>
 
+
 		function submitForm() {
 
 			var name = $('#name').val()
 			var reviewContent = $('#reviewContent').val()
+			var stars = $('#rating').val()
 
-			if (name.length == 0 || reviewContent.length == 0) {
-				window.alert("Please fill in both fields!")
+			if (name.length == 0 || reviewContent.length == 0 || stars == null) {
+				window.alert("Please fill in all fields!")
 				return
 			}
 
 
 
 			sessionStorage.setItem('name', name);
+
 			// sessionStorage.setItem('reviewContent', reviewContent)
 
 			$.ajax({
 				url: `http://localhost:8081/review`,
 				type: 'POST',
-				data: JSON.stringify({ review: reviewContent }),
+				data: JSON.stringify({ review: reviewContent, rating:stars }),
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (data, textStatus, xhr) {
 					var reviewContent = data.review;
 
+					if (data.mean){
+						stars = data.flag2;
+					}
 
-					if (data.attack) {
+					else if (data.attack) {
 						try {
 							window.alert = function () {
-								window.confirm("Damn, {xssishard}!")
+								window.confirm(`Damn, ${data.flag}!`)
 							}
 						}
 						catch (err) {
@@ -75,7 +81,7 @@
 					}
 					var name = sessionStorage.getItem("name");
 					// var reviewContent = sessionStorage.getItem('reviewContent');
-					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2></div><h2 class="den_text"><a href="#">${name}<br></a></h2>`
+					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2><h2>${stars}/5</h2></div><h2 class="den_text"><a href="#">${name}<br></a></h2>`
 					$("#comment").html(reviewFormat);
 				},
 				error: function (xhr, textStatus, errorThrown) {
@@ -232,18 +238,21 @@
 					<div class="col-sm-4">
 						<div class="images">
 							<h2><strong>"The bread is freshly baked everyday and is super fluffy!"</strong></h2>
+							<h2>5/5</h2>
 						</div>
 						<h2 class="den_text"><a href="#" title="hint:caesar cipher {jsvo}">Denise</a></h2>
 					</div>
 					<div class="col-sm-4">
 						<div class="images">
 							<h2><strong>"The best in town, you won't regret buying"</strong></h2>
+							<h2>5/5</h2>
 						</div>
 						<h2 class="den_text"><a href="#">Tom</a></h2>
 					</div>
 					<div id='comment' class="col-sm-4">
 						<div class="images">
 							<h2><strong>Give us your thoughts <br>below!</strong></h2>
+							<h2>?/5</h2>
 						</div>
 						<h2 class="den_text"><a href="#">You!</a></h2>
 					</div>
@@ -266,7 +275,19 @@
 											<textarea required id="reviewContent" class="massage-bt"
 												placeholder="REVIEW" rows="5" name="reviewcontent"></textarea>
 										</div>
+										<div class="form-group three">
+											<strong><label for="rating">Rate Us!</label></strong>
+											<select id="rating" name="rating" class='ignore' size="1" required>
+												<option value="" selected disabled hidden>Choose here</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
 									</form>
+
 								</div>
 							</div>
 							<div class="send_btn">
