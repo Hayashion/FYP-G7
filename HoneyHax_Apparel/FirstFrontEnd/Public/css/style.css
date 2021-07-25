@@ -188,12 +188,12 @@ nav.main-menu {
     vertical-align: middle;
 }
 
-.mean-container .mean-bar { background: #ed1c24;}
+.mean-container .mean-bar { background: #1c4ded;}
 
-.main-menu ul > li.active a{ background-color: #ed1c24; color: #ffffff; }
+.main-menu ul > li.active a{ background-color: #1c4ded; color: #ffffff; }
 
 .carousel-indicators .active {
-    background-color: #fa3e19;
+    background-color: #2766b9;
 }
 
 .carousel-indicators li { background-color: #000; height: 10px;}
@@ -202,7 +202,7 @@ nav.main-menu {
     display: inline-block;
     width: 40px;
     height: 40px;
-    background: #fa3e19;
+    background: #2766b9;
     background-size: 100% 100%;
     padding-top: 8px;
 }
@@ -272,7 +272,7 @@ nav.main-menu {
 	width: 100%;
 	float: left;
 	font-size: 50pt;
-	color: #fa3e19;
+	color: #2766b9;
 	line-height: 75px;
 }
 .taital{
@@ -293,7 +293,7 @@ nav.main-menu {
 .bt_main{
 	width: 100%;
 	float: left;
-	background-color: #fa3e19;
+	background-color: #2766b9;
 	height: 50px;
     font-size: 16pt;
     border: 0px;
@@ -315,7 +315,7 @@ nav.main-menu {
  .about_text{
  	width: 100%;
  	float: left;
- 	color: #fa3e19;
+ 	color: #2766b9;
  	font-size: 50pt;
  	border-bottom: 3px solid #111111;
     margin-top: 65px;
@@ -334,7 +334,7 @@ nav.main-menu {
  .read_more{
 	width: 30%;
 	float: left;
-	background-color: #fa3e19;
+	background-color: #2766b9;
 	height: 50px;
 	font-size: 16pt;
 	margin-top: 20px;
@@ -355,7 +355,7 @@ nav.main-menu {
  	border-bottom: 3px solid #111111;
   
  }
- .den{ color: #fa3e19; }
+ .den{ color: #2766b9; }
 
 .product_section_2{
 	width: 100%;
@@ -367,11 +367,11 @@ nav.main-menu {
 	width: 100%;
 	float: left;
 	text-align: center;
-	color: #fa3e19;
+	color: #2766b9;
 	font-weight: 700;
 
 }
-.den_text a{ color: #fa3e19}
+.den_text a{ color: #2766b9}
 
 .den_text a:hover{
 	 color: #000; 
@@ -397,7 +397,7 @@ nav.main-menu {
 }
 
 .our_text{
-	color: #fa3e19;
+	color: #2766b9;
 	border-bottom: 3px solid #111111;
 }
 
@@ -427,7 +427,7 @@ nav.main-menu {
 .input_main {
     width: 100%;
     float: left;
-    background-color: #fa3e19;
+    background-color: #2766b9;
     padding: 40px 20px 13px 20px;
 }
 
@@ -470,7 +470,7 @@ button.main_bt {
     
 }
 
-button.main_bt a:hover { color: #fa3e19; }
+button.main_bt a:hover { color: #2766b9; }
 
 .map_section{
 	width: 100%;
@@ -635,7 +635,7 @@ button.main_bt a:hover { color: #fa3e19; }
 }
 
 .product_section_2 .images:hover {
-    border-color: #fa3e19;
+    border-color: #2766b9;
 }
 
 

@@ -11,7 +11,7 @@ var dbconnect = {
             host: "localhost",
             user: "root",               // This is your own username of your SQL Database.
             password: "1qwer$#@!",      // This is your own password of your SQL Database.
-            database: "foodshop" // 2 dbs
+            database: "apparel" // 2 dbs
         });     
         return conn;
     }
