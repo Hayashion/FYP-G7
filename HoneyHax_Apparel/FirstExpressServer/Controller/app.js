@@ -297,6 +297,28 @@ app.delete('/students/:adminNo/', function (req, res) {
 
 });
 
+// Delete all students in same class
+app.delete('/classDelete/:studentClass/', function (req, res) {
+
+    var studentClass = req.params.studentClass;
+
+    studentsDB.deleteStudents(studentClass, function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+
+            res.status(200);
+            res.send(`{"message":"Successfully Deleted users in class ${studentClass}}`);
+        }
+
+    });
+
+});
+
 
 
 
