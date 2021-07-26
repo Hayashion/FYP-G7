@@ -216,8 +216,6 @@ app.post("/admin", function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var adminid = req.body.adminid;
-    
-
 
     adminDB.insertAdmin(adminid, username, password, function (err, result) {
         if (!err) {
@@ -421,24 +419,24 @@ app.post('/checkFlag/',function (req, res) {
 
 
 // POST /users/:userId/:productId/review
-app.post('/users/:userId/:productId/review', function (req, res) {
-    var userId = req.params.userId;
-    var productId = req.params.productId;
-    var reviewContent = req.body.reviewContent;
-    var rating = req.body.rating;
+// app.post('/users/:userId/:productId/review', function (req, res) {
+//     var userId = req.params.userId;
+//     var productId = req.params.productId;
+//     var reviewContent = req.body.reviewContent;
+//     var rating = req.body.rating;
 
-    res.type('json');
-    reviewsDB.insertReviews(reviewContent, rating, productId, userId, function (err, result) {
-        if (err) {
-            res.status(500);
-            // res.send(`"Internal Server Error"`);
-            res.send(err)
-        } else {
-            res.status(201);
-            res.send(`"reviewid":"${result.insertId}"`);
-        }
-    });
-});
+//     res.type('json');
+//     reviewsDB.insertReviews(reviewContent, rating, productId, userId, function (err, result) {
+//         if (err) {
+//             res.status(500);
+//             // res.send(`"Internal Server Error"`);
+//             res.send(err)
+//         } else {
+//             res.status(201);
+//             res.send(`"reviewid":"${result.insertId}"`);
+//         }
+//     });
+// });
 
 
 
