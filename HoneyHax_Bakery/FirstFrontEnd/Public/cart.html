@@ -483,15 +483,24 @@
                 success: function (result, textStatus, xhr) {
                     console.log(result);
                     if (result.length != 0) {
-
                         var divOutput = "";
+                        if (result.length > 1){
+                            for (i=0;i<result.length;i++){
+                                divOutput += `
+                                        <div>
+                                            <label>Discount applied successfully! The code ${result[i].voucherCode} gives ${result[i].voucherDiscount}% off</label>
+                                        </div>
+                                        `;
+                            }
+                        } else {
+                        
 
-                        divOutput += `
-                                                <div>
-                                                    <label>Discount applied successfully!${result[0].voucherDiscount}% off</label>
-                                                </div>
-                                                `;
-
+                            divOutput += `
+                                            <div>
+                                                <label>Discount applied successfully!${result[0].voucherDiscount}% off</label>
+                                            </div>
+                                            `;
+                        }
 
                         $("#discountresult").html(divOutput);
                     } else {
