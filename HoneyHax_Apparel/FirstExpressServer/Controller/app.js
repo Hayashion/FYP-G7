@@ -345,25 +345,18 @@ app.get('/products/:productName/', function (req, res) {
 
 //Search /staff/:staffName/
 app.get('/staff/:staffName/', function (req, res) {
-
     var staffName = req.params.staffName;
-    console.log(staffName)
-
+    
     productsDB.searchStaff(staffName, function (err, result) {
-        
-
         res.type('json');
         if (err) {
             res.status(500);
             res.send(`{"message":"Internal Server Error"}`);
-
         } else {
             res.status(200);
             res.send(result);
         }
-
     });
-
 });
 
 //Search /voucher/:voucherCode/
