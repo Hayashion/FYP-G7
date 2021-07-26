@@ -1,1 +1,1 @@
-var clue = 'eW91IGZvdW5kIG1lLCB0aGlzIGlzIHlvdXIgY2x1ZTogZldWc2EyTnBjSHNLCg=='
+var clue = 'WW91IGZvdW5kIG1lISBIZXJlIGlzIHlvdXIgY2x1ZSAtPiBmV1Z0WlhKd2RYTjc='

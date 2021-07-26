@@ -12,7 +12,7 @@ var aboutDB = {
     processAbout: function (url, callback) {
         var args = [url]
         var filtered = [];
-        var flag = '{1mag3}'
+        var flag = '{am1aJok3}'
         var attack = false;
         args.forEach(function (item) {
             if (item.includes("alert") && item.includes('onload="')) {

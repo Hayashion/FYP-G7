@@ -1,6 +1,6 @@
 // HoneyHAX
 // DISM/FT/3A/02
-// FYP HoneyHAX Bakery
+// FYP HoneyHAX Apparel
 // databaseConfig.js
 
 var mysql = require('mysql');

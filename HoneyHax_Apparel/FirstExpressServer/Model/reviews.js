@@ -30,13 +30,13 @@ var reviewsDB = {
 
         if (stars == 0) {
             filtered.mean = true
-            filtered.flag2 = '{y_s0_m3an}?'
+            filtered.flag2 = '{d0ntbm3an}'
             return callback(null,filtered)
         }
 
         if (review.match(regExpscript) !== null) {
             filtered.attack = true
-            filtered.flag = '{x55ishard}'
+            filtered.flag = '{x55isFun}'
             return callback(null, filtered);
         }
 
