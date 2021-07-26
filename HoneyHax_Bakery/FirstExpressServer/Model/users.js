@@ -65,14 +65,13 @@ var usersDB = {
         });
     },
 
-    updateUser: function (username, password, callback) {     // Updating user's info
+    updateUser: function (username, password, userid, callback) {     // Updating user's info
         var dbConn = db.getConnection();
         dbConn.connect(function (err) {
             if (err) {
                 console.log(err);
                 return callback(err, null);
-            }
-            else {
+            }else {
                 var sql = "update users set username=?, password=? where userid=?"
                 dbConn.query(sql, [username, password, userid], function (err, result) {
                     dbConn.end();

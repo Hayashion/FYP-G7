@@ -591,15 +591,14 @@ app.post("/users", function (req, res) {
     });
 });
 
-// update /users/:username 
-app.put('/users/:username',function(req,res){
+// update /users/:userid 
+app.put('/users/:userid',function(req,res){
     
-    var username = req.body.username;
-   
-    var password = req.body.password;
+    var newusername = req.body.newusername;
+    var userid = req.params.userid;
+    var newpassword = req.body.newpassword;
 
-
-    usersDB.updateUser(username, password, function (err, result) {
+    usersDB.updateUser(newusername, newpassword, userid, function (err, result) {
         res.type('json');
         if (err) {
             res.status(500);
