@@ -76,7 +76,7 @@ var flagsDB = {
 
             var sql = "update login.students set vulnStr=?, points=? where adminNo=?"
             await dbConn.query(sql, [vulnString, points, adminID])
-            return callback(null,JSON.stringify({'message':'Well done! Points scored: '+pointValue}));
+            return callback(null,JSON.stringify({'message':'Well done! Points scored: '+pointValue,points:points}));
 
 
         }
