@@ -8,10 +8,6 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const productsDB = require('../Model/products');
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 const aboutDB = require('../Model/about');
 const flagsDB = require('../Model/flags');
 
