@@ -8,8 +8,6 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const productsDB = require('../Model/products');
-const galleryDB = require('../Model/gallery');
-
 
 const aboutDB = require('../Model/about');
 const flagsDB = require('../Model/flags');
@@ -386,27 +384,6 @@ app.get('/voucher/', function (req, res) {
 
 });
 
-//GET /gallery/ 
-app.get('/gallery/',function (req, res) {
-
-    var productImg = req.body.productImg;
-    var productName = req.body.productName;
-
-    galleryDB.getGallery(productImg, productName, function (err, result) {
-
-        res.type('json');
-        if (err) {
-            res.status(500);
-            res.send(`{"message":"Internal Server Error"}`);
-
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-
-    });
-
-});
 
 //POST /checkFlag
 app.post('/checkFlag/',function (req, res) {
@@ -571,7 +548,6 @@ app.post("/users", function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-
     usersDB.insertUsers(username, password, function (err, result) {
         if (!err) {
             res.status(201);
@@ -603,6 +579,7 @@ app.put('/users/:userid',function(req,res){
         res.type('json');
         if (err) {
             res.status(500);
+            console.log(err);
             res.send(`{"message":"Internal Server Error"}`);
         } else {
             res.status(201);
