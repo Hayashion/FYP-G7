@@ -571,7 +571,7 @@ app.post("/users", function (req, res) {
     var password = req.body.password;
 
 
-    studentsDB.insertStudents(username, password, function (err, result) {
+    usersDB.insertUsers(username, password, function (err, result) {
         if (!err) {
             res.status(201);
             res.send(`{"User Created": ${result.affectedRows}}`)
@@ -599,7 +599,7 @@ app.put('/users/:username',function(req,res){
     var password = req.body.password;
 
 
-    studentsDB.updateStudents(username, password, function (err, result) {
+    usersDB.updateUser(username, password, function (err, result) {
         res.type('json');
         if (err) {
             res.status(500);
