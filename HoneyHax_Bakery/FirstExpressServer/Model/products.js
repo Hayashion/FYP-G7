@@ -105,8 +105,6 @@ searchStaff: function (staffName, callback) {
                     for(i=0;i<result.length;i++){
                         
                         // result[i].productImg = __dirname + '\\' + result[i].productImg
-                       
-                        console.log('success')
                     }
 
                 }
