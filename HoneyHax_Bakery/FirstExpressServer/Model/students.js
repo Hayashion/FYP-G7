@@ -232,7 +232,7 @@ var studentsDB = {
                 var sql = "delete from login.students where studentClass=?";
 
                 dbConn.query(sql, [studentClass], function (err, result) {
-
+ 
                     dbConn.end();
                     if (err) {
                         console.log(err);
