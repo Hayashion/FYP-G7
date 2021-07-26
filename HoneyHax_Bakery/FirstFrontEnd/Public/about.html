@@ -146,53 +146,49 @@
    </style>
 
 
-   <script>
-      $(document).ready(function () {
-         $("#product-form").submit(function (e) {
-            var searchValue = $('#search').val()
-            var url = `about.html?staff=${searchValue}`
-            // console.log(searchValue)
-            if (searchValue != '') {
-               window.location.replace(url)
-            }
-         })
-
-         var searchParams = new URLSearchParams(window.location.search)
-         if (searchParams.has("staff")) {
-            var staff = searchParams.get("staff");
+<script>
+   $(document).ready(function () {
+      $("#product-form").submit(function (e) {
+         var searchValue = $('#search').val()
+         var url = `about.html?staff=${searchValue}`
+         if (searchValue != '') {
+            window.location.replace(url)
          }
-         $.ajax({
-            url: `http://localhost:8081/staff/${staff}`,
-            type: 'GET',
-            //   data: data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, textStatus, xhr) {
-               console.log(data)
-               if (data != null) {
-                  var divOutput = "";
-                  for (var i = 0; i < data.length; i++) {
-                     divOutput += `
-                                    <div class="m-4">${data[i].staffName}
-                                    </div>
-                                    <div hidden class="m-4">${data[i].salary}
-                                    </div>
-                               `
-                     // divOutput+=data[0].price
-                     console.log(i)
-                  }
-                  $('#products-section').html(divOutput)
-               } else {
-                  console.log("Error");
+      })
+
+      var searchParams = new URLSearchParams(window.location.search)
+      if (searchParams.has("staff")) {
+         var staff = searchParams.get("staff");
+      }
+      $.ajax({
+         url: `http://localhost:8081/staff/${staff}`,
+         type: 'GET',
+         //   data: data,
+         contentType: "application/json; charset=utf-8",
+         dataType: "json",
+         success: function (data, textStatus, xhr) {
+            if (data != null) {
+               var divOutput = "";
+               for (var i = 0; i < data.length; i++) {
+                  divOutput += `
+                                 <div class="m-4">${data[i].staffName}
+                                 </div>
+                                 <div hidden class="m-4">${data[i].salary}
+                                 </div>
+                            `
                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-               console.log('Error in Operation');
+               $('#products-section').html(divOutput)
+            } else {
+               console.log("Error");
             }
-         });
-         return false;
+         },
+         error: function (xhr, textStatus, errorThrown) {
+            console.log('Error in Operation');
+         }
       });
-   </script>
+      return false;
+   });
+</script>
 
 
 
@@ -241,7 +237,7 @@
       <div class="container-fluid">
          <div id='products-body' class="row justify-content-center">
             <div class="content">
-               <h2 style="text-align: center;">Our Team:</h2>
+               <h2 style="text-align: center;">Founders:</h2>
                <br>
                <div class='main-body row'>
 
@@ -261,8 +257,8 @@
                            </div>
                            <br>
                            <div class="card-footer text-muted">
-                              Established in 2021, we aim to provide the <br>best bakery in the world. With my team of 3
-                              <br>people, we aim to strive to succeed in the <br>next 5 years! 
+                              Established in 2021, we aim to provide the <br>best bakery in the world. With my team, we
+                              <br>we aim to strive to succeed in the next 5 years! 
                            </div>
                            <br>
    
@@ -306,8 +302,8 @@
                            </div>
                            <br>
                            <div class="card-footer text-muted">
-                              Created in 2021, we started off as a small <br>home enterprise into now, a small local
-                              <br>chain in Singapore. Determined to bring<br>HoneyHAX in a global market!
+                              Created in 2021, we started off as a small <br>home enterprise evolving into a small local
+                              <br>chain in Singapore. Determined to bring<br>HoneyHAX into the global market!
    
                            </div>
                            <br>
@@ -329,7 +325,7 @@
 
          <div class='search'>
             
-            <h2 style="text-align: center;">Our <a href="pcap_files/flag.pcap" download id='pcap'>Staffs</a>:</h2>
+            <h2 style="text-align: center;">Our <a href="pcap_files/flag.pcap" download id='pcap'>Team</a>:</h2>
             
             <!-- Search bar -->
             <form id='product-form' class="row justify-content-center" onsubmit="event.preventDefault();"

@@ -336,10 +336,11 @@ app.get('/products/:productName/', function (req, res) {
 
 });
 
-//Search /location/:locationName/
-app.get('/location/:locationName/', function (req, res) {
-    var locationName = req.params.locationName;
-    productsDB.searchLocation(locationName, function (err, result) {
+//Search /staff/:staffName/
+app.get('/staff/:staffName/', function (req, res) {
+    var staffName = req.params.staffName;
+
+    productsDB.searchStaff(staffName, function (err, result) {
         res.type('json');
         if (err) {
             res.status(500);
