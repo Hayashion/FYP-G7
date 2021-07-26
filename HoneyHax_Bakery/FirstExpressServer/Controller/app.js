@@ -139,7 +139,7 @@ app.post("/students", function (req, res) {
         else {
             if (err.code == "ER_BAD_NULL_ERROR"){
                 res.status(422);
-                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
+                res.send(`Unprocessable Entity: One or more field is empty. Please try again.`)
             } else {
                 res.status(500);
                 console.log(err)
@@ -285,7 +285,7 @@ app.delete('/students/:adminNo/', function (req, res) {
 
         } else {
             res.status(204);
-            res.send('');
+            res.send(`{"message":"Student Successfully deleted"}`);
         }
 
     });
@@ -628,7 +628,7 @@ app.post('/users/login',function(req,res){
             res.send();
         } else {
             res.status(500);
-            res.sendStatus(err.statusCode);
+            res.send(`{"message": "Internal Server Error"}`);
         }
     });
 });
