@@ -56,7 +56,7 @@ var usersDB = {
                 return callback(err, null);
             }
             else {
-                var sql = "insert into users (username, password, userid) Values(?,?,?)";
+                var sql = "insert into users(username, password) Values(?,?)";
                 dbConn.query(sql, [username, password], function (err, result) {
                     dbConn.end();
                     return callback(err, result);
