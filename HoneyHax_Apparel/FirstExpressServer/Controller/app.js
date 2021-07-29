@@ -381,6 +381,26 @@ app.get('/staff/:staffName/', function (req, res) {
     });
 });
 
+//GET /voucher/ 
+app.get('/voucher/', function (req, res) {
+
+    voucherDB.getvoucher(function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
+
+
 //Search /voucher/:voucherCode/
 app.get('/voucher/:voucherCode/', function (req, res) {
 
