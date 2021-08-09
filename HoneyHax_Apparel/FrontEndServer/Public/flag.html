@@ -463,6 +463,7 @@
     var userData = localStorage.getItem("userInfo");
     var token = localStorage.getItem("token");
     var userJsonData = JSON.parse(userData);
+    
 
     if (userJsonData === null || userJsonData === undefined || token === null) {
       window.alert('Unauthorized. You will be redirected to home page.');
@@ -537,19 +538,20 @@
             
             if (result != null) {                     // managed to retrieve some data
               alert(result.message)
-              if (points != undefined){
-                var points = result.points
-                userJsonData[0].points = points
+              if (result.points != undefined){
+                var curPoints = result.points
+                document.getElementById('studentNameOfUsername').innerHTML = `${userName} - ${curPoints} pts`
+                userJsonData[0].points = curPoints
                 localStorage.setItem('userInfo',JSON.stringify(userJsonData))
+                // window.location.reload();
               }
-              window.location.assign("/flag.html")
             } else {
               alert("Error: "+result.message)
-              console.log("Error");
+              
             }
           },
           error: function (xhr, textStatus, errorThrown) {
-            console.log(errorThrown)
+            
             alert("Invalid flag input, please try again.")
           }
         });
@@ -656,12 +658,12 @@
 
 
           } else {
-            console.log("Error");
+            
           }
         },
         error: function (xhr, textStatus, errorThrown) {
-          console.log(errorThrown);
-          console.log('Error in Operation');
+          
+          
 
         }
       });
@@ -686,7 +688,7 @@
 
     $('#logout').click(function () {
       window.localStorage.clear();
-      console.log('Cleared the localStorage!')
+      
       window.location.assign("/login.html");
     })
   </script>
