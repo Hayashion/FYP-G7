@@ -537,13 +537,12 @@
             console.log(result,textStatus,xhr)
             if (result != null) {                     // managed to retrieve some data
               alert(result.message)
-              var points = result.points
+              if (points != undefined){
+                var points = result.points
+                userJsonData[0].points = points
+                localStorage.setItem('userInfo',JSON.stringify(userJsonData))
+              }
               window.location.assign("/flag.html")
-              userJsonData[0].points = points
-              print(userJsonData[0])
-              print(userJsonData[0].points)
-              print(userJsonData)
-              localStorage.setItem('userInfo',JSON.stringify(userJsonData))
             } else {
               alert("Error: "+result.message)
               console.log("Error");

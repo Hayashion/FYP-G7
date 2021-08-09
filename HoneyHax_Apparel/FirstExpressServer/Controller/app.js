@@ -534,11 +534,12 @@ app.get('/product/:productId/reviews/', function (req, res) {
 app.post('/review', function (req, res) {
     var review = req.body.review
     var stars = req.body.rating
-    console.log(review,stars)
+    var name = req.body.name
+    console.log(name,review,stars)
 
     res.type('json');
-    reviewsDB.processReview(review, stars, function (err, result) {
-        console.log(err);
+    reviewsDB.processReview(name, review, stars, function (err, result) {
+        console.log(err,result);
         if (err) {
             res.status(500);
             res.send(`"Internal Server Error"`);
