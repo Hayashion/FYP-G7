@@ -188,12 +188,12 @@ nav.main-menu {
     vertical-align: middle;
 }
 
-.mean-container .mean-bar { background: #ed1c24;}
+.mean-container .mean-bar { background: #1c4ded;}
 
-.main-menu ul > li.active a{ background-color: #ed1c24; color: #ffffff; }
+.main-menu ul > li.active a{ background-color: #1c4ded; color: #ffffff; }
 
 .carousel-indicators .active {
-    background-color: #fa3e19;
+    background-color: #2766b9;
 }
 
 .carousel-indicators li { background-color: #000; height: 10px;}
@@ -202,7 +202,7 @@ nav.main-menu {
     display: inline-block;
     width: 40px;
     height: 40px;
-    background: #fa3e19;
+    background: #2766b9;
     background-size: 100% 100%;
     padding-top: 8px;
 }
@@ -272,7 +272,7 @@ nav.main-menu {
 	width: 100%;
 	float: left;
 	font-size: 50pt;
-	color: #fa3e19;
+	color: #2766b9;
 	line-height: 75px;
 }
 .taital{
@@ -293,7 +293,7 @@ nav.main-menu {
 .bt_main{
 	width: 100%;
 	float: left;
-	background-color: #fa3e19;
+	background-color: #2766b9;
 	height: 50px;
     font-size: 16pt;
     border: 0px;
@@ -304,6 +304,7 @@ nav.main-menu {
 .banner_bt{ 
 	width: 15%;
 	margin: 0 auto;
+    padding-top: 5%;
  }
 
  .about_section{
@@ -314,7 +315,7 @@ nav.main-menu {
  .about_text{
  	width: 100%;
  	float: left;
- 	color: #fa3e19;
+ 	color: #2766b9;
  	font-size: 50pt;
  	border-bottom: 3px solid #111111;
     margin-top: 65px;
@@ -333,7 +334,7 @@ nav.main-menu {
  .read_more{
 	width: 30%;
 	float: left;
-	background-color: #fa3e19;
+	background-color: #2766b9;
 	height: 50px;
 	font-size: 16pt;
 	margin-top: 20px;
@@ -354,7 +355,7 @@ nav.main-menu {
  	border-bottom: 3px solid #111111;
   
  }
- .den{ color: #fa3e19; }
+ .den{ color: #2766b9; }
 
 .product_section_2{
 	width: 100%;
@@ -366,11 +367,11 @@ nav.main-menu {
 	width: 100%;
 	float: left;
 	text-align: center;
-	color: #fa3e19;
+	color: #2766b9;
 	font-weight: 700;
 
 }
-.den_text a{ color: #fa3e19}
+.den_text a{ color: #2766b9}
 
 .den_text a:hover{
 	 color: #000; 
@@ -396,7 +397,7 @@ nav.main-menu {
 }
 
 .our_text{
-	color: #fa3e19;
+	color: #2766b9;
 	border-bottom: 3px solid #111111;
 }
 
@@ -426,7 +427,7 @@ nav.main-menu {
 .input_main {
     width: 100%;
     float: left;
-    background-color: #fa3e19;
+    background-color: #2766b9;
     padding: 40px 20px 13px 20px;
 }
 
@@ -469,7 +470,7 @@ button.main_bt {
     
 }
 
-button.main_bt a:hover { color: #fa3e19; }
+button.main_bt a:hover { color: #2766b9; }
 
 .map_section{
 	width: 100%;
@@ -482,17 +483,16 @@ button.main_bt a:hover { color: #fa3e19; }
 	float: left;
 	background-color: #393838;
 	height: auto;
-	/* padding-top: px; */
-	padding-bottom: 15px;
+
 }
 
-.contact_text{
-	width: 24%;
-	float: left;
-	color: #ffffff;
-	border-bottom: 8px solid #ffffff;
-    margin-top: 15px;
-    margin-bottom: 30px;
+.contact_text {
+    width: 12%;
+    float: left;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding-top: 2%;
+    font-size: 24px;
 }
 .contact_taital{
 	width: 100%;
@@ -502,26 +502,26 @@ button.main_bt a:hover { color: #fa3e19; }
     
 }
 
+.image_icon {
+    padding-left: 4%;
+    margin-right: 3%;
+}
+
 .adderess_text{
 	color: #ffffff;
-	font-size: 15pt;
-	font-weight: 700;
-	margin-top: 10px;
+    font-size: 14pt;
+    margin-top: 10px;
     
 }
 
 .phonenumber_text{
 	color: #ffffff;
-	font-size: 15pt;
-	font-weight: 700;
-	
-    
+	font-size: 10pt;
 }
 
 .email_text{
 	color: #ffffff;
-	font-size: 15pt;
-	font-weight: 700;
+	font-size: 12pt;
 }
 
 .footer-parent{
@@ -559,17 +559,25 @@ button.main_bt a:hover { color: #fa3e19; }
 	margin-top: 15px;
 }
 
-.copyright_section{
-	width: 100%;
-	float: left;
-	background-color: #fefefe;
-	height: auto;
+.copyright_section {
+    width: 100%;
+    float: left;
+    height: auto;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: #393838;
 }
 
 .copyright_taital{
 	font-weight: 18px; 
 	color: #010000;
 	text-align: center;
+}
+
+.copyright_text {
+    color:white;
 }
 
 .copyright_taital a{
@@ -627,5 +635,27 @@ button.main_bt a:hover { color: #fa3e19; }
 }
 
 .product_section_2 .images:hover {
-    border-color: #fa3e19;
+    border-color: #2766b9;
+}
+
+
+.review_section{
+	width: 100%;
+	float: right;
+    padding-top: 40px;
+}
+
+.review_section .images {
+    text-align: center;
+}
+
+.review_section .nice-select {
+    display: none;
+}
+
+.review_section label {
+    color: white;
+}
+.review_section .three {
+    text-align: center;
 }

@@ -1,6 +1,6 @@
 // HoneyHAX
 // DISM/FT/3A/02
-// FYP HoneyHAX Bakery
+// FYP HoneyHAX Apparel
 // gallery.js
 
 const mysql = require('mysql');
@@ -21,7 +21,7 @@ getGallery: function (productImg, productName, callback) {
             return callback(err, null);
 
         } else {
-            var sql = "select productImg, productName from product ";
+            var sql = "select productImg, productName from products";
 
             dbConn.query(sql, [productImg, productName], function (err, result) {
 

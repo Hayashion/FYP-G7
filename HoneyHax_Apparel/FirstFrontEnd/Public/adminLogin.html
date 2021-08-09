@@ -1,0 +1,396 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>HoneyHAX Admin</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+  <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+
+
+  <script>
+
+    $(document).ready(function () {
+      $("#logout").click(function () {
+        window.localStorage.clear();
+        window.location.assign("http://localhost:3001/home.html");
+      });
+
+      var a = JSON.parse(localStorage.getItem("userInfo"))
+
+      if (a == null || a[0].role != "admin") {
+        // window.location.assign("http://localhost:3001/home.html");
+      }
+
+
+      var a = localStorage.getItem("userInfo")
+      if (a == null) {
+        // window.location.assign("http://localhost:3001/login.html");
+      }
+      else {
+        var teacherName = JSON.parse(a)
+        var username = teacherName[0].username
+        console.log(username)
+        console.log(`${username}`)
+        document.getElementById('teacherName').innerHTML = `${username}`
+      }
+
+
+    })
+
+  </script>
+
+<script>
+  
+  $(document).ready(function () { // Login
+
+    $("#Login").click(function () { // # = id
+
+      var username = $("#username").val();
+      var password = $("#pwd").val();
+
+      var data = `{"username":"${username}","password":"${password}"}`;
+      // const myJSON = JSON.stringify(data);
+
+      // data collection and creation of json data that we're sending back  
+      console.log(data);
+
+      $.ajax({
+        url: 'http://localhost:8081/admin/login',
+        type: 'POST',
+        data: data, // contain username and password
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result, textStatus, xhr) {
+          if (result != null) {                     // managed to retrieve some data
+            console.log(result)
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('userInfo', result.UserData);
+            window.location.assign("http://localhost:3001/admin.html"); // successful redirected to this page
+          } else {
+            alert("Invalid Username/Password")
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Invalid Username/Password")
+          console.log('Error in Operation');
+          console.log("Error");
+        }
+      });
+
+      return false;
+
+    });
+
+  });
+
+</script>
+
+
+  <script>
+    $(document).ready(function () {
+      $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+      });
+
+      $(".zoom").hover(function () {
+
+        $(this).addClass('transition');
+      }, function () {
+
+        $(this).removeClass('transition');
+      });
+    });
+    jQuery(document).ready(function ($) {
+      tab = $('.tabs h3 a');
+
+      tab.on('click', function (event) {
+        event.preventDefault();
+        tab.removeClass('active');
+        $(this).addClass('active');
+
+        tab_content = $(this).attr('href');
+        $('div[id$="tab-content"]').removeClass('active');
+        $(tab_content).addClass('active');
+      });
+    });
+  </script>
+
+  <style>
+    :root {
+      --rad: .7rem;
+      --dur: .3s;
+      /* --color-dark: #2f2f2f; */
+      --color-light: #fff;
+      --color-brand: #57bd84;
+      --font-fam: 'Lato', sans-serif;
+      --height: 5rem;
+      --btn-width: 6rem;
+      --bez: cubic-bezier(0, 0, 0.43, 1.49);
+    }
+
+    /* // Setup */
+    /* body {background: var(--color-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh } */
+    html {
+      box-sizing: border-box;
+      height: 100%;
+      font-size: 10px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #4FDA8C;
+    }
+
+    input {
+      font: 16px/26px "Raleway", sans-serif;
+    }
+
+    body {
+      color: #666;
+      background-color: #f1f2f2;
+      font: 16px/26px "Raleway", sans-serif;
+    }
+
+    .form-wrap {
+      background-color: #fff;
+      width: 420px;
+      margin: 3em auto;
+      box-shadow: 0px 1px 8px #BEBEBE;
+      -webkit-box-shadow: 0px 1px 8px #BEBEBE;
+      -moz-box-shadow: 0px 1px 8px #BEBEBE;
+    }
+
+    .form-wrap .tabs {
+      overflow: hidden;
+    }
+
+    .form-wrap .tabs h3 {
+      float: left;
+      width: 100%;
+    }
+
+    .form-wrap .tabs h3 a {
+      padding: 0.5em 0;
+      text-align: center;
+      font-weight: 400;
+      background-color: #e6e7e8;
+      display: block;
+      color: #666;
+    }
+
+    .form-wrap .tabs h3 a.active {
+      background-color: #fff;
+    }
+
+    .form-wrap .tabs-content {
+      padding: 1.5em;
+    }
+
+    .form-wrap .tabs-content div[id$="tab-content"] {
+      display: none;
+    }
+
+    .form-wrap .tabs-content .active {
+      display: block !important;
+    }
+
+    .form-wrap form .input {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      color: inherit;
+      font-family: inherit;
+      padding: .8em 0 10px .8em;
+      border: 1px solid #CFCFCF;
+      outline: 0;
+      display: inline-block;
+      margin: 0 0 .8em 0;
+      padding-right: 2em;
+      width: 100%;
+    }
+
+    .form-wrap form .button {
+      width: 100%;
+      padding: .8em 0 10px .8em;
+      background-color: #DC143C;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .form-wrap form .button:hover {
+      background-color: #DC143C;
+    }
+
+    .form-wrap form .checkbox {
+      visibility: hidden;
+      padding: 20px;
+      margin: .5em 0 1.5em;
+    }
+
+    .form-wrap form .checkbox:checked+label:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+      filter: alpha(opacity=100);
+      opacity: 1;
+    }
+
+    .form-wrap form label[for] {
+      position: relative;
+      padding-left: 20px;
+      cursor: pointer;
+    }
+
+    .form-wrap form label[for]:before {
+      content: '';
+      position: absolute;
+      border: 1px solid #CFCFCF;
+      width: 17px;
+      height: 17px;
+      top: 0px;
+      left: -14px;
+    }
+
+    .form-wrap form label[for]:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+      filter: alpha(opacity=0);
+      opacity: 0;
+      content: '';
+      position: absolute;
+      width: 9px;
+      height: 5px;
+      background-color: transparent;
+      top: 4px;
+      left: -10px;
+      border: 3px solid #28A55F;
+      border-top: none;
+      border-right: none;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+
+    .form-wrap .help-text {
+      margin-top: .6em;
+    }
+
+    .form-wrap .help-text p {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    #copyright p{
+      letter-spacing: 0.20em;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.80em;
+      color: rgb(0, 0, 0);
+    }
+
+    .login-tab {
+      text-align: center;
+    }
+
+    /*     
+      .email_text{
+        font-size:15px;
+      } */
+  </style>
+
+
+
+
+</head>
+
+<body>
+  <div id="header-wrapper">
+    <div id="header" class="container">
+      <div id="logo">
+        <h1><a href="#"><strong>HoneyHAX Admin</strong></a></h1>
+      </div>
+      <div id="menu">
+        <ul>
+          <li class="current_page_item home"><a accesskey="" title="">Welcome to HoneyHAX Admin Page!</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="page" class="container">
+    <div id="content">
+      <div class="form-wrap">
+        <div class="tabs">
+          
+          <h3 class="login-tab active">Login</h3>
+        </div>
+        <!--.tabs-->
+
+        <div class="tabs-content">
+
+
+          <div id="login-tab-content" class="active">
+
+
+            <form class="login-form" action="" method="POST">
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="username" placeholder="Username"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="password" class="form-control form-control-lg" id="pwd" placeholder="Password"
+                  autocomplete="off">
+              </div>
+              <button type="submit" id="Login" class="btn btn-danger btn-lg btn-block">LOGIN</button>
+            </form>
+            <!--.login-form-->
+            
+          </div>
+
+          <!--.login-form-->
+    </div>
+  </div>
+  <div id="copyright">
+    <p>| &copy; HoneyHAX. All rights reserved. |</p>
+  </div>
+</body>
+
+</html>

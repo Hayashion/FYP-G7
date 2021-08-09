@@ -1,6 +1,6 @@
 // HoneyHAX
 // DISM/FT/3A/02
-// FYP HoneyHAX Bakery
+// FYP HoneyHAX Apparel
 // databaseConfig.js
 
 var mysql = require('mysql');
@@ -11,7 +11,7 @@ var dbconnect = {
             host: "localhost",
             user: "root",               // This is your own username of your SQL Database.
             password: "1qwer$#@!",      // This is your own password of your SQL Database.
-            database: "foodshop"    
+            database: "apparel" // 2 dbs
         });     
         return conn;
     }

@@ -1,3 +1,7 @@
+// Class: DISM/FT/3A/02
+// FYP Group 7
+// HoneyHAX Bakery
+
 const express= require('express');
 const serveStatic =require('serve-static');
 
@@ -22,10 +26,17 @@ app.use(function(req,res,next){
 });
 
 
-app.use(serveStatic(__dirname+"/Public")); 
+app.use(serveStatic(__dirname+"/Public",{index:'home.html'})); 
 
+app.get('/secret', function(req, res) {
+    res.redirect('/secret/secretcart.html');
+});
+
+app.get('*', function(req, res) {
+    res.redirect('/');
+});
 
 app.listen(port,hostname,function(){
 
-    console.log(`Server hosted at http://${hostname}:${port}`);
+    console.log(`HoneyHAX Frontend hosted at http://${hostname}:${port}`);
 });

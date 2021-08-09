@@ -1,0 +1,1 @@
+var clue = 'WW91IGZvdW5kIG1lISBIZXJlIGlzIHlvdXIgY2x1ZSAtPiBmV1Z0WlhKd2RYTjc='

@@ -1,6 +1,7 @@
-// Class: DISM/FT/2A/02
-// Admission No: P1950023
-// Name: Ang Yuran
+// HoneyHAX
+// DISM/FT/3A/02
+// FYP HoneyHAX Bakery
+// server.js
 
 
 var express = require('express');
@@ -13,5 +14,6 @@ var port = 8081;
 app.use(serveStatic(__dirname + '/Public')); 
 
 var server = app.listen(port, function(){
-    console.log('Web App Hosted at http://localhost:%s', port);
+    // console.log('Web App Hosted at http://localhost:%s', port);
+    console.log('HoneyHAX Backend Hosted at http://localhost:%s', port);
 });
