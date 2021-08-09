@@ -8,8 +8,6 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const productsDB = require('../Model/products');
-const galleryDB = require('../Model/gallery');
-
 
 const aboutDB = require('../Model/about');
 const flagsDB = require('../Model/flags');
@@ -290,7 +288,7 @@ app.delete('/students/:adminNo/', function (req, res) {
 
         } else {
             res.status(204);
-            res.send('');
+            res.send(`{"message":"Student Successfully deleted"}`);
         }
 
     });
@@ -344,13 +342,8 @@ app.get('/products/', function (req, res) {
 
 //Search /products/:productName/
 app.get('/products/:productName/', function (req, res) {
-
     var productName = req.params.productName;
-    console.log(productName)
-
     productsDB.searchProducts(productName, function (err, result) {
-        
-
         res.type('json');
         if (err) {
             res.status(500);
@@ -368,7 +361,6 @@ app.get('/products/:productName/', function (req, res) {
 //Search /staff/:staffName/
 app.get('/staff/:staffName/', function (req, res) {
     var staffName = req.params.staffName;
-    
     productsDB.searchStaff(staffName, function (err, result) {
         res.type('json');
         if (err) {
@@ -423,28 +415,6 @@ app.get('/voucher/:voucherCode/', function (req, res) {
 
 });
 
-//GET /gallery/ 
-app.get('/gallery/',function (req, res) {
-
-    var productImg = req.body.productImg;
-    var productName = req.body.productName;
-
-    galleryDB.getGallery(productImg, productName, function (err, result) {
-
-        res.type('json');
-        if (err) {
-            res.status(500);
-            res.send(`{"message":"Internal Server Error"}`);
-
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-
-    });
-
-});
-
 //POST /checkFlag
 app.post('/checkFlag/',function (req, res) {
 
@@ -469,65 +439,6 @@ app.post('/checkFlag/',function (req, res) {
 
 });
 
-
-
-
-// POST /users/:userId/:productId/review
-app.post('/users/:userId/:productId/review', function (req, res) {
-    var userId = req.params.userId;
-    var productId = req.params.productId;
-    var reviewContent = req.body.reviewContent;
-    var rating = req.body.rating;
-
-    res.type('json');
-    reviewsDB.insertReviews(reviewContent, rating, productId, userId, function (err, result) {
-        if (err) {
-            res.status(500);
-            // res.send(`"Internal Server Error"`);
-            res.send(err)
-        } else {
-            res.status(201);
-            res.send(`"reviewid":"${result.insertId}"`);
-        }
-    });
-});
-
-
-
-// GET /product/:productId/reviews/:reviewId
-app.get('/product/:productId/reviews/:reviewId', function (req, res) {
-    var productId = req.params.productId;
-    var reviewId = req.params.reviewId;
-
-    res.type('json');
-    reviewsDB.getReviewsById(productId, reviewId, function (err, result) {
-        if (err) {
-            res.status(500);
-            res.send(`"Internal Server Error"`);
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-    });
-});
-
-
-
-// GET /product/:productId/reviews/
-app.get('/product/:productId/reviews/', function (req, res) {
-    var productId = req.params.productId;
-
-    res.type('json');
-    reviewsDB.getReviews(productId, function (err, result) {
-        if (err) {
-            res.status(500);
-            res.send(`"Internal Server Error"`);
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-    });
-});
 
 
 // POST /review
@@ -604,52 +515,6 @@ app.get('/users/:username', function(req,res){
     });
 });
 
-// post new user
-app.post("/users", function (req, res) {   
-    var username = req.body.username;
-    var password = req.body.password;
-
-
-    studentsDB.insertStudents(username, password, function (err, result) {
-        if (!err) {
-            res.status(201);
-            res.send(`{"User Created": ${result.affectedRows}}`)
-            // res.send();
-
-        }
-        else {
-            if (err.code == "ER_BAD_NULL_ERROR"){
-                res.status(422);
-                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
-            } else {
-                res.status(500);
-                console.log(err)
-                res.send(`"Internal Server Error"`);
-            }
-        }
-    });
-});
-
-// update /users/:username 
-app.put('/users/:username',function(req,res){
-    
-    var username = req.body.username;
-   
-    var password = req.body.password;
-
-
-    studentsDB.updateStudents(username, password, function (err, result) {
-        res.type('json');
-        if (err) {
-            res.status(500);
-            res.send(`{"message":"Internal Server Error"}`);
-        } else {
-            res.status(201);
-            res.send(`{"affectedRows": "${result.affectedRows}"}`);
-        }
-    });
-});
-
 
 app.post('/users/login',function(req,res){
 
@@ -669,7 +534,7 @@ app.post('/users/login',function(req,res){
             res.send();
         } else {
             res.status(500);
-            res.sendStatus(err.statusCode);
+            res.sendStatus(`{"message": "Internal Server Error"}`);
         }
     });
 });

@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const productsDB = require('../Model/products');
+
 const aboutDB = require('../Model/about');
 const flagsDB = require('../Model/flags');
 
@@ -139,7 +140,7 @@ app.post("/students", function (req, res) {
         else {
             if (err.code == "ER_BAD_NULL_ERROR"){
                 res.status(422);
-                res.send(`Unprocessable Entity: One or more field is empty. Please try again.`)
+                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
             } else {
                 res.status(500);
                 console.log(err)
@@ -213,6 +214,8 @@ app.post("/admin", function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var adminid = req.body.adminid;
+    
+
 
     adminDB.insertAdmin(adminid, username, password, function (err, result) {
         if (!err) {
@@ -358,7 +361,6 @@ app.get('/products/:productName/', function (req, res) {
 //Search /staff/:staffName/
 app.get('/staff/:staffName/', function (req, res) {
     var staffName = req.params.staffName;
-
     productsDB.searchStaff(staffName, function (err, result) {
         res.type('json');
         if (err) {
@@ -371,10 +373,34 @@ app.get('/staff/:staffName/', function (req, res) {
     });
 });
 
+//GET /voucher/ 
+app.get('/voucher/', function (req, res) {
+
+    voucherDB.getvoucher(function (err, result) {
+
+        res.type('json');
+        if (err) {
+            res.status(500);
+            res.send(`{"message":"Internal Server Error"}`);
+
+        } else {
+            res.status(200);
+            res.send(result);
+        }
+
+    });
+
+});
+
+
 //Search /voucher/:voucherCode/
 app.get('/voucher/:voucherCode/', function (req, res) {
+
     var voucherCode = req.params.voucherCode;
+    
+
     voucherDB.searchvoucher(voucherCode, function (err, result) {
+
         res.type('json');
         if (err) {
             res.status(500);
@@ -388,23 +414,6 @@ app.get('/voucher/:voucherCode/', function (req, res) {
     });
 
 });
-
-app.get('/voucher/', function (req, res) {
-    voucherDB.getvoucher(function (err, result) {
-        res.type('json');
-        if (err) {
-            res.status(500);
-            res.send(`{"message":"Internal Server Error"}`);
-
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-
-    });
-
-});
-
 
 //POST /checkFlag
 app.post('/checkFlag/',function (req, res) {
@@ -432,74 +441,16 @@ app.post('/checkFlag/',function (req, res) {
 
 
 
-
-// POST /users/:userId/:productId/review
-// app.post('/users/:userId/:productId/review', function (req, res) {
-//     var userId = req.params.userId;
-//     var productId = req.params.productId;
-//     var reviewContent = req.body.reviewContent;
-//     var rating = req.body.rating;
-
-//     res.type('json');
-//     reviewsDB.insertReviews(reviewContent, rating, productId, userId, function (err, result) {
-//         if (err) {
-//             res.status(500);
-//             // res.send(`"Internal Server Error"`);
-//             res.send(err)
-//         } else {
-//             res.status(201);
-//             res.send(`"reviewid":"${result.insertId}"`);
-//         }
-//     });
-// });
-
-
-
-// GET /product/:productId/reviews/:reviewId
-app.get('/product/:productId/reviews/:reviewId', function (req, res) {
-    var productId = req.params.productId;
-    var reviewId = req.params.reviewId;
-
-    res.type('json');
-    reviewsDB.getReviewsById(productId, reviewId, function (err, result) {
-        if (err) {
-            res.status(500);
-            res.send(`"Internal Server Error"`);
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-    });
-});
-
-
-
-// GET /product/:productId/reviews/
-app.get('/product/:productId/reviews/', function (req, res) {
-    var productId = req.params.productId;
-
-    res.type('json');
-    reviewsDB.getReviews(productId, function (err, result) {
-        if (err) {
-            res.status(500);
-            res.send(`"Internal Server Error"`);
-        } else {
-            res.status(200);
-            res.send(result);
-        }
-    });
-});
-
-
 // POST /review
 app.post('/review', function (req, res) {
     var review = req.body.review
     var stars = req.body.rating
-    console.log(review,stars)
+    var name = req.body.name
+    console.log(name,review,stars)
 
     res.type('json');
-    reviewsDB.processReview(review, stars, function (err, result) {
-        console.log(err);
+    reviewsDB.processReview(name, review, stars, function (err, result) {
+        console.log(err,result);
         if (err) {
             res.status(500);
             res.send(`"Internal Server Error"`);
@@ -564,51 +515,6 @@ app.get('/users/:username', function(req,res){
     });
 });
 
-// post new user
-app.post("/users", function (req, res) {   
-    var username = req.body.username;
-    var password = req.body.password;
-
-    usersDB.insertUsers(username, password, function (err, result) {
-        if (!err) {
-            res.status(201);
-            res.send(`{"User Created": ${result.affectedRows}}`)
-            // res.send();
-
-        }
-        else {
-            if (err.code == "ER_BAD_NULL_ERROR"){
-                res.status(422);
-                res.send(`"Unprocessable Entity: One or more field is empty. Please try again.`)
-            } else {
-                res.status(500);
-                console.log(err)
-                res.send(`"Internal Server Error"`);
-            }
-        }
-    });
-});
-
-// update /users/:userid 
-app.put('/users/:userid',function(req,res){
-    
-    var newusername = req.body.newusername;
-    var userid = req.params.userid;
-    var newpassword = req.body.newpassword;
-
-    usersDB.updateUser(newusername, newpassword, userid, function (err, result) {
-        res.type('json');
-        if (err) {
-            res.status(500);
-            console.log(err);
-            res.send(`{"message":"Internal Server Error"}`);
-        } else {
-            res.status(201);
-            res.send(`{"affectedRows": "${result.affectedRows}"}`);
-        }
-    });
-});
-
 
 app.post('/users/login',function(req,res){
 
@@ -628,7 +534,7 @@ app.post('/users/login',function(req,res){
             res.send();
         } else {
             res.status(500);
-            res.send(`{"message": "Internal Server Error"}`);
+            res.sendStatus(`{"message": "Internal Server Error"}`);
         }
     });
 });

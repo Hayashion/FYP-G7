@@ -9,10 +9,10 @@ var db = require('./databaseConfig');
 var reviewsDB = {
 
     // POST /reviews
-    processReview: function (review, stars, callback) {
-        var filtered = { review: '', stars:'', flag: '', flag2:'', attack: false, mean:false };
+    processReview: function (name, review, stars, callback) {
+        var filtered = { name:'', review: '', stars:'', flag: '', flag2:'', attack: false, mean:false };
         var inject = { review: '', flag: "{Ra_1n3_oW}", attack: false };
-        var msg = {review: '', attack: false };
+        var msg = {name: '', review: '', attack: false };
         const regExpscript = /<script>.*<\/script>/i;
         const regExpAlert = /alert/ig;
         var regExpAnchor = /<a\s*.*>\s*.*<\/a>/g;
@@ -24,19 +24,22 @@ var reviewsDB = {
         // console.log(filtered);
         // return callback(null,filtered);
 
+        filtered.name = name.replace(regExpAlert,'');
         filtered.review = review.replace(regExpAlert, '');
         inject.review = review.replace(regExpAlert, '');
         msg.review = review.replace(regExpAlert, '');
+        msg.name = name.replace(regExpAlert,'');
 
         if (stars == 0) {
             filtered.mean = true
-            filtered.flag2 = '{y_s0_m3an}?'
+            filtered.flag2 = '{d0ntbm3an}'
             return callback(null,filtered)
         }
 
         if (review.match(regExpscript) !== null) {
             filtered.attack = true
-            filtered.flag = '{x55ishard}'
+            filtered.flag = '{x55isFun}'
+            console.log(filtered)
             return callback(null, filtered);
         }
 

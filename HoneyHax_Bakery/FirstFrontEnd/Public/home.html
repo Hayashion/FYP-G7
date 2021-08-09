@@ -52,25 +52,28 @@
 
 
 
-			sessionStorage.setItem('name', name);
+										
 
 			// sessionStorage.setItem('reviewContent', reviewContent)
 
 			$.ajax({
 				url: `http://localhost:8081/review`,
 				type: 'POST',
-				data: JSON.stringify({ review: reviewContent, rating:stars }),
+				data: JSON.stringify({ review: reviewContent, rating:stars, name:name }),
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (data, textStatus, xhr) {
+					console.log("yo this is ",data)
 					var reviewContent = data.review;
-
+					var name = data.name;
+					var oldAlert = window.alert
 					if (data.mean){
 						stars = data.flag2;
 					}
-
+					
 					else if (data.attack) {
 						try {
+							
 							window.alert = function () {
 								window.confirm(`Damn, ${data.flag}!`)
 							}
@@ -79,10 +82,11 @@
 							console.log(err)
 						}
 					}
-					var name = sessionStorage.getItem("name");
-					// var reviewContent = sessionStorage.getItem('reviewContent');
+					
+																	
 					var reviewFormat = `<div class="images"><h2><strong>${reviewContent}</strong></h2><h2>${stars}/5</h2></div><h2 class="den_text"><a href="#">${name}<br></a></h2>`
 					$("#comment").html(reviewFormat);
+					window.alert = oldAlert
 				},
 				error: function (xhr, textStatus, errorThrown) {
 					console.log(errorThrown)
