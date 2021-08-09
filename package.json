@@ -1,0 +1,31 @@
+{
+  "name": "honeyhax",
+  "version": "1.0.0",
+  "description": "FYP Project Group 7",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fsevents": "^2.3.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "node": "^16.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hayashion/FYP-G7.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hayashion/FYP-G7/issues"
+  },
+  "homepage": "https://github.com/Hayashion/FYP-G7#readme"
+}
