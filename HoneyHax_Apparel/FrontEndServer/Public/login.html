@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <!-- site metas -->
-  <title>HoneyHax</title>
+  <title>HoneyHAX</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -44,6 +44,7 @@
   <!-- javascript -->
   <script src="js/owl.carousel.js"></script>
   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  <script src="js/secret.js"></script>
   <script>
     $(document).ready(function () {
       $(".fancybox").fancybox({
@@ -108,10 +109,6 @@
       padding: 0;
     } */
 
-    .login-tab {
-      text-align: center;
-    }
-
     a {
       color: #666;
       text-decoration: none;
@@ -127,7 +124,7 @@
 
     body {
       color: #666;
-      background-color: #f1f2f2;
+      background-color: white;
       font: 16px/26px "Raleway", sans-serif;
     }
 
@@ -144,10 +141,10 @@
       overflow: hidden;
     }
 
-    /* .form-wrap .tabs h3 {
+    .form-wrap .tabs h3 {
       float: left;
       width: 50%;
-    } */
+    }
 
     .form-wrap .tabs h3 a {
       padding: 0.5em 0;
@@ -166,9 +163,9 @@
       padding: 1.5em;
     }
 
-    /* .form-wrap .tabs-content div[id$="tab-content"] {
+    .form-wrap .tabs-content div[id$="tab-content"] {
       display: none;
-    } */
+    }
 
     .form-wrap .tabs-content .active {
       display: block !important;
@@ -274,7 +271,66 @@
 
 </head>
 
+<script> // sign up
 
+
+  var userData = undefined;
+  var studentClass = undefined;
+  var adminNo = undefined;
+  var userJsonData = undefined;
+  var userData = localStorage.getItem("userInfo");
+  var token = localStorage.getItem("token");
+  var userJsonData = JSON.parse(userData);
+
+  if (userJsonData != null && token != null) {
+    window.alert('You are already logged in.')
+    window.location.assign("/flag.html")
+  }
+
+  $(document).ready(function () {
+
+    $("#Signup").click(function () { // # = id
+
+      var data = {};
+
+      data.adminNo = $("#adminNo").val();
+      data.studentName = $("#studentName").val();
+      data.username = $("#new_username").val();
+      data.password = $("#new_pwd").val();
+      data.studentClass = $("#new_studentClass").val();
+
+      // data collection and creation of json data that we're sending back  
+      
+
+      $.ajax({
+        url: 'http://localhost:8081/students/',
+        type: 'POST', // insertStudents
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result, textStatus, xhr) {
+          if (result != null) {                     // managed to retrieve some data
+            // localStorage.setItem('token', result.token);
+            // localStorage.setItem('userInfo', result.UserData);
+            alert("Registered Successfully! Please login now.");
+            window.location.assign("http://localhost:3001/login.html"); // successful redirected to this page
+          } else {
+            console.log("Error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Error Signing up. Please contact your teacher")
+          console.log('Error in Operation');
+        }
+      });
+
+      return false;
+
+    });
+
+  });
+
+</script>
 
 <script>
 
@@ -286,22 +342,23 @@
       var password = $("#pwd").val();
 
       var data = `{"username":"${username}","password":"${password}"}`;
-     
+      // const myJSON = JSON.stringify(data);
 
       // data collection and creation of json data that we're sending back  
-      console.log(data);
+      
 
       $.ajax({
-        url: 'http://localhost:8081/users/login',
+        url: 'http://localhost:8081/students/login',
         type: 'POST',
         data: data, // contain username and password
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result, textStatus, xhr) {
-          if (result != null) {                     // managed to retrieve some data
+          if (result != null || 'Internal Server Error') {                     // managed to retrieve some data
+            
+            localStorage.setItem('token', result.token);
             localStorage.setItem('userInfo', result.UserData);
-            window.alert('Successfully logged in!')
-            window.location.assign("http://localhost:3001/flag(test).html"); // successful redirected to this page
+            window.location.assign("http://localhost:3001/flag.html"); // successful redirected to this page
           } else {
             alert("Invalid Username/Password")
             console.log("Error");
@@ -320,6 +377,17 @@
 
   });
 
+  // Select your input element.
+  var number = document.getElementById('adminNo');
+
+  // Listen for input event on numInput.
+  number.onkeydown = function (e) {
+    if (!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58)
+      || e.keyCode == 8)) {
+      return false;
+    }
+  }
 </script>
 
 
@@ -343,7 +411,8 @@
                 <div class="limit-box">
                   <nav class="main-menu">
                     <ul class="menu-area-main">
-                      <li><a href="login.html">Hey food users use this to login into your account!XD</a></li>
+                      <li><a href="login.html">Do not believe whatever you see :o</a></li>
+                      <!-- <div hidden>{hideandseek}</div> -->
                     </ul>
                   </nav>
                 </div>
@@ -355,13 +424,62 @@
       <!-- end header inner -->
       <div class="form-wrap">
         <div class="tabs">
-         
-          <h3 class="login-tab"><a class="active" href="#login-tab-content">Login</a></h3>
+          <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
+          <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
         </div>
         <!--.tabs-->
 
         <div class="tabs-content">
 
+          <div id="signup-tab-content" class="active">
+            <!-- <form class="signup-form" action="" method="post">
+              <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email">
+              <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username">
+              <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
+              <input type="submit" class="button" value="Sign Up"> -->
+
+            <form class="signup-form" action="" method="POST">
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="number" class="form-control form-control-lg positive-numeric-only" id="adminNo"
+                  pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==7) return false;"
+                  placeholder="Admin No (22xxxxx)." autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="studentName" placeholder="Student Name"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Username</label> -->
+                <input type="text" class="form-control form-control-lg" id="new_username" placeholder="Username"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="password" class="form-control form-control-lg" id="new_pwd" placeholder="Password"
+                  autocomplete="off">
+              </div>
+              <div class="form-group">
+                <!-- <label>Password</label> -->
+                <input type="text" class="form-control form-control-lg" id="new_studentClass"
+                  placeholder="Student Class (2A01)" autocomplete="off">
+              </div>
+
+              <button type="submit" id="Signup" class="btn btn-danger btn-lg btn-block">
+                SIGN UP
+              </button>
+
+            </form>
+            <!--.login-form-->
+            <div class="help-text">
+              <p>By signing up, you agree to our</p>
+              <p><a href="#">Terms of service</a></p>
+            </div>
+            <!--.help-text-->
+          </div>
+          <!--.signup-tab-content-->
 
           <div id="login-tab-content">
             <!-- <form class="login-form" action="" method="post">
@@ -385,6 +503,9 @@
                   autocomplete="off">
               </div>
 
+
+
+
               <button type="submit" id="Login" class="btn btn-danger btn-lg btn-block">LOGIN</button>
             </form>
             <!--.login-form-->
@@ -402,17 +523,13 @@
   </header>
 
 
-
 </body>
 <footer>
-  
-  <!-- copyright start-->
   <div class="copyright_section">
 
-      <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
+    <p class="copyright_text">| &copy; HoneyHAX. All rights reserved. |</p>
 
   </div>
-  <!-- copyright end-->
-
 </footer>
+
 </html>

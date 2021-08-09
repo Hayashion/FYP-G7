@@ -534,7 +534,7 @@
           dataType: "json",
           data: JSON.stringify({ "adminID": adminNo, 'flagValue': flagValue }),
           success: function (result, textStatus, xhr) {
-            console.log(result,textStatus,xhr)
+            
             if (result != null) {                     // managed to retrieve some data
               alert(result.message)
               if (points != undefined){
@@ -545,11 +545,11 @@
               window.location.assign("/flag.html")
             } else {
               alert("Error: "+result.message)
-              console.log("Error");
+              
             }
           },
           error: function (xhr, textStatus, errorThrown) {
-            console.log(errorThrown)
+            
             alert("Invalid flag input, please try again.")
           }
         });
@@ -639,7 +639,7 @@
 
                 var delayInMilliseconds = 1000; //1 second
 
-                console.log(result, userName)
+                
 
                 setTimeout(function (htmloutput, i) {
                   $("#Rightscoreboard").append(htmloutput);
@@ -656,12 +656,12 @@
 
 
           } else {
-            console.log("Error");
+            
           }
         },
         error: function (xhr, textStatus, errorThrown) {
-          console.log(errorThrown);
-          console.log('Error in Operation');
+          
+          
 
         }
       });
@@ -686,7 +686,7 @@
 
     $('#logout').click(function () {
       window.localStorage.clear();
-      console.log('Cleared the localStorage!')
+      
       window.location.assign("/login.html");
     })
   </script>

@@ -47,8 +47,8 @@
       else {
         var teacherName = JSON.parse(a)
         var username = teacherName[0].username
-        console.log(username)
-        console.log(`${username}`)
+        
+        
         document.getElementById('teacherName').innerHTML = `${username}`
       }
 
@@ -70,7 +70,7 @@
       // const myJSON = JSON.stringify(data);
 
       // data collection and creation of json data that we're sending back  
-      console.log(data);
+      
 
       $.ajax({
         url: 'http://localhost:8081/admin/login',
@@ -80,7 +80,7 @@
         dataType: "json",
         success: function (result, textStatus, xhr) {
           if (result != null) {                     // managed to retrieve some data
-            console.log(result)
+            
             localStorage.setItem('token', result.token);
             localStorage.setItem('userInfo', result.UserData);
             window.location.assign("http://localhost:3001/admin.html"); // successful redirected to this page

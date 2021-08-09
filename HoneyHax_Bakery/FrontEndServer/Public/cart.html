@@ -244,7 +244,7 @@
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                             <div class="full">
                                 <div class="center-desk">
-                                    <div class="logo"><a href="#{a9a149669016648270dede2327cf0ef82478fa39ef03a750c6393f9e6474c345}"><img src="images/logo.png"
+                                    <div class="logo"><a href="#{0515aa086a21d9b65d30b41aeb325de3783a40bd9f93ecb3110ef4845aa4848f}"><img src="images/logo.png"
                                                 style="max-width: 100%;"></a>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
     <div class="shopping-cart">
         <!-- Title -->
         <div class="title">
-            Apparel Cart
+            Pastry Cart
         </div>
 
         <!-- Product #1 -->
@@ -288,14 +288,14 @@
 
             </div>
             <div class="image">
-                <a href="./images/hoodie1.png" download>
-                    <img src="images/hoodie1.png" alt="https://stylesuxx.github.io/steganography/" />
+                <a href="./images/bread1.png" download>
+                    <img src="images/bread1.png" alt="https://stylesuxx.github.io/steganography/" />
                 </a>
             </div>
             
             <div class="description">
 
-                <span>Hoodie 1</span>
+                <span>Bread1</span>
 
             </div>
 
@@ -309,7 +309,7 @@
                 </button>
             </div>
 
-            <div class="total-price">$20</div>
+            <div class="total-price">$5</div>
         </div>
 
         <!-- Product #2 -->
@@ -319,8 +319,8 @@
 
             </div>
             <div class="image">
-                <a href="./images/hoodie2.png" download>
-                    <img src="images/hoodie2.png" alt="https://stylesuxx.github.io/steganography/" />
+                <a href="./images/bread2.png" download>
+                    <img src="images/bread2.png" alt="https://stylesuxx.github.io/steganography/" />
                     <p hidden>Using the flag u gotten from the images, figure out a way to access the secret site</p>
                 </a>
             </div>
@@ -328,7 +328,7 @@
 
             <div class="description">
 
-                <span>Hoodie 2</span>
+                <span>Bread2</span>
 
             </div>
 
@@ -342,7 +342,7 @@
                 </button>
             </div>
 
-            <div class="total-price">$25</div>
+            <div class="total-price">$8</div>
         </div>
 
         <!-- Product #3 -->
@@ -353,8 +353,8 @@
             </div>
 
             <div class="image">
-                <a href="./images/hoodie3.png" download>
-                    <img src="images/hoodie3.png" alt="https://stylesuxx.github.io/steganography/" />
+                <a href="./images/bread3.png" download>
+                    <img src="images/bread3.png" alt="https://stylesuxx.github.io/steganography/" />
                 </a>
             </div>
                 
@@ -362,7 +362,7 @@
 
             <div class="description">
 
-                <span>Hoodie 3</span>
+                <span>Bread3</span>
 
             </div>
 
@@ -376,7 +376,7 @@
                 </button>
             </div>
 
-            <div class="total-price">$33</div>
+            <div class="total-price">$3</div>
         </div>
     </div>
     <div class="discountsection">
@@ -481,7 +481,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (result, textStatus, xhr) {
-                    console.log(result);
+                    
                     if (result.length != 0) {
                         var divOutput = "";
                         if (result.length > 1){
@@ -493,14 +493,16 @@
                                         `;
                             }
                         } else {
+                            divOutput += `
+                                    <div>
+                                        <label>Discount applied successfully! The code ${result[0].voucherCode} gives ${result[0].voucherDiscount}% off</label>
+                                    </div>
+                                    `;
+                        }
+                        
+                        
                         
 
-                            divOutput += `
-                                            <div>
-                                                <label>Discount applied successfully!${result[0].voucherDiscount}% off</label>
-                                            </div>
-                                            `;
-                        }
 
                         $("#discountresult").html(divOutput);
                     } else {
@@ -514,12 +516,11 @@
 
 
                         $("#discountresult").html(divOutput);
-                        console.log("Error");
-
+                        
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
+                    
                 }
             });
 

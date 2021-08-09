@@ -238,7 +238,7 @@
          //     var id=$('#email').val();
          //     var pwd=$('#pwd').val();
          //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
-         //     console.log(data)
+         //     
          // searchParam = new URLSearchParams(windows.location.search)
          // var wsUrl = 'http://localhost:8081/products'
          // if(searchParams.has("productSearch")){
@@ -246,7 +246,7 @@
          // }
          // if (searchParams.has('query')){
          //       var product =searchParams.get("query");
-         //       console.log(product)
+         //       
          // }
          var searchParams = new URLSearchParams(window.location.search)
          if (searchParams.has("product")) {
@@ -274,11 +274,11 @@
                   }
                   $('#products-section').html(divOutput)
                } else {
-                  console.log("Error");
+                  
                }
             },
             error: function (xhr, textStatus, errorThrown) {
-               console.log('Error in Operation');
+               
             }
          });
          return false;
@@ -293,19 +293,19 @@
    //       success: function (result, textStatus, xhr) {  
    //           if (result != null){     
    //                for(var i=0;i<result.length;i++){
-   //                   console.log(result[i]);
+   //                   
    //                }               
    //             //   localStorage.setItem('token',data.token);
-   //             //   console.log(data)
+   //             //   
    //             //   localStorage.setItem('userInfo',data.UserData);
 
    //               location.reload
    //           } else {
-   //               console.log("Error");
+   //               
    //           }                                                                 
    //       },  
    //       error: function (xhr, textStatus, errorThrown) {  
-   //           console.log('Error in Operation');  
+   //           
    //       }  
    //    });  
    //    return false;
@@ -338,7 +338,7 @@
       //       });
       //   });
       //   $(document).ready(function()){
-      //      console.log()
+      //      
       //   }
    </script>
 

@@ -63,7 +63,7 @@
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (data, textStatus, xhr) {
-					console.log("yo this is ",data)
+					
 					var reviewContent = data.review;
 					var name = data.name;
 					var oldAlert = window.alert
@@ -79,7 +79,7 @@
 							}
 						}
 						catch (err) {
-							console.log(err)
+							
 						}
 					}
 					
@@ -89,8 +89,8 @@
 					window.alert = oldAlert
 				},
 				error: function (xhr, textStatus, errorThrown) {
-					console.log(errorThrown)
-					console.log('Error in Operation');
+					
+					
 				}
 			});
 			return false;

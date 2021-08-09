@@ -156,15 +156,15 @@ app.post('/students/login',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    console.log(username);
-    console.log(password);
+    
+    
 
     studentsDB.loginStudents(username, password, function (err, token, result) {
         if (!err) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             delete result[0]['password'];//clear the password in json data, do not send back to client
-            console.log(result);
+            
             res.json({ success: true, UserData: JSON.stringify(result), token: token, status: 'You are successfully logged in!' }); // token = jwt
             res.send();
         } else {
@@ -177,7 +177,7 @@ app.post('/students/login',function(req,res){
 
 //POST /students/logout
 app.post('/students/logout', function (req, res) {
-    console.log("..logging out.");
+    
     //res.clearCookie('session-id'); //clears the cookie in the response
     //res.setHeader('Content-Type', 'application/json');
     res.json({ success: true, status: 'Log out successful!' });
@@ -244,15 +244,15 @@ app.post('/admin/login',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    console.log(username);
-    console.log(password);
+    
+    
 
     adminDB.loginAdmin(username, password, function (err, token, result) {
         if (!err) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             delete result[0]['password'];//clear the password in json data, do not send back to client
-            console.log(result);
+            
             res.json({ success: true, UserData: JSON.stringify(result), token: token, status: 'You are successfully logged in!' }); // token = jwt
             res.send();
         } else {
@@ -265,7 +265,7 @@ app.post('/admin/login',function(req,res){
 
 //POST /admin/logout
 app.post('/admin/logout', function (req, res) {
-    console.log("..logging out.");
+    
     //res.clearCookie('session-id'); //clears the cookie in the response
     //res.setHeader('Content-Type', 'application/json');
     res.json({ success: true, status: 'Log out successful!' });
@@ -423,7 +423,7 @@ app.post('/checkFlag/',function (req, res) {
 
 
     flagsDB.checkFlag(adminID, flagValue, function (err, result) {
-        console.log(err,result)
+        
 
         res.type('json');
         if (err) {
@@ -446,11 +446,11 @@ app.post('/review', function (req, res) {
     var review = req.body.review
     var stars = req.body.rating
     var name = req.body.name
-    console.log(name,review,stars)
+    
 
     res.type('json');
     reviewsDB.processReview(name, review, stars, function (err, result) {
-        console.log(err,result);
+        
         if (err) {
             res.status(500);
             res.send(`"Internal Server Error"`);
@@ -465,7 +465,7 @@ app.post('/review', function (req, res) {
 // GET /about
 app.get('/about', function (req, res) {
     var url = req.query.url;
-    console.log(url)
+    
 
     res.type('json');
     aboutDB.processAbout(url, function (err, result) {
@@ -521,15 +521,15 @@ app.post('/users/login',function(req,res){
     var username = req.body.username;
     var password = req.body.password;
     
-    console.log(username);
-    console.log(password);
+    
+    
 
     usersDB.loginUser(username, password, function (err, token, result) {
         if (!err) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             delete result[0]['password'];//clear the password in json data, do not send back to client
-            console.log(result);
+            
             res.json({ success: true, UserData: JSON.stringify(result), token: token, status: 'You are successfully logged in!' }); // token = jwt
             res.send();
         } else {

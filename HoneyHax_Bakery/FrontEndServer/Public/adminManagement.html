@@ -52,12 +52,12 @@
                             alert("Delete Successful!");
                             location.reload();
                         } else {
-                            console.log("Error");
+                            
                         }
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error in Operation');
-                        console.log(xhr)
+                        
+                        
                         if (errorThrown == "Forbidden") {
                             alert("Unauthorised!")
                         } else {
@@ -87,7 +87,7 @@
                     if (result != null) {
                         var divOutput = "";
                         for (var i = 0; i < result.length; i++) {
-                            console.log(result[i]);
+                            
                             divOutput += `<tr>
 												<th scope="row">${i + 1}</th>
 												<td>${result[i].studentName}</td>
@@ -105,11 +105,11 @@
                         $('#studentTable').html(divOutput);
 
                     } else {
-                        console.log("Error");
+                        
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
+                    
                 }
             });
 
@@ -126,8 +126,8 @@
             else {
                 var teacherName = JSON.parse(a)
                 var username = teacherName[0].username
-                console.log(username)
-                console.log(`${username}`)
+                
+                
                 document.getElementById('teacherName').innerHTML = `${username}`
             }
 

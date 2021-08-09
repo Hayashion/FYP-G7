@@ -534,7 +534,7 @@
           dataType: "json",
           data: JSON.stringify({ "adminID": adminNo, 'flagValue': flagValue }),
           success: function (result, textStatus, xhr) {
-            console.log(result,textStatus,xhr)
+            
             if (result != null) {                     // managed to retrieve some data
               alert(result.message)
               if (points != undefined){
@@ -639,7 +639,7 @@
 
                 var delayInMilliseconds = 1000; //1 second
 
-                console.log(result, userName)
+                
 
                 setTimeout(function (htmloutput, i) {
                   $("#Rightscoreboard").append(htmloutput);

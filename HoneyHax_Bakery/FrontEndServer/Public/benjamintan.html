@@ -148,7 +148,7 @@
 
     <script>
         currentURL = window.location.href
-        console.log(currentURL)
+        
 
         $(document).ready(function () {
 
@@ -161,7 +161,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data, textStatus, xhr) {
-                    console.log(data)
+                    
                     var attack = data[1];
                     var flag = data[1];
                     if (attack) {
@@ -175,8 +175,8 @@
                     
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log(errorThrown)
-                    console.log('Error in Operation');
+                    
+                    
                 }
             });
             return false;

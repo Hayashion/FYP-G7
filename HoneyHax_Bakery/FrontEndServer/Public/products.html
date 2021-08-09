@@ -127,7 +127,7 @@
             success: function (data, textStatus, xhr) {
                if (data != null) {
                   var divOutput = "";
-                  console.log(data)
+                  
                   for (var i = 0; i < data.length - 1; i++) {
                      divOutput += `
                                           <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
@@ -141,11 +141,11 @@
                   }
                   $('#products-body').html(divOutput)
                } else {
-                  console.log("Error");
+                  
                }
             },
             error: function (xhr, textStatus, errorThrown) {
-               console.log('Error in Operation');
+               
             }
          });
          return false;
@@ -228,7 +228,7 @@
          $("#product-form").submit(function (e) {
             var searchValue = $('#search').val()
             var url = `products.html?product=${searchValue}`
-            // console.log(searchValue)
+            // 
             if (searchValue != '') {
                window.location.replace(url)
             }
@@ -237,7 +237,7 @@
          //     var id=$('#email').val();
          //     var pwd=$('#pwd').val();
          //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
-         //     console.log(data)
+         //     
          // searchParam = new URLSearchParams(windows.location.search)
          // var wsUrl = 'http://localhost:8081/products'
          // if(searchParams.has("productSearch")){
@@ -245,7 +245,7 @@
          // }
          // if (searchParams.has('query')){
          //       var product =searchParams.get("query");
-         //       console.log(product)
+         //       
          // }
          var searchParams = new URLSearchParams(window.location.search)
          if (searchParams.has("product")) {
@@ -269,16 +269,16 @@
                                        <p class="product-description text-center">${data[i].description}
                                     </div>
                                  `
-                     console.log(divOutput)
+                     
                      // divOutput+=data[0].price
                   }
                   $('#products-section').html(divOutput)
                } else {
-                  console.log("Error");
+                  
                }
             },
             error: function (xhr, textStatus, errorThrown) {
-               console.log('Error in Operation');
+               
             }
          });
          return false;
@@ -293,19 +293,19 @@
    //       success: function (result, textStatus, xhr) {  
    //           if (result != null){     
    //                for(var i=0;i<result.length;i++){
-   //                   console.log(result[i]);
+   //                   
    //                }               
    //             //   localStorage.setItem('token',data.token);
-   //             //   console.log(data)
+   //             //   
    //             //   localStorage.setItem('userInfo',data.UserData);
 
    //               location.reload
    //           } else {
-   //               console.log("Error");
+   //               
    //           }                                                                 
    //       },  
    //       error: function (xhr, textStatus, errorThrown) {  
-   //           console.log('Error in Operation');  
+   //           
    //       }  
    //    });  
    //    return false;
@@ -338,7 +338,7 @@
       //       });
       //   });
       //   $(document).ready(function()){
-      //      console.log()
+      //      
       //   }
    </script>
 

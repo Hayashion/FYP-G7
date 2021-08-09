@@ -128,11 +128,11 @@
                         $("#studentClass").val(data[0].studentClass);
                         $("#adminNo").val(data[0].adminNo);
                     } else {
-                        console.log("Error");
+                        
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log('Error in Operation');
+                    
                     if (errorThrown == "Forbidden") {
                         alert("Unauthorised!")
                     } else {
@@ -159,12 +159,12 @@
                             alert("Update Successful!");
                             window.location.assign("http://localhost:3001/adminManagement.html");
                         } else {
-                            console.log("Error");
+                            
                         }
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error in Operation');
-                        console.log(xhr)
+                        
+                        
                         if (errorThrown == "Forbidden") {
                             alert("Unauthorised!")
                         } else {
@@ -198,8 +198,8 @@
         else {
             var teacherName = JSON.parse(a)
             var username = teacherName[0].username
-            console.log(username)
-            console.log(`${username}`)
+            
+            
             document.getElementById('teacherName').innerHTML = `${username}`
         }   
     })

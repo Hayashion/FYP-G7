@@ -5,7 +5,7 @@
 const express= require('express');
 const serveStatic =require('serve-static');
 
-var hostname="localhost";
+var hostname="0.0.0.0";
 var port=3001;
 
 var app=express();
