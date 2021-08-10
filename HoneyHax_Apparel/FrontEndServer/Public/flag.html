@@ -279,20 +279,19 @@
     .currentuser {
       background-color: #f2ff7960;
     }
-    
+
     #submitbtn {
-      border:1px solid #c41010 ;
+      border: 1px solid #c41010;
       border-radius: 10px;
       background-color: #ffff;
       font-weight: thin;
-      
+
     }
+
     #submitbtn:hover {
       background-color: #dd7a7a;
-      
+
     }
-
-
   </style>
 
 </head>
@@ -463,7 +462,7 @@
     var userData = localStorage.getItem("userInfo");
     var token = localStorage.getItem("token");
     var userJsonData = JSON.parse(userData);
-    
+
 
     if (userJsonData === null || userJsonData === undefined || token === null) {
       window.alert('Unauthorized. You will be redirected to home page.');
@@ -525,42 +524,40 @@
 
     // $(document).ready(function () { // Login
 
-      function submitFlag () { // # = id
-        var flagValue = $('#inputText').val();
-        $.ajax({
-          url: `http://localhost:8081/checkFlag`,
-          type: 'POST',
-          // data: data, // contain username and password
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          data: JSON.stringify({ "adminID": adminNo, 'flagValue': flagValue }),
-          success: function (result, textStatus, xhr) {
-            
-            if (result != null) {                     // managed to retrieve some data
-              alert(result.message)
-              if (result.points != undefined){
-                var curPoints = result.points
-                document.getElementById('studentNameOfUsername').innerHTML = `${userName} - ${curPoints} pts`
-                userJsonData[0].points = curPoints
-                localStorage.setItem('userInfo',JSON.stringify(userJsonData))
-                // window.location.reload();
-              }
-            } else {
-              alert("Error: "+result.message)
-              
+    function submitFlag() { // # = id
+      var flagValue = $('#inputText').val();
+      $.ajax({
+        url: `http://localhost:8081/checkFlag`,
+        type: 'POST',
+        // data: data, // contain username and password
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({ "adminID": adminNo, 'flagValue': flagValue }),
+        success: function (result, textStatus, xhr) {
+
+          if (result != null) {                     // managed to retrieve some data
+            alert(result.message)
+            if (result.points != undefined) {
+              var curPoints = result.points
+              document.getElementById('studentNameOfUsername').innerHTML = `${userName} - ${curPoints} pts`
+              userJsonData[0].points = curPoints
+              localStorage.setItem('userInfo', JSON.stringify(userJsonData))
+              return window.location.reload(true);
             }
-          },
-          error: function (xhr, textStatus, errorThrown) {
-            
-            alert("Invalid flag input, please try again.")
+          } else {
+            alert("Error: " + result.message)
+
           }
-        });
-        $('#inputText').val("")
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Invalid flag input, please try again.")
+        }
+      });
+      $('#inputText').val("")
+      return false;
 
-        return false;
+    };
 
-      };
-      
     // });
 
 
@@ -641,7 +638,7 @@
 
                 var delayInMilliseconds = 1000; //1 second
 
-                
+
 
                 setTimeout(function (htmloutput, i) {
                   $("#Rightscoreboard").append(htmloutput);
@@ -658,12 +655,12 @@
 
 
           } else {
-            
+
           }
         },
         error: function (xhr, textStatus, errorThrown) {
-          
-          
+
+
 
         }
       });
@@ -688,7 +685,7 @@
 
     $('#logout').click(function () {
       window.localStorage.clear();
-      
+
       window.location.assign("/login.html");
     })
   </script>
