@@ -23,27 +23,28 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous">
         </script>
+<script type="text/javascript" src="./configuration.js"></script> 
 
 
 
 		<script>
-
+			var hostname = hostname.hostname
 			$(document).ready(function(){
 				$("#logout").click(function () {
 					window.localStorage.clear();
-					window.location.assign("http://localhost:3001/home.html");
+					window.location.assign(`http://${hostname}:3001/home.html`);
 				});
 				
 				var a = JSON.parse(localStorage.getItem("userInfo"))
 				
 				if (a==null || a[0].role != "admin") {
-					window.location.assign("http://localhost:3001/home.html");
+					window.location.assign(`http://${hostname}:3001/home.html`);
 				}
 
 
 				var a = localStorage.getItem("userInfo")
 				if (a == null) {
-					// window.location.assign("http://localhost:3001/adminLogin.html");
+					// window.location.assign("http://${hostname}:3001/adminLogin.html");
 				}
 				else {
 					var teacherName = JSON.parse(a)

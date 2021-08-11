@@ -33,6 +33,8 @@
       media="screen">
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+
+
    <style>
       :root {
          --rad: .7rem;
@@ -116,10 +118,16 @@
          margin-top: 5%;
       }
    </style>
+
+<script type="text/javascript" src="./configuration.js"></script> 
+
+
    <script>
+
       $(document).ready(function () {
+
          $.ajax({
-            url: 'http://localhost:8081/products/',
+            url: `http://${hostname}:8081/products/`,
             type: 'GET',
             // data: data,
             contentType: "application/json; charset=utf-8",
@@ -127,7 +135,7 @@
             success: function (data, textStatus, xhr) {
                if (data != null) {
                   var divOutput = "";
-                  
+
                   for (var i = 0; i < data.length - 1; i++) {
                      divOutput += `
                                           <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
@@ -147,7 +155,8 @@
             error: function (xhr, textStatus, errorThrown) {
                console.log('Error in Operation');
             }
-         });
+         })
+            ;
          return false;
       });
    </script>
@@ -165,8 +174,8 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo"><a href="images/Iogo.docx" download='HoneyHAX'><img src="images/logo.png"
-                              style="max-width: 100%;"></a>
-                     </div>
+                                    style="max-width: 100%;"></a>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -180,7 +189,7 @@
                                  <li><a href="search.html">search</a></li>
                                  <li><a href="cart.html">Cart</a></li>
                                  <li><a href="login.html">Login</a></li>
-                                 
+
                               </ul>
                            </nav>
                         </div>
@@ -196,7 +205,7 @@
    <main>
       <!-- Slideshow container -->
       <div class="container-fluid">
-         
+
          <div id='products-body' class="row justify-content-center">
 
          </div>
@@ -210,137 +219,18 @@
 
 </body>
 
-   <!-- Javascript files-->
-   <script src="js/jquery.min.js"></script>
-   <script src="js/popper.min.js"></script>
-   <script src="js/bootstrap.bundle.min.js"></script>
-   <script src="js/jquery-3.0.0.min.js"></script>
-   <script src="js/plugin.js"></script>
-   <!-- sidebar -->
-   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-   <script src="js/custom.js"></script>
-   <!-- javascript -->
-   <script src="js/owl.carousel.js"></script>
-   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
-   <script>
-      $(document).ready(function () {
-         $("#product-form").submit(function (e) {
-            var searchValue = $('#search').val()
-            var url = `products.html?product=${searchValue}`
-            // console.log(searchValue)
-            if (searchValue != '') {
-               window.location.replace(url)
-            }
-         })
-         // $("#Login").click(function () {  
-         //     var id=$('#email').val();
-         //     var pwd=$('#pwd').val();
-         //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
-         //     console.log(data)
-         // searchParam = new URLSearchParams(windows.location.search)
-         // var wsUrl = 'http://localhost:8081/products'
-         // if(searchParams.has("productSearch")){
-         //    searchParams.get("productSearch")
-         // }
-         // if (searchParams.has('query')){
-         //       var product =searchParams.get("query");
-         //       console.log(product)
-         // }
-         var searchParams = new URLSearchParams(window.location.search)
-         if (searchParams.has("product")) {
-            var product = searchParams.get("product");
-         }
-         $.ajax({
-            url: `http://localhost:8081/products/${product}`,
-            type: 'GET',
-            //   data: data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, textStatus, xhr) {
-               if (data != null) {
-                  var divOutput = "";
-                  for (var i = 0; i < data.length; i++) {
-                     divOutput += `
-                                    <div class=" rounded m-4 shadow-lg col-lg-3 col-sm-5 product-body">
-                                       <img class="product-img center-block img-thumbnail" src="${data[i].productImg}">
-                                       <p class="product-name text-center">${data[i].productName}
-                                       <p class="product-price text-center">$${data[i].price}
-                                       <p class="product-description text-center">${data[i].description}
-                                    </div>
-                                 `
-                     
-                     // divOutput+=data[0].price
-                  }
-                  $('#products-section').html(divOutput)
-               } else {
-                  console.log("Error");
-               }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-               console.log('Error in Operation');
-            }
-         });
-         return false;
-      });
-   //    $(document).ready(function(){
-   //       $.ajax({                                                               
-   //       url: 'http://localhost:8081/products',  
-   //       type: 'GET', 
-   //       data: data,
-   //       contentType: "application/json; charset=utf-8",
-   //       dataType: "json",  
-   //       success: function (result, textStatus, xhr) {  
-   //           if (result != null){     
-   //                for(var i=0;i<result.length;i++){
-   //                   console.log(result[i]);
-   //                }               
-   //             //   localStorage.setItem('token',data.token);
-   //             //   console.log(data)
-   //             //   localStorage.setItem('userInfo',data.UserData);
-
-   //               location.reload
-   //           } else {
-   //               console.log("Error");
-   //           }                                                                 
-   //       },  
-   //       error: function (xhr, textStatus, errorThrown) {  
-   //           console.log('Error in Operation');  
-   //       }  
-   //    });  
-   //    return false;
-
-   // });
-      // $(".fancybox").fancybox({
-      //    openEffect: "none",
-      //    closeEffect: "none"
-      //    });
-
-      //    $(".zoom").hover(function(){
-
-      //    $(this).addClass('transition');
-      //    }, function(){
-
-      //    $(this).removeClass('transition');
-      //    }),
-
-      //   jQuery(document).ready(function($) {
-      //       tab = $('.tabs h3 a');
-
-      //       tab.on('click', function(event) {
-      //           event.preventDefault();
-      //           tab.removeClass('active');
-      //           $(this).addClass('active');
-
-      //           tab_content = $(this).attr('href');
-      //           $('div[id$="tab-content"]').removeClass('active');
-      //           $(tab_content).addClass('active');
-      //       });
-      //   });
-      //   $(document).ready(function()){
-      //      console.log()
-      //   }
-   </script>
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- javascript -->
+<script src="js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
 
 
@@ -348,63 +238,63 @@
 <footer>
    <!-- contact start-->
    <div id="contact" class="contact_section">
-       <div class="container">
-           <div class="contact-taital">
-               <div class="row">
-                   <div class="col-sm-12">
-                       <div class="contact_text"><strong>Contact Us</strong></div>
-                   </div>
+      <div class="container">
+         <div class="contact-taital">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="contact_text"><strong>Contact Us</strong></div>
                </div>
-           </div>
-           <div class="container">
+            </div>
+         </div>
+         <div class="container">
 
-               <div class="row">
-                   <div class="col-4 box">
-                       <label class="adderess_text">Address</label>
+            <div class="row">
+               <div class="col-4 box">
+                  <label class="adderess_text">Address</label>
 
-                       <div class="row">
-                           <div class="image_icon">
-                               <img class="img-fluid" src="images/map-icon.png">
-                           </div>
-                           <div class="email_text">500 Dover Rd, Singapore 139651</div>
+                  <div class="row">
+                     <div class="image_icon">
+                        <img class="img-fluid" src="images/map-icon.png">
+                     </div>
+                     <div class="email_text">500 Dover Rd, Singapore 139651</div>
 
 
-                       </div>
+                  </div>
 
-                   </div>
-
-                   <div class="col-4 box">
-                       <label class="adderess_text">Phone Number</label>
-                       <div class="row">
-                           <div class="image_icon">
-                               <img class="img-fluid" src="images/phone-icon.png">
-                           </div>
-
-                           <div class="email_text">(+65) 67751133</div>
-                       </div>
-                   </div>
-
-                   <div class="col-4 box">
-                       <label class="adderess_text">Email</label>
-                       <div class="row">
-                           <div class="image_icon">
-                               <img class="img-fluid" src="images/email-icon.png">
-                           </div>
-
-                           <div class="email_text">honeyhax@gmail.com</div>
-                       </div>
-                   </div>
                </div>
 
+               <div class="col-4 box">
+                  <label class="adderess_text">Phone Number</label>
+                  <div class="row">
+                     <div class="image_icon">
+                        <img class="img-fluid" src="images/phone-icon.png">
+                     </div>
 
-           </div>
-       </div>
+                     <div class="email_text">(+65) 67751133</div>
+                  </div>
+               </div>
+
+               <div class="col-4 box">
+                  <label class="adderess_text">Email</label>
+                  <div class="row">
+                     <div class="image_icon">
+                        <img class="img-fluid" src="images/email-icon.png">
+                     </div>
+
+                     <div class="email_text">honeyhax@gmail.com</div>
+                  </div>
+               </div>
+            </div>
+
+
+         </div>
+      </div>
    </div>
    <!-- contact end-->
    <!-- copyright start-->
    <div class="copyright_section">
 
-       <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
+      <p class="copyright_text">| &copy; HoneyHAX. ALL RIGHTS RESERVED. |</p>
 
    </div>
    <!-- copyright end-->

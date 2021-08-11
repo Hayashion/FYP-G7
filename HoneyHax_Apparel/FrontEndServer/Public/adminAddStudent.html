@@ -82,6 +82,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+<script type="text/javascript" src="./configuration.js"></script> 
 
 
 
@@ -111,7 +112,7 @@
 
     $(document).ready(function () {
         var tmpToken = localStorage.getItem("token");
-        const baseUrl = "http://localhost:8081"
+        const baseUrl = `http://${hostname}:8081`
         $("#add-student").submit((event) => {
             event.preventDefault(); //this prevents the webpage from reloading
 
@@ -125,7 +126,7 @@
 
             $.ajax({
                 headers: { 'authorization': 'Bearer ' + tmpToken },
-                url: `http://localhost:8081/students`,
+                url: `http://${hostname}:8081/students`,
                 type: 'POST',
                 data: data,
                 contentType: "application/json; charset=utf-8",
@@ -133,7 +134,7 @@
                 success: function (data, textStatus, xhr) {
                     if (data != null) {
                         window.alert("Successfully added a new student!")
-                        // window.location.assign(`http://localhost:3001/adminManagement.html`);
+                        // window.location.assign(`http://${hostname}:3001/adminManagement.html`);
                         location.reload();
                     } else {
                         console.log("Error");
@@ -152,24 +153,24 @@
         })
         // var a = JSON.parse(localStorage.getItem("userInfo"))
         // if (a[0].role != "admin") {
-        //     window.location.assign("http://localhost:3001/index1.html");
+        //     window.location.assign("http://${hostname}:3001/index1.html");
         // }
 
 
         $("#logout").click(function () {
             window.localStorage.clear();
-            window.location.assign("http://localhost:3001/home.html");
+            window.location.assign(`http://${hostname}:3001/home.html`);
         });
 
         var a = JSON.parse(localStorage.getItem("userInfo"))
         
         if (a==null || a[0].role != "admin") {
-            window.location.assign("http://localhost:3001/home.html");
+            window.location.assign(`http://${hostname}:3001/home.html`);
         }
 
         var a = localStorage.getItem("userInfo")
         if (a == null) {
-            // window.location.assign("http://localhost:3001/login.html");
+            // window.location.assign("http://${hostname}:3001/login.html");
         }
         else {
             var teacherName = JSON.parse(a)

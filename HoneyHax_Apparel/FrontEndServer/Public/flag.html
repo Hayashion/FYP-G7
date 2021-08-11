@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
     media="screen">
+  <script type="text/javascript" src="./configuration.js"></script> 
 
 
 
@@ -527,7 +528,7 @@
     function submitFlag() { // # = id
       var flagValue = $('#inputText').val();
       $.ajax({
-        url: `http://localhost:8081/checkFlag`,
+        url: `http://${hostname}:8081/checkFlag`,
         type: 'POST',
         // data: data, // contain username and password
         contentType: "application/json; charset=utf-8",
@@ -596,7 +597,7 @@
 
     $(document).ready(function () {
 
-      var wsURL = 'http://localhost:8081/studentsflag'
+      var wsURL = `http://${hostname}:8081/studentsflag`
 
 
       $.ajax({

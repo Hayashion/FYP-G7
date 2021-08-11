@@ -31,6 +31,8 @@
    <link rel="stylesheet" href="css/owl.theme.default.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
       media="screen">
+   <script type="text/javascript" src="./configuration.js"></script> 
+
    <style>
       :root {
          --rad: .7rem;
@@ -103,23 +105,6 @@
          border-radius: 0 var(--rad) var(--rad) 0;
          padding-left: 500px;
       }
-
-      /* input:not(:placeholder-shown) {
-      border-radius: var(--rad) 0 0 var(--rad);
-      width: calc(100% - var(--btn-width));
-      /* + button {
-        display: block;
-      } */
-      /* } */
-      /* label {
-         position: absolute;
-         clip: rect(1px, 1px, 1px, 1px);
-         padding: 0;
-         border: 0;
-         height: 1px;
-         width: 1px;
-         overflow: hidden;
-      } */
 
       .product-body {
          border: 1px solid black;
@@ -234,26 +219,13 @@
                
             }
          })
-         // $("#Login").click(function () {  
-         //     var id=$('#email').val();
-         //     var pwd=$('#pwd').val();
-         //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
-         //     console.log(data)
-         // searchParam = new URLSearchParams(windows.location.search)
-         // var wsUrl = 'http://localhost:8081/products'
-         // if(searchParams.has("productSearch")){
-         //    searchParams.get("productSearch")
-         // }
-         // if (searchParams.has('query')){
-         //       var product =searchParams.get("query");
-         //       console.log(product)
-         // }
+
          var searchParams = new URLSearchParams(window.location.search)
          if (searchParams.has("product")) {
             var product = searchParams.get("product");
          }
          $.ajax({
-            url: `http://localhost:8081/products/${product}`,
+            url: `http://${hostname}:8081/products/${product}`,
             type: 'GET',
             //   data: data,
             contentType: "application/json; charset=utf-8",
@@ -283,63 +255,6 @@
          });
          return false;
       });
-   //    $(document).ready(function(){
-   //       $.ajax({                                                               
-   //       url: 'http://localhost:8081/products',  
-   //       type: 'GET', 
-   //       data: data,
-   //       contentType: "application/json; charset=utf-8",
-   //       dataType: "json",  
-   //       success: function (result, textStatus, xhr) {  
-   //           if (result != null){     
-   //                for(var i=0;i<result.length;i++){
-   //                   console.log(result[i]);
-   //                }               
-   //             //   localStorage.setItem('token',data.token);
-   //             //   console.log(data)
-   //             //   localStorage.setItem('userInfo',data.UserData);
-
-   //               location.reload
-   //           } else {
-   //               console.log("Error");
-   //           }                                                                 
-   //       },  
-   //       error: function (xhr, textStatus, errorThrown) {  
-   //           console.log('Error in Operation');  
-   //       }  
-   //    });  
-   //    return false;
-
-   // });
-      // $(".fancybox").fancybox({
-      //    openEffect: "none",
-      //    closeEffect: "none"
-      //    });
-
-      //    $(".zoom").hover(function(){
-
-      //    $(this).addClass('transition');
-      //    }, function(){
-
-      //    $(this).removeClass('transition');
-      //    }),
-
-      //   jQuery(document).ready(function($) {
-      //       tab = $('.tabs h3 a');
-
-      //       tab.on('click', function(event) {
-      //           event.preventDefault();
-      //           tab.removeClass('active');
-      //           $(this).addClass('active');
-
-      //           tab_content = $(this).attr('href');
-      //           $('div[id$="tab-content"]').removeClass('active');
-      //           $(tab_content).addClass('active');
-      //       });
-      //   });
-      //   $(document).ready(function()){
-      //      console.log()
-      //   }
    </script>
 
 

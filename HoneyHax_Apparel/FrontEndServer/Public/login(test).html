@@ -44,6 +44,8 @@
   <!-- javascript -->
   <script src="js/owl.carousel.js"></script>
   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  <script type="text/javascript" src="./configuration.js"></script> 
+
   <script>
     $(document).ready(function () {
       $(".fancybox").fancybox({
@@ -292,7 +294,7 @@
       console.log(data);
 
       $.ajax({
-        url: 'http://localhost:8081/users/login',
+        url: `http://${hostname}:8081/users/login`,
         type: 'POST',
         data: data, // contain username and password
         contentType: "application/json; charset=utf-8",
@@ -301,7 +303,7 @@
           if (result != null) {                     // managed to retrieve some data
             localStorage.setItem('userInfo', result.UserData);
             window.alert('Successfully logged in!')
-            window.location.assign("http://localhost:3001/flag(test).html"); // successful redirected to this page
+            window.location.assign(`http://${hostname}:3001/flag(test).html`x); // successful redirected to this page
           } else {
             alert("Invalid Username/Password")
             console.log("Error");
