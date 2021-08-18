@@ -303,7 +303,7 @@
       
 
       $.ajax({
-        url: 'http://localhost:8081/students/',
+        url: `http://${hostname}:8081/students/`,
         type: 'POST', // insertStudents
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
@@ -313,7 +313,7 @@
             // localStorage.setItem('token', result.token);
             // localStorage.setItem('userInfo', result.UserData);
             alert("Registered Successfully! Please login now.");
-            window.location.assign("http://localhost:3001/login.html"); // successful redirected to this page
+            window.location.assign(`http://${hostname}:3001/login.html`); // successful redirected to this page
           } else {
             
           }
@@ -348,7 +348,7 @@
       
 
       $.ajax({
-        url: 'http://localhost:8081/students/login',
+        url: `http://${hostname}:8081/students/login`,
         type: 'POST',
         data: data, // contain username and password
         contentType: "application/json; charset=utf-8",
@@ -358,7 +358,7 @@
             
             localStorage.setItem('token', result.token);
             localStorage.setItem('userInfo', result.UserData);
-            window.location.assign("http://localhost:3001/flag.html"); // successful redirected to this page
+            window.location.assign(`http://${hostname}:3001/flag.html`); // successful redirected to this page
           } else {
             alert("Invalid Username/Password")
             
@@ -389,7 +389,7 @@
     }
   }
 </script>
-
+<script type="text/javascript" src="./configuration.js"></script> 
 
 <body>
   <header>

@@ -119,7 +119,7 @@
    <script>
       $(document).ready(function () {
          $.ajax({
-            url: 'http://localhost:8081/products/',
+            url: `http://${hostname}:8081/products/`,
             type: 'GET',
             // data: data,
             contentType: "application/json; charset=utf-8",
@@ -151,7 +151,7 @@
          return false;
       });
    </script>
-
+<script type="text/javascript" src="./configuration.js"></script> 
 </head>
 
 <body>
@@ -239,7 +239,7 @@
          //     var data = "{\"email\":\""+id+"\", \"password\":\""+pwd+"\"}";
          //     
          // searchParam = new URLSearchParams(windows.location.search)
-         // var wsUrl = 'http://localhost:8081/products'
+         // var wsUrl = 'http://${hostname}:8081/products'
          // if(searchParams.has("productSearch")){
          //    searchParams.get("productSearch")
          // }
@@ -252,7 +252,7 @@
             var product = searchParams.get("product");
          }
          $.ajax({
-            url: `http://localhost:8081/products/${product}`,
+            url: `http://${hostname}:8081/products/${product}`,
             type: 'GET',
             //   data: data,
             contentType: "application/json; charset=utf-8",
@@ -285,7 +285,7 @@
       });
    //    $(document).ready(function(){
    //       $.ajax({                                                               
-   //       url: 'http://localhost:8081/products',  
+   //       url: 'http://${hostname}:8081/products',  
    //       type: 'GET', 
    //       data: data,
    //       contentType: "application/json; charset=utf-8",

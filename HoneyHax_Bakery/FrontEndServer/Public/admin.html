@@ -1,65 +1,65 @@
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>HoneyHAX Admin</title>
-		<meta name="keywords" content="" />
-		<meta name="description" content="" />
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-		<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
-		
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous">
-        </script>
 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>HoneyHAX Admin</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+	<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
-
-		<script>
-
-			$(document).ready(function(){
-				$("#logout").click(function () {
-					window.localStorage.clear();
-					window.location.assign("http://localhost:3001/home.html");
-				});
-				
-				var a = JSON.parse(localStorage.getItem("userInfo"))
-				
-				if (a==null || a[0].role != "admin") {
-					window.location.assign("http://localhost:3001/home.html");
-				}
-
-
-				var a = localStorage.getItem("userInfo")
-				if (a == null) {
-					// window.location.assign("http://localhost:3001/adminLogin.html");
-				}
-				else {
-					var teacherName = JSON.parse(a)
-					var username = teacherName[0].username
-					console.log(username)
-					console.log(`${username}`)
-					document.getElementById('teacherName').innerHTML = `${username}`
-				}
-
-
-			})
-
-
-
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
 		</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+		</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+		</script>
+	
+
+	<script type="text/javascript" src="./configuration.js"></script>
+
+	<script>
+
+		$(document).ready(function () {
+			$("#logout").click(function () {
+				window.localStorage.clear();
+				window.location.assign(`http://${hostname}:3001/home.html`);
+			});
+
+			var a = JSON.parse(localStorage.getItem("userInfo"))
+
+			if (a == null || a[0].role != "admin") {
+				window.location.assign(`http://${hostname}:3001/home.html`);
+			}
+
+
+			var a = localStorage.getItem("userInfo")
+			if (a == null) {
+				// window.location.assign("http://${hostname}:3001/adminLogin.html");
+			}
+			else {
+				var teacherName = JSON.parse(a)
+				var username = teacherName[0].username
+				console.log(username)
+				console.log(`${username}`)
+				document.getElementById('teacherName').innerHTML = `${username}`
+			}
+
+
+		})
+
+
+
+
+	</script>
 
 
 
@@ -67,36 +67,38 @@
 
 
 
-    </head>
-    <body>
-        <div id="header-wrapper">
-			<div id="header" class="container">
-				<div id="logo">
-					<h1><a href="admin.html"><strong>HoneyHAX Admin</strong></a></h1>
-				</div>
-				<div id="menu">
-					<ul>
-						<li class="current_page_item home"><a href="admin.html" accesskey="1" title="">Home</a></li>
-						<li class="itinerary"><a href="adminManagement.html" accesskey="2" title="">Management</a></li>
-						<li class="itinerary"><a href="#" accesskey="3" title="" id="teacherName">Name</a></li>
-						<li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
-					</ul>
-				</div>
+</head>
+
+<body>
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="admin.html"><strong>HoneyHAX Admin</strong></a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li class="current_page_item home"><a href="admin.html" accesskey="1" title="">Home</a></li>
+					<li class="itinerary"><a href="adminManagement.html" accesskey="2" title="">Management</a></li>
+					<li class="itinerary"><a href="#" accesskey="3" title="" id="teacherName">Name</a></li>
+					<li id="logout"><a href="#" accesskey="4" title="">Logout</a></li>
+				</ul>
 			</div>
 		</div>
-        <div id="page" class="container">
-            <div id="content">
-				<div class="title">
-					<h2>Welcome to HoneyHAX Admin Dashboard</h2>
-					<span class="byline">You can manage students here on the "Management" tab :)</span> 
-				</div>
-				<div class="card-footer text-muted">
-					<a href="home.html" target="_blank" class="btn btn-primary">HoneyHAX Page</a>			
-				</div>
+	</div>
+	<div id="page" class="container">
+		<div id="content">
+			<div class="title">
+				<h2>Welcome to HoneyHAX Admin Dashboard</h2>
+				<span class="byline">You can manage students here on the "Management" tab :)</span>
+			</div>
+			<div class="card-footer text-muted">
+				<a href="home.html" target="_blank" class="btn btn-primary">HoneyHAX Page</a>
 			</div>
 		</div>
-		<div id="copyright">
-			<p>| &copy; HoneyHAX. All rights reserved. |</p>
-		</div>
-    </body>
+	</div>
+	<div id="copyright">
+		<p>| &copy; HoneyHAX. All rights reserved. |</p>
+	</div>
+</body>
+
 </html>

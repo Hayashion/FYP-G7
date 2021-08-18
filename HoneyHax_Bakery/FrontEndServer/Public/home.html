@@ -57,7 +57,7 @@
 			// sessionStorage.setItem('reviewContent', reviewContent)
 
 			$.ajax({
-				url: `http://localhost:8081/review`,
+				url: `http://${hostname}:8081/review`,
 				type: 'POST',
 				data: JSON.stringify({ review: reviewContent, rating:stars, name:name }),
 				contentType: "application/json; charset=utf-8",
@@ -101,6 +101,7 @@
 
 
 	</script>
+	<script type="text/javascript" src="./configuration.js"></script> 
 	<script>
 		$(document).ready(function () {
 			$('[title]').each(function () {

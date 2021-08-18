@@ -270,9 +270,9 @@
                 </div>
             </div>
             <!-- end header inner -->
-
+            
     </header>
-
+    <script type="text/javascript" src="./configuration.js"></script> 
 
     <!--shopping cart-->
     <div class="shopping-cart">
@@ -477,7 +477,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: `http://localhost:8081/voucher/${discountcode}/`,
+                url: `http://${hostname}:8081/voucher/${discountcode}/`,
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (result, textStatus, xhr) {
